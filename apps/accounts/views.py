@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from rest_auth.views import LoginView
 
-from django.shortcuts import render
+from .serializers import LoginSerializer
 
-# Create your views here.
+
+class AccountLoginView(LoginView):
+    """
+    Account user login view
+    """
+    serializer_class = LoginSerializer
