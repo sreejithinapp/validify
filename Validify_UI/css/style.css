@@ -113,9 +113,7 @@ a{
 }
 
 /* ------------------------------------- */
-#page-content-wrapper{ 
-    width: calc(100% - 90px)!important;
-}
+
 .container-fluid{
     padding: 0;
 }
@@ -139,9 +137,9 @@ a{
 li > .logo-container{
     line-height:18px!important;
 }
-/*@media (max-width: 568px){
+@media (max-width: 767px){
     #page-content-wrapper{ 
-        width: calc(100% - 125px)!important;
+        width: calc(100% - 68px)!important;
     }
 
-}*/
+}
