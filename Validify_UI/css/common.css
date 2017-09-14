@@ -49,7 +49,7 @@ body {
 }
 
 body {
-    padding-top: 50px;
+    /*padding-top: 50px;*/
     font-family: 'robotoregular';
     font-size: 12px;
 }
@@ -826,9 +826,9 @@ div.table-wrapper .dataTables_wrapper div.dataTables_filter input {
     .left-nav-toggle a {
         color: #fff;
     }
-    .navbar-top-links > li > a {
+    /*.navbar-top-links > li > a {
         color: #fff;
-    }
+    }*/
     .navbar-top-links li:last-child {
         margin: 0;
     }

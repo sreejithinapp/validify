@@ -28,7 +28,7 @@ body {
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
-    background: #000;
+    background: #55426D;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -64,19 +64,23 @@ body {
 
 .sidebar-nav li {
     text-indent: 20px;
-    line-height: 40px;
+    /*line-height: 40px;*/
+    line-height: 30px;
 }
 
 .sidebar-nav li a {
     display: block;
     text-decoration: none;
     color: #999999;
+    border-left: 2px solid #55426D;
 }
 
 .sidebar-nav li a:hover {
     text-decoration: none;
     color: #fff;
-    background: rgba(255, 255, 255, 0.2);
+    /*background: rgba(255, 255, 255, 0.2);*/
+    background-color: #766AB0;
+    border-left: 2px solid #fff;
 }
 
 .sidebar-nav li a:active,
@@ -101,13 +105,13 @@ body {
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 0;
+        padding-left: 68px;
     }
     #wrapper.toggled {
         padding-left: 250px;
     }
     #sidebar-wrapper {
-        width: 0;
+        width: 68px;
     }
     #wrapper.toggled #sidebar-wrapper {
         width: 250px;

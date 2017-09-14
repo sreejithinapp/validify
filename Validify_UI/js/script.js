@@ -1110,32 +1110,29 @@ $(document).ready(function() {
 
     //Header Toggle...........................................
 
-     if ($( "#wrapper" ).hasClass("toggled")){
-            $("#header-wrap").removeClass("colp");
-            $("#header-wrap").addClass("exp");     
-            $(".navbar-left").fadeIn("slow");
-        } else {
-            $("#header-wrap").removeClass("exp");
-            $("#header-wrap").addClass("colp");
-            $(".navbar-left").hide();
-        }
-   
+     
 
-    $('#menu-toggle1').click(function(e){   
-        if ($( "#header-wrap" ).hasClass("colp")){
-            $(".navbar-left").fadeIn("slow");
-            $("#header-wrap").removeClass("colp");
-            $("#header-wrap").addClass("exp");           
-        } else {
-            $("#header-wrap").removeClass("exp");
-            $("#header-wrap").addClass("colp");
-            $(".navbar-left").hide();
-        }  
+    // $('#menu-toggle1').click(function(e){   
+
+    //     if ($( "#header-wrap" ).hasClass("colp")){
+    //         $(".navbar-left").fadeIn("slow");
+    //         $("#header-wrap").removeClass("colp");
+    //         $("#header-wrap").addClass("exp"); 
+            
+    //     } else {
+    //         $("#header-wrap").removeClass("exp");
+    //         $("#header-wrap").addClass("colp");
+    //         $(".navbar-left").hide();
+
+    //     }  
+    // });
+    // Header Toggle...........................................
+    // 24 Aug 2017 END-----------------------------------
+
+    $("#menu-toggle").click(function(e) {
+        //e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
     });
-    //Header Toggle...........................................
-    //24 Aug 2017 END-----------------------------------
-
-
     
     //29 Aug 2017 START-----------------------------------
     var selectedCounties = [];
