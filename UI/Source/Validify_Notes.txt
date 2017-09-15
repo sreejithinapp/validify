@@ -1,6 +1,5 @@
 
 
-
 ######################################################################################
 
 https://gitlab.inapp.com
@@ -49,14 +48,22 @@ git push origin master:master
 ######################################################################################
 
 
+
 ######################################################################################
 
-(on branch VALIDIFY-APP-V1)$ git merge master
+Merge master into development branch (eg: on branch VALIDIFY-APP-V1)
 (resolve any merge conflicts if there are any)
 
+git fetch origin
+git merge --no-ff origin/master
+
+or
+$ git merge master
+
+
+Merge development brach into Master:
 git checkout master
-
 git merge VALIDIFY-APP-V1 (there won't be any conflicts now)
+git push or git push origin master
 
-git push
 ######################################################################################
