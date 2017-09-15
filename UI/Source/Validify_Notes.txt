@@ -33,14 +33,30 @@ git commit -m "manual each file updates"
 git commit -am "all files updates"
 
 
+Fetch and Merge:
+git fetch origin
+git merge --no-ff origin/master
+
+
 PUSH:
 git push origin VALIDIFY-APP-V1
 git push origin validify-dev
 git push origin master
-
-
-Fetch and Merge:
-git fetch origin
-git merge --no-ff origin/master
+(or)
+git push origin VALIDIFY-APP-V1:master
+git push origin validify-dev:master
+git push origin master:master
 ######################################################################################
 
+
+######################################################################################
+
+(on branch VALIDIFY-APP-V1)$ git merge master
+(resolve any merge conflicts if there are any)
+
+git checkout master
+
+git merge VALIDIFY-APP-V1 (there won't be any conflicts now)
+
+git push
+######################################################################################
