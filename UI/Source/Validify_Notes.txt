@@ -1,0 +1,46 @@
+
+
+
+######################################################################################
+
+https://gitlab.inapp.com
+
+https://sunil@gitlab.inapp.com/Validify/Validify.git
+
+######################################################################################
+
+
+
+######################################################################################
+
+CREATE BRANCH:
+git checkout -b VALIDIFY-APP-V1 origin/master
+
+
+VIEW BRANCH:
+git branch
+
+
+SWITCH BRANCH:
+git checkout VALIDIFY-APP-V1
+git checkout validify-dev
+git checkout master
+
+
+COMMIT:
+git add index.html
+git commit -m "manual each file updates"
+git commit -am "all files updates"
+
+
+PUSH:
+git push origin VALIDIFY-APP-V1
+git push origin validify-dev
+git push origin master
+
+
+Fetch and Merge:
+git fetch origin
+git merge --no-ff origin/master
+######################################################################################
+
