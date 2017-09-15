@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Validify</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body class="login-body">
+
+    <div class="login-container">
+        <div class="login-box">
+            <div class="row">
+                <div class="col-md-12 col-sm-12">
+                    <a href="#" class="pull-right">Help</a>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="login-wrap mBot20 text-center">
+                    <ul>
+                        <li>
+                            <img src="images/logo-validify.png" class="logo mBot10">
+                            <!-- <h1 class="login-head">✔alidify</h1> -->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>    
+        <div class="row">  
+            <div class="col-md-6 col-sm-12 col-xs-12 border-R">
+                <div class="login-inner-content mTop20">
+                    <h4>User Login</h4>
+                    <form>
+                        <div class="form-group">
+                            <label for="email">Username or Email</label>
+                            <!-- <input type="email" class="form-control" id="email" placeholder="eg:abc@abc.com, ram123"> -->
+                             <select class="form-control role-login-types">
+                                <option value="surety">surety@validify.com</option>
+                                <option value="doi">doi@validify.com</option>
+                                <option value="court">court@validify.com</option>
+                                <option value="agents">agent@validify.com</option>
+                                <option value="detention">detention@validify.com</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pwd">Password:</label>
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter Password">
+                        </div>
+                        <div class="login-footer-box">
+                            <div class="checkbox pull-left">
+                                <label>
+                                    <input type="checkbox"> Remember me</label>
+                            </div>
+                            <!-- <a class="btn active-btn pull-right" href="dashboard.html">Login Bonds</a> -->
+                            <a href="dashboard_surety.html" class="btn active-btn pull-right mRight10" id="login-btn">Login</a>
+                        </div>
+                        <a href="#" class="forgot-pwd-link mTop20" data-toggle="modal" data-target="#fogotModal">Forgot Password</a>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12 mTop20">
+                <h4>Public Bond Search</h4>
+                <div class="nav-search form-group">
+                    <input type="search" class="form-control public-search" value="Search"><i class="public-search fa fa-search"></i>
+                <div class="public-search-result mTop10" style="display: none;">
+                    <ul class="list-group">
+                        <li class="list-group-item justify-content-between">
+                            Defendant Name
+                            <span class="">John Smith</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Charges    
+                            <span>xxxx</span>
+                        </li> 
+                        <li class="list-group-item justify-content-between">
+                            Bond Amount 
+                            <span>$3000</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Next Court Date 
+                            <span>08/03/2017</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Court Time 
+                            <span>8:30AM–5PM</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Court Address
+                            <span> 191 N 1st St</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Court City
+                            <span>San Jose</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Court State
+                            <span>CA</span>
+                        </li>
+                        <li class="list-group-item justify-content-between">
+                            Court Type
+                            <span>Superior</span>
+                        </li>
+
+                    </ul>
+                    <div>
+                        <h5>Court Date History </h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <th>Court Date</th>
+                                  <th>Show Y/N</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                 
+                                  <td>xx/xx/xx</td>
+                                  <td>Y</td>
+                                </tr>
+                                <tr>
+                                  
+                                  <td>xx/xx/xx</td>
+                                  <td>N</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                </div>
+             </div>   
+            </div>
+            <!-- <div class="login-footer-box hidden">✔alidify, Inc. Contact Us: 408-123-4567</div> -->
+            <div class="login-footer-box hidden">Validify all rights reserved</div>
+        </div>
+</div>
+    <!-- /#wrapper -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="jquery/jquery.min.js"></script>
+    <script src="popper/popper.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
