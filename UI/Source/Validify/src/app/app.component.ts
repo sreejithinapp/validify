@@ -1,5 +1,6 @@
 
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
+
 /*
 import {AuthService} from "app/auth/auth.service";
 import {HeaderService} from "app/layout/header/header.service";
@@ -20,8 +21,6 @@ export class AppComponent {
 
 
 /*
-
-
 
 
 export class AppComponent implements AfterViewInit {

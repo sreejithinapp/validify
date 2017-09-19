@@ -5,10 +5,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import {LayoutModule} from "app/layout/layout.module";
+import { LayoutModule } from "app/layout/layout.module";
 
-//import {CallModule} from "app/call/call.module";
-//import {UtilsModule} from 'app/utils/utils.module';
+import {UtilsModule} from 'app/utils/utils.module';
 //import {ConfirmDialogModule} from "primeng/components/confirmdialog/confirmdialog";
 //import {GrowlModule} from "primeng/components/growl/growl";
 //import {MalihuScrollbarModule} from 'ngx-malihu-scrollbar';
@@ -17,7 +16,7 @@ import { AppRoutingModule } from './app.routing';
 
 
 import { AppComponent } from './app.component';
-//import {LoaderComponent} from "app/core/loader/loader.component";
+import {LoaderComponent} from "app/core/loader/loader.component";
 
 
 //import {AuthGuard} from "app/auth/auth.guard";

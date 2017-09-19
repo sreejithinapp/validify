@@ -1,25 +1,28 @@
-/*import { NgModule } from '@angular/core';
+
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+
 import { LoginComponent } from './login/login.component';
-import {RouterModule, Routes} from '@angular/router';
 import { AuthGuard } from "app/auth/auth.guard";
 
 
 const ROUTES:Routes = [
   {
-    path:"",
-    component:LoginComponent,
+    path: "",
+    component: LoginComponent,
     outlet: 'login'
-
   }
 ];
 
 @NgModule({
+  
   imports: [
     CommonModule,
     RouterModule.forChild(ROUTES)
   ],
-  exports:[RouterModule]
+
+  exports: [RouterModule]
 })
+
 export class AuthRoutesModule { }
-*/

@@ -1,23 +1,29 @@
-/*import { NgModule } from '@angular/core';
+
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login/login.component';
-import { AuthRoutesModule } from './auth.routes';
-import { AuthService } from "app/auth/auth.service";
 import { FormsModule } from '@angular/forms';
-import { GrowlModule } from "primeng/components/growl/growl";
+
+import { AuthRoutesModule } from './auth.routes';
+
+import { LoginComponent } from './login/login.component';
+
+import { AuthService } from "app/auth/auth.service";
+
+//import { GrowlModule } from "primeng/components/growl/growl";
 
 @NgModule({
+ 
   imports: [
     CommonModule,
     AuthRoutesModule,
     FormsModule,
-    GrowlModule
+    /*GrowlModule*/
   ],
+  
   declarations: [LoginComponent]
 })
-export class AuthModule {
 
-  constructor() {
-  }
+export class AuthModule {
+  constructor() { }
 }
-*/
+

@@ -4,15 +4,18 @@ import { SharedService } from "app/core/shared.service";
 import { LoggerService } from "app/utils/logger.service";
 
 @Component({
-  selector: 'evn-loader',
+  selector: 'vfy-loader',
   templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss']
+  styleUrls: ['./loader.component.css']
 })
 
 export class LoaderComponent implements OnInit {
+  
   constructor() {
     //constructor
   }
+
   ngOnInit() {
+    //ngOnInit
   }
 }
