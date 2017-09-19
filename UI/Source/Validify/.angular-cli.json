@@ -17,8 +17,10 @@
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-      "prefix": "app",
-      "styles": [
+      "prefix": "vfy",
+      "styles": [        
+        "assets/css/common.css",        
+        "assets/css/style.css",
         "styles.css"
       ],
       "scripts": [],
