@@ -49,12 +49,14 @@
 #wrapper {
     height: calc(100%);
 }
+/*
 #wrapper .logo-container {   
     visibility: hidden;
 }
 #wrapper.toggled .logo-container{
     visibility: visible; 
 }
+*/
 .container-fluid{
     padding: 0;
 }
@@ -125,3 +127,4 @@ li > .logo-container{
     color: #fff;
 }
 /*----------------------------------------------------*/
+

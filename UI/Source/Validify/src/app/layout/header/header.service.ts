@@ -1,11 +1,13 @@
 
-/*
+
 import {Injectable, EventEmitter} from '@angular/core';
+
 import {HttpService} from 'app/utils/http-service/http.service';
 import {Constants} from "app/layout/header/header.constant";
 
 @Injectable()
 export class HeaderService {
+    
  public toggleSidebar: EventEmitter<any> = new EventEmitter();
  public api_url: string;
 
@@ -21,4 +23,3 @@ export class HeaderService {
   return this.httpServiceRef.httpDelete(Constants.deleteAllDrafts);
  }
 }
-*/

@@ -1,22 +1,16 @@
 
+<router-outlet name="login" *ngIf="!isLoggedIn"></router-outlet> 
 
-<div class="login-container">
-    <div class="login-box">
-        <p>Login page...</p>
-    </div>
-    <!--<router-outlet name="login" [hidden]="isLoggedIn"></router-outlet>-->  
-</div>
+<div id="wrapper">  
 
-<div id="wrapper" class="toggled">
-    <p>Header page...</p>
-    <p>Sidebar page...</p>
-    <p>Content page...</p>
-    <!--
-    <router-outlet *ngIf="isLoggedIn" name='header'></router-outlet>
-    <router-outlet *ngIf="isLoggedIn" name='sidebar'></router-outlet>
-    <vfy-loader [hidden]="!loading"></vfy-loader>
-    <router-outlet></router-outlet>
-    -->
+    <router-outlet name='header' *ngIf="isLoggedIn"></router-outlet>
+
+    <router-outlet name='sidebar' *ngIf="isLoggedIn"></router-outlet>
+
+    <vfy-loader *ngIf="isLoading"></vfy-loader>
+    
+    <router-outlet></router-outlet>  
+
 </div>
     
         

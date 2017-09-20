@@ -35,7 +35,8 @@ export class LoginComponent implements OnInit, OnDestroy {
             if (response.status == "200" && response.content) {
                 if (response.content["access_token"]) {
                     this.storage.set("access_token", response.content.access_token);
-                    this.obsvGetUser = this.authService.getUserDetails().subscribe((response) => {
+
+                    /*this.obsvGetUser = this.authService.getUserDetails().subscribe((response) => {
                         if (response.user) {
                             this.storage.set('user_details', JSON.stringify(response.user));      
                             let role_id = this.storage.get('user_details').role_id;
@@ -46,7 +47,8 @@ export class LoginComponent implements OnInit, OnDestroy {
                             this.router.navigate(["/dashboard"]);       
                             this.authService.setIsLoggedInSubject(true);
                         }
-                    });
+                    });*/
+
                 }
             }
         }, (err) => {

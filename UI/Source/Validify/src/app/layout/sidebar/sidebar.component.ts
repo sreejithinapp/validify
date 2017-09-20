@@ -1,4 +1,18 @@
 
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Router} from "@angular/router";
+
+@Component({
+ selector: 'vfy-sidebar',
+ templateUrl: './sidebar.component.html',
+ styleUrls: ['./sidebar.component.css']
+})
+
+export class SidebarComponent {
+  constructor(){}
+}
+
+
 /*
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";

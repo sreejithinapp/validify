@@ -1,13 +1,30 @@
 
-/*
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
-import {ConfirmationService} from "primeng/components/common/confirmationservice";
 import {HeaderService} from "./header.service";
 import {SidebarService} from "app/layout/sidebar/sidebar.service";
 import {AuthService} from "app/auth/auth.service";
 import {StorageService} from "app/utils/storage.service";
+
+
+@Component({
+ selector: 'vfy-header',
+ templateUrl: './header.component.html',
+ styleUrls: ['./header.component.css']
+})
+
+export class HeaderComponent  {
+    private sidebarStatus = false;
+    constructor(){
+      /*this.sidebarService.sidebarStatus.subscribe((sidebarStatusb) => {
+        this.sidebarStatus = sidebarStatusb;
+      });*/
+    }
+}
+
+/*
+import {ConfirmationService} from "primeng/components/common/confirmationservice";
 import {OverlayPanel} from "primeng/components/overlaypanel/overlaypanel";
 import {Message} from "primeng/components/common/message";
 

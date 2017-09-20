@@ -1,4 +1,4 @@
-/*
+
 export const Constants = {
  getCustomerDraftList: 'draft/module/customer',
  getCustomerDraftCount: 'drafts/count/customer',
@@ -13,4 +13,3 @@ export const Constants = {
  }
 }
 
-*/
