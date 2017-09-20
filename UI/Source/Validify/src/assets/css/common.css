@@ -522,10 +522,7 @@ div.table-wrapper .dataTables_wrapper div.dataTables_filter input {
     }    
     .navbar-top-links li:last-child {
         margin: 0;
-    }
-    #wrapper #page-content-wrapper {
-        padding: 20px 15px;
-    }
+    }   
     .graph-wrapper {
         text-align: center;        margin: 15px 0;
     }

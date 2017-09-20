@@ -5,14 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
+import { GrowlModule } from "primeng/components/growl/growl";
+
 import { LayoutModule } from "app/layout/layout.module";
 import { UtilsModule } from 'app/utils/utils.module';
-
-import {ConfirmDialogModule} from "primeng/components/confirmdialog/confirmdialog";
-import {GrowlModule} from "primeng/components/growl/growl";
-//import {MalihuScrollbarModule} from 'ngx-malihu-scrollbar';
-//import {WorkorderSharedModule} from "app/workorder/workorder-shared/workorder.shared.module";
-import { AppRoutingModule } from './app.routing';
+import { AppRouterModule } from './app-router.module';
 
 import { AppComponent } from './app.component';
 import { LoaderComponent } from "app/core/loader/loader.component";
@@ -28,7 +26,6 @@ import { StorageService } from "app/utils/storage.service";
 
 
 @NgModule({
-
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,15 +34,14 @@ import { StorageService } from "app/utils/storage.service";
     RouterModule,
     LayoutModule,
     UtilsModule,
-    //ConfirmDialogModule, GrowlModule, MalihuScrollbarModule.forRoot(), 
-    AppRoutingModule
+    ConfirmDialogModule, 
+    GrowlModule, 
+    AppRouterModule
   ],
-
   declarations: [
     AppComponent,
     LoaderComponent
   ],  
-
   providers: [
     AuthGuard,
     AuthService,
@@ -56,9 +52,7 @@ import { StorageService } from "app/utils/storage.service";
     SharedService,
     StorageService
   ],
-
   bootstrap: [AppComponent]
-
 })
 
 export class AppModule {   

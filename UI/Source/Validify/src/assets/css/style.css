@@ -49,6 +49,9 @@
 #wrapper {
     height: calc(100%);
 }
+#wrapper #page-content-wrapper {
+    padding: 20px 15px;
+}
 /*
 #wrapper .logo-container {   
     visibility: hidden;
@@ -105,6 +108,12 @@ li > .logo-container{
 
 
 /*----------------------------------------------------*/
+#wrapper.toggled .sidebar-nav .submenu{
+    display: block;   margin-left: 30px;
+}
+#wrapper.toggled .sidebar-nav .submenu a{
+    color: #fff;
+}
 .sidebar-brand .header-head{ 
     color: #fff;   font-size: 15px;
 } 
@@ -113,12 +122,6 @@ li > .logo-container{
 }
 .sidebar-nav .submenu{
     display: none;
-}
-#wrapper.toggled .sidebar-nav .submenu{
-    display: block;   margin-left: 30px;
-}
-#wrapper.toggled .sidebar-nav .submenu a{
-    color: #fff;
 }
 .sidebar-nav .active{
     text-decoration: none;  background: #46365A;  border-left: 2px solid #fff;
