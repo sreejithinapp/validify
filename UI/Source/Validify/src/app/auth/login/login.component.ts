@@ -2,14 +2,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
-//import {Message} from "primeng/components/common/message";
+import { Subscription } from "rxjs/Subscription";
 
-import {Subscription} from "rxjs/Subscription";
+import { Message } from "primeng/components/common/message";
 
 import { LoggerService } from 'app/utils/logger.service';
 import { AuthService } from "app/auth/auth.service";
 import { StorageService } from "app/utils/storage.service";
-
 import { Login } from "app/auth/login/login";
 
 
@@ -24,19 +23,26 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     obsvGetUser: Subscription;
     obsvLogin: Subscription;
-    //displayMsgs: Message[] = [];
+    displayMsgs: Message[] = [];
 
     constructor(private router: Router, private authService: AuthService, public loginModel: Login, private storage: StorageService) {
         //constructor
     }
 
     login() {        
+        this.loginDummyAction();//DUMMY TEST
+        //this.loginAction();//Deployment
+    }
+
+    loginAction(){
         this.obsvLogin = this.authService.login(this.loginModel).subscribe((response) => {
             if (response.status == "200" && response.content) {
+
                 if (response.content["access_token"]) {
+
                     this.storage.set("access_token", response.content.access_token);
 
-                    /*this.obsvGetUser = this.authService.getUserDetails().subscribe((response) => {
+                    this.obsvGetUser = this.authService.getUserDetails().subscribe((response) => {
                         if (response.user) {
                             this.storage.set('user_details', JSON.stringify(response.user));      
                             let role_id = this.storage.get('user_details').role_id;
@@ -46,16 +52,22 @@ export class LoginComponent implements OnInit, OnDestroy {
                             this.storage.setPermissions(response.permission);
                             this.router.navigate(["/dashboard"]);       
                             this.authService.setIsLoggedInSubject(true);
-                        }
-                    });*/
-
+                        }                        
+                    });
                 }
             }
+
         }, (err) => {
             console.log('LOGIN ERROR: ', {severity: 'error', summary: 'Error', detail: err.message});
-            //this.displayMsgs = [];
-            //this.displayMsgs.push({severity: 'error', summary: 'Error', detail: err.message});
+            this.displayMsgs = [];
+            this.displayMsgs.push({severity: 'error', summary: 'Error', detail: err.message});
         });
+    }
+
+    loginDummyAction(){ 
+        this.storage.set("access_token", null);
+        this.router.navigate(["/dashboard"]);       
+        this.authService.setIsLoggedInSubject(true);        
     }
 
     hasAuthToken() {
@@ -71,7 +83,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.obsvLogin.unsubscribe();
-        this.obsvGetUser.unsubscribe();
+        if (this.obsvLogin) this.obsvLogin.unsubscribe();
+        if (this.obsvGetUser) this.obsvGetUser.unsubscribe();
     }
 }

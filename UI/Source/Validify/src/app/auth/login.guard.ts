@@ -14,7 +14,7 @@ export class LoginGuard implements CanActivate {
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         if (this.authService.isLoggedIn()) {
-            //this.router.navigate(['dashboard']);
+            this.router.navigate(['dashboard']);
             console.log("Alreday Logined..goto Dashboard");
             return false;
         } else {

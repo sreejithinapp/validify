@@ -34,7 +34,7 @@ import { StorageService } from "app/utils/storage.service";
     RouterModule,
     LayoutModule,
     UtilsModule,
-    ConfirmDialogModule, 
+    ConfirmDialogModule,
     GrowlModule, 
     AppRouterModule
   ],
@@ -50,7 +50,7 @@ import { StorageService } from "app/utils/storage.service";
     LoggerService,
     LoginGuard,
     SharedService,
-    StorageService
+    StorageService,    
   ],
   bootstrap: [AppComponent]
 })

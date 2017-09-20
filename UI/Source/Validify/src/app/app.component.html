@@ -1,27 +1,24 @@
 
-
 <router-outlet name="login" *ngIf="!isLoggedIn"></router-outlet> 
 
-<div id="wrapper" *ngIf="!isLoggedIn">  
+<div id="wrapper" *ngIf="isLoggedIn" class="toggled">  
     <router-outlet name='header'></router-outlet>
-    <router-outlet name='sidebar'></router-outlet>
-    <div id="page-content-wrapper">
-        <vfy-loader *ngIf="isLoading"></vfy-loader>    
-        <router-outlet></router-outlet>
-    </div> 
+    <router-outlet name='sidebar'></router-outlet>   
+    <!--<vfy-loader *ngIf="isLoading"></vfy-loader>-->    
+    <router-outlet name='content'></router-outlet>    
 </div>
-    
-<!--
-<p-growl [(value)]="msgs" [life]="3000"></p-growl>
-<p-confirmDialog header="Confirmation" [closeOnEscape]="false" [closable]="false" width="425" #cdRef>
-    <p-footer>
-        <button type="button" pButton label="OK" (click)="cdRef.ok()"></button>
-        <button type="button" pButton label="CANCEL" (click)="cdRef.cancel()"></button>
-        <button type="button" pButton label=" " class="close-button" (click)="cdRef.hide()">
-        <span class="icon icon-close"></span></button>
+
+<p-growl [(value)]="msgs" [life]="3000"></p-growl> 
+
+<p-confirmDialog  [closeOnEscape]="false" [closable]="true" width="425" #cdRef>
+     <p-footer>
+        <button type="button" pButton icon="fa-close" label="No" (click)="cdRef.reject()"></button>
+        <button type="button" pButton icon="fa-check" label="Yes" (click)="cdRef.accept()"></button>
+        <!-- <button type="button" pButton icon="fa-close" label="Close" (click)="cdRef.hide()"></button> --> 
     </p-footer>
 </p-confirmDialog>
--->
+
+<!--<button type="button" (click)="confirm1()" pButton icon="fa-check" label="Confirm"></button> -->
 
 
 

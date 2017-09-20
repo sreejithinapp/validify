@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from "./dashboard.component";
 
-
 const ROUTES:Routes = [
   {
     path: "",
@@ -14,12 +13,10 @@ const ROUTES:Routes = [
 ];
 
 @NgModule({
-
   imports: [
     CommonModule,
     RouterModule.forChild(ROUTES)
   ],
-
   exports:[RouterModule]
 })
 

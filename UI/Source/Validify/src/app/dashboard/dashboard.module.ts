@@ -3,19 +3,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutesModule } from "./dashboard.routes";
-
 import { DashboardComponent } from "./dashboard.component";
 
-//import { ChartModule } from "primeng/components/chart/chart";
 
-@NgModule({
-  
+@NgModule({  
   imports: [
     CommonModule,
-    DashboardRoutesModule,
-    /*ChartModule*/
+    DashboardRoutesModule  
   ],
-
   declarations: [DashboardComponent]
 })
 
