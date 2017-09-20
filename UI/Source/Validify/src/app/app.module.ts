@@ -8,8 +8,8 @@ import { RouterModule } from '@angular/router';
 import { LayoutModule } from "app/layout/layout.module";
 import { UtilsModule } from 'app/utils/utils.module';
 
-//import {ConfirmDialogModule} from "primeng/components/confirmdialog/confirmdialog";
-//import {GrowlModule} from "primeng/components/growl/growl";
+import {ConfirmDialogModule} from "primeng/components/confirmdialog/confirmdialog";
+import {GrowlModule} from "primeng/components/growl/growl";
 //import {MalihuScrollbarModule} from 'ngx-malihu-scrollbar';
 //import {WorkorderSharedModule} from "app/workorder/workorder-shared/workorder.shared.module";
 import { AppRoutingModule } from './app.routing';

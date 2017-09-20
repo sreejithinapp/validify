@@ -5,9 +5,10 @@ import {AuthService} from "app/auth/auth.service";
 import {HeaderService} from "app/layout/header/header.service";
 import {SidebarService} from "app/layout/sidebar/sidebar.service";
 
-//import {Message} from "primeng/components/common/message";
+import {Message} from "primeng/components/common/message";
 
-declare var $;
+declare var jquery:any;
+declare var $:any;
 
 @Component({
   selector: 'body',
