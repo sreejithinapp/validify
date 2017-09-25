@@ -32,17 +32,16 @@ export class AppComponent implements AfterViewInit{
 
     //.......................................................................
     constructor(private authService:AuthService, private headerService:HeaderService, private sidebarService:SidebarService, private sharedService:SharedService, private confirmationService:ConfirmationService, private messageService: MessageService) {
-      //console.log('AppComponent very FIRST....');
-
+      
       authService.isLoggedInCheckUsingBS().subscribe((bool) => {          
         this.isUserLogined = bool;
-        console.log('AppComponent isLoggedInCheckUsingBS>> this.isUserLogined:', this.isUserLogined);
+        //console.log('AppComponent isLoggedInCheckUsingBS>> this.isUserLogined:', this.isUserLogined);
       });
 
       authService.isWhichRoleCheckUsingBS().subscribe((roleID) => {  
         this.isWhichRole = roleID;
-        console.log('AppComponent isWhichRoleCheckUsingBS>> this.isWhichRole:', this.isWhichRole);       
-        if (this.isWhichRole == "R1"){
+        //console.log('AppComponent isWhichRoleCheckUsingBS>> this.isWhichRole:', this.isWhichRole);       
+        if (this.isWhichRole == "group1" || this.isWhichRole == "group2"){
           this.loginSuccessMessage();
         } else {
           this.loginFailMessage();
@@ -66,9 +65,7 @@ export class AppComponent implements AfterViewInit{
 
     //.......................................................................
     ngAfterViewInit() {
-      /*this.confirmationDialogRef.el.nativeElement
-      .querySelector('.ui-confirmdialog')
-      .classList.add('logout-confirm');*/   
+      //this.confirmationDialogRef.el.nativeElement.querySelector('.ui-confirmdialog').classList.add('logout-confirm'); 
     }
     //.......................................................................
 
@@ -76,13 +73,16 @@ export class AppComponent implements AfterViewInit{
     
     //.......................................................................
     loginSuccessMessage() {
-        this.messageService.add({severity:'success', summary:'Login Message', detail:'Logined Successfully!'});
+        var obj = this.sharedService.getCurrentMsg();
+        if (obj){
+          this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
+        }        
         //this.messageService.clear();//clear message
     }
 
     loginFailMessage() {
         var obj = this.sharedService.getCurrentMsg();
-        console.log('loginFailMessage', obj)
+        //console.log('loginFailMessage', obj)
         if (obj){
           this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
         }      

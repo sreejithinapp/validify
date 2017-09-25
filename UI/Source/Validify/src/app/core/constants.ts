@@ -1,8 +1,7 @@
 
-export const Constants = {
-    //api_url: "http://environapi.inapp.com/", 
-    api_url: "http://192.168.20.7:8000/",
-    login: "login",
+export const Constants = {    
+    api_url: "http://192.168.1.90:8000/api/v1/",
+    login: "account/login/",
     logout: "logout",
     userdetails: "userdetails",
     users: "users",

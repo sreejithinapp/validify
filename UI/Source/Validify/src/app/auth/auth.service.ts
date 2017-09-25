@@ -20,7 +20,7 @@ export class AuthService {
 
   //LOGIN CHECK
   isLoggedIn() {   
-    return this.storage.get('access_token') ? true : false;
+    return this.storage.get('auth_token') ? true : false;
   } 
   isLoggedInCheckUsingBS() {  
     this.bsForLoginCheck = new BehaviorSubject(this.isLoggedIn());
@@ -32,7 +32,7 @@ export class AuthService {
 
   //ROLE CHECK
   getWhichRole() {   
-    return this.storage.get('role_id');  
+    return this.storage.get('user_role');  
   } 
   isWhichRoleCheckUsingBS() {  
     this.bsForRoleCheck = new BehaviorSubject(this.getWhichRole());
@@ -44,8 +44,8 @@ export class AuthService {
 
 
   //LOGIN ACTION - POST API
-  login(loginModel:Login) {    
-    return this.httpService.httpPost(Constants.login, {username: loginModel.username, password: loginModel.password, remember: loginModel.remember});
+  login(loginModel:Login) {      
+    return this.httpService.httpPost(Constants.login, {email: loginModel.username, password: loginModel.password, remember: loginModel.remember});
   }
   
   //LOGOUT ACTION - POST API

@@ -11,13 +11,14 @@ export class StorageService {
         window.localStorage.setItem(name, value);
     }
     get(name:string) {
-        let val;
+        return window.localStorage.getItem(name);
+        /*let val;
         try {
             val = JSON.parse(window.localStorage.getItem(name));
         } catch (error) {
             val = window.localStorage.getItem(name);
         }
-        return val;
+        return val;*/
     }
     remove(name:string){
         window.localStorage.removeItem(name);
