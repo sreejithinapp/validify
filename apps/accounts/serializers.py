@@ -1,8 +1,11 @@
+import os
+import json
 from django.contrib.auth import get_user_model, authenticate
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers, exceptions
+from rest_auth.models import TokenModel
 
 UserModel = get_user_model()
 
@@ -100,3 +103,57 @@ class LoginSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    """
+    User model w/o password
+    """
+    auth_token = serializers.SerializerMethodField()
+    user_role = serializers.SerializerMethodField()
+    dashboard = serializers.SerializerMethodField()
+
+    class Meta:
+        model = UserModel
+        fields = ('id', 'auth_token', 'username', 'email', 'first_name', 'last_name', 'is_active',
+                  'date_joined', 'dashboard', 'user_role')
+        read_only_fields = ('email', 'auth_token', 'is_active', 'date_joined', 'dashboard', 'user_role')
+
+    def get_auth_token(self, user):
+        """
+        Get auth token
+        :param user:
+        :return:
+        """
+        token = TokenModel.objects.get(user=user)
+        auth_token = token.key
+        return auth_token
+
+    def get_user_role(self, user):
+        """
+        Get auth token
+        :param user:
+        :return:
+        """
+        group = user.groups.all().first()
+        return group.name
+
+    def get_dashboard(self, user):
+        """
+
+        :param user:
+        :return:
+        """
+        data = {}
+        if self.is_member(user, "group1"):
+            json_data = open(os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                          '../../samples/dashboard/surety.json'))).read()
+            data = json.loads(json_data)
+        elif self.is_member(user, "group2"):
+            json_data = open(os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                          '../../samples/dashboard/doi.json'))).read()
+            data = json.loads(json_data)
+        return data
+
+    def is_member(self, user, group_name):
+        return user.groups.filter(name=group_name).exists()
