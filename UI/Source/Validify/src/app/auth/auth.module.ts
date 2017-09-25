@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AuthRoutesModule } from './auth.routes';
 import { LoginComponent } from './login/login.component';
-import { AuthService } from "app/auth/auth.service";
-import { GrowlModule } from "primeng/components/growl/growl";
+import { AuthService } from 'app/auth/auth.service';
+import { GrowlModule } from 'primeng/components/growl/growl';
 
 @NgModule({ 
   imports: [

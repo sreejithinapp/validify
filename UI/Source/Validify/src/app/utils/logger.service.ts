@@ -9,10 +9,9 @@ export class LoggerService {
   constructor() {
     if(environment.production){
       this.shouldEnable = false;
-    }
-    else{
+    } else{
       this.shouldEnable = true;
-      // console.log('%cEnviron Debugger', 'color: green; font-weight: bold;text-decoration: underline;text-transform: uppercase;');
+      // console.log('%c Debugger', 'color: green; font-weight: bold;text-decoration: underline;text-transform: uppercase;');
     }
   }
 

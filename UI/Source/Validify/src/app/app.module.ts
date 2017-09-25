@@ -16,13 +16,13 @@ import { AppComponent } from './app.component';
 import { LoaderComponent } from "app/core/loader/loader.component";
 
 import { AuthGuard } from "app/auth/auth.guard";
-import { AuthService } from "app/auth/auth.service";
 import { LoginGuard } from "app/auth/login.guard";
-import { DraftGuard } from "app/common/guard/draft.guard"
+import { AuthService } from "app/auth/auth.service";
 import { SharedService } from "app/core/shared.service";
 import { HttpService } from "app/utils/http-service/http.service";
 import { LoggerService } from "app/utils/logger.service";
 import { StorageService } from "app/utils/storage.service";
+import { DraftGuard } from "app/common/guard/draft.guard"
 
 
 @NgModule({
@@ -44,13 +44,13 @@ import { StorageService } from "app/utils/storage.service";
   ],  
   providers: [
     AuthGuard,
-    AuthService,
-    DraftGuard,
-    HttpService,
-    LoggerService,
     LoginGuard,
-    SharedService,
-    StorageService,    
+    AuthService,  
+    SharedService, 
+    HttpService,
+    LoggerService,      
+    StorageService,  
+    DraftGuard,  
   ],
   bootstrap: [AppComponent]
 })

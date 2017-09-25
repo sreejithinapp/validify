@@ -9,38 +9,56 @@ import { Constants } from "app/core/constants";
 
 
 @Injectable()
-export class AuthService {
+export class AuthService {  
   
-  private behaviorSubject$ = new BehaviorSubject(this.isLoggedIn());
+  private bsForLoginCheck;
+  private bsForRoleCheck;
 
-  constructor(private storage:StorageService, public httpService:HttpService) {
+  constructor(private storage:StorageService, private httpService:HttpService) {
     //constructor
   }
 
-  isLoggedIn() {
+  //LOGIN CHECK
+  isLoggedIn() {   
     return this.storage.get('access_token') ? true : false;
-  }
-
-  isLoggedInSubject() {
-    return this.behaviorSubject$.asObservable();
-  }
-
-  setIsLoggedInSubject(bool:boolean) {
-    this.behaviorSubject$.next(bool);
+  } 
+  isLoggedInCheckUsingBS() {  
+    this.bsForLoginCheck = new BehaviorSubject(this.isLoggedIn());
+    return this.bsForLoginCheck.asObservable();
+  }     
+  setIsLoggedInInCheckUsingBS(bool:boolean) {
+    this.bsForLoginCheck.next(bool);
   }  
 
+  //ROLE CHECK
+  getWhichRole() {   
+    return this.storage.get('role_id');  
+  } 
+  isWhichRoleCheckUsingBS() {  
+    this.bsForRoleCheck = new BehaviorSubject(this.getWhichRole());
+    return this.bsForRoleCheck.asObservable();
+  }     
+  setIsWhichRoleCheckUsingBS(roleID:string) {
+    this.bsForRoleCheck.next(roleID);
+  }  
+
+
+  //LOGIN ACTION - POST API
   login(loginModel:Login) {    
-    return this.httpService.httpPost(Constants.login, {email: loginModel.username, password: loginModel.password});
+    return this.httpService.httpPost(Constants.login, {username: loginModel.username, password: loginModel.password, remember: loginModel.remember});
   }
- 
+  
+  //LOGOUT ACTION - POST API
   logout() {
     return this.httpService.httpPost(Constants.logout, {});
   }
   
+  //GET USER
   getUserDetails() {
     return this.httpService.httpGet(Constants.userdetails);
-  }
-  
+  } 
+
+  //GET PERMISSIONS 
   getPermissions(role_id) {
      return this.httpService.httpGet('role/role_permission/' + role_id);
   }
