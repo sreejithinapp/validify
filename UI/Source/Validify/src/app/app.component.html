@@ -1,0 +1,46 @@
+
+<router-outlet name="login" *ngIf="!isLoggedIn"></router-outlet> 
+
+<div id="wrapper">  
+
+    <router-outlet name='header' *ngIf="isLoggedIn"></router-outlet>
+
+    <router-outlet name='sidebar' *ngIf="isLoggedIn"></router-outlet>
+
+    <vfy-loader *ngIf="isLoading"></vfy-loader>
+    
+    <router-outlet></router-outlet>  
+
+</div>
+    
+        
+
+<!--
+<router-outlet name="login" [hidden]="isLoggedIn"></router-outlet>
+<div id="wrapper" class="wrapper">
+ <router-outlet *ngIf="isLoggedIn" name='header'></router-outlet>
+ <router-outlet *ngIf="isLoggedIn" name='sidebar'></router-outlet>
+ <div id="page-content-wrapper">
+  <evn-loader [hidden]="!loading"></evn-loader>
+  <router-outlet></router-outlet>
+ </div>
+</div>
+
+<p-growl [(value)]="msgs" [life]="3000"></p-growl>
+<p-confirmDialog header="Confirmation" [closeOnEscape]="false" [closable]="false" width="425" #cdRef>
+ <p-footer>
+  <button type="button" pButton label="Yes" (click)="cdRef.accept()"></button>
+  <button type="button" pButton label="No" (click)="cdRef.reject()"></button>
+  <button type="button" pButton class="close-button" label=" " (click)="cdRef.hide()">
+   <span class="icon icon-close"></span></button>
+ </p-footer>
+</p-confirmDialog>
+<div class="call-icons-wrapper">
+ <evn-call-active *ngIf="isLoggedIn" class="call-icon"></evn-call-active>
+ <evn-call-hold *ngIf="isLoggedIn" class="call-icon"></evn-call-hold>
+ <evn-call-default *ngIf="isLoggedIn" class="call-icon"></evn-call-default>
+</div>
+-->
+
+
+
