@@ -20,6 +20,7 @@ export class AuthService {
 
   //LOGIN CHECK
   isLoggedIn() {   
+    //this.storage.remove("auth_token"); this.storage.remove("user_role"); //dummy
     return this.storage.get('auth_token') ? true : false;
   } 
   isLoggedInCheckUsingBS() {  

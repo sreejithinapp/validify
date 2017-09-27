@@ -17,18 +17,9 @@ const ROUTES:Routes = [
     {
         path: "dashboard",
         loadChildren: "app/dashboard/dashboard.module#DashboardModule",
+        
         canActivate: [AuthGuard]
-    }, 
-    {
-        path: "",
-        outlet: 'sidebar',
-        component: SidebarComponent
-    },
-    {
-        path: "",
-        outlet: 'header',
-        component: HeaderComponent
-    },  
+    },      
     {
         path: "",
         redirectTo: "/dashboard",
@@ -55,3 +46,39 @@ export class AppRouterModule {
     constructor() {}
 }
 
+
+
+/*
+const ROUTES:Routes = [    
+    {
+        path: "login",
+        loadChildren: "app/auth/auth.module#AuthModule",
+        canActivate: [LoginGuard]
+    },      
+    {
+        path: "dashboard",
+        loadChildren: "app/dashboard/dashboard.module#DashboardModule",
+        canActivate: [AuthGuard]
+    }, 
+    {
+        path: "",
+        outlet: 'sidebar',
+        component: SidebarComponent
+    },
+    {
+        path: "",
+        outlet: 'header',
+        component: HeaderComponent
+    },  
+    {
+        path: "",
+        redirectTo: "/dashboard",
+        pathMatch: "full"
+    },
+    {
+        path: "**",
+        redirectTo: "/login",
+        pathMatch: "full"
+    }      
+];
+*/

@@ -8,7 +8,8 @@ import { DashboardComponent } from "./dashboard.component";
 const ROUTES:Routes = [
   {
     path: "",
-    component: DashboardComponent
+    component: DashboardComponent,
+    outlet:'dashboard'
   }
 ];
 
@@ -20,5 +21,8 @@ const ROUTES:Routes = [
   exports:[RouterModule]
 })
 
-export class DashboardRoutesModule { }
+export class DashboardRoutesModule {
+  constructor(){
+  }
+ }
 

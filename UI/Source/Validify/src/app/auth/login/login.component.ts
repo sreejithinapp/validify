@@ -19,7 +19,7 @@ import { SharedService } from "app/core/shared.service";
 
 export class LoginComponent implements OnInit, OnDestroy {
 
-    obsvGetUser: Subscription;
+    //obsvGetUser: Subscription;
     obsvLogin: Subscription;  
     //...................................................................
 
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.authService.setIsLoggedInInCheckUsingBS(true);         
             this.authService.setIsWhichRoleCheckUsingBS(response.data.user_role);  
 
-            this.router.navigate(["/dashboard"]);  
+            this.router.navigate(["dashboard"]);  
         }
     } 
     
@@ -119,7 +119,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
     ngOnDestroy() {
         if (this.obsvLogin) this.obsvLogin.unsubscribe();
-        if (this.obsvGetUser) this.obsvGetUser.unsubscribe();
+        //if (this.obsvGetUser) this.obsvGetUser.unsubscribe();
     }
     //...................................................................
 
@@ -137,7 +137,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 /*
 //...................................................................
-//this.storage.remove("access_token"); this.storage.remove("user_role"); 
+//this.storage.remove("auth_token"); this.storage.remove("user_role"); 
 
 //................
 fetchUserDetails(){
