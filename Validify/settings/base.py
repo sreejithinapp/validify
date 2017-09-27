@@ -51,6 +51,7 @@ THIRD_PARTY_APPS = [
 VALIDIFY_APPS = [
     'apps.accounts',
     'apps.common',
+    'apps.search',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + VALIDIFY_APPS
@@ -127,5 +128,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         # 'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
-    )
+    ),
+
+    'EXCEPTION_HANDLER': 'apps.common.exceptions.validify_exception_handler'
 }

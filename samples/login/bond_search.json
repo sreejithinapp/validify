@@ -1,0 +1,9 @@
+{
+  "defendant_name":"John Smith", "charge": "5000", "bond_amount": 3000,
+  "next_court_date": "08/03/2017", "court_time": "8:30AM–5PM", "court_address":"191 N 1st St", "court_city": "San Jose",
+  "court_state":"CA", "court_type": "Superior",
+  "court_date_history": [
+    {"date":"08/03/2017", "availability":"Y"}, {"date":"08/07/2017", "availability":"N"}
+  ]
+
+}
