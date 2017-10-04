@@ -71,7 +71,7 @@ ROOT_URLCONF = 'Validify.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,3 +132,10 @@ REST_FRAMEWORK = {
 
     'EXCEPTION_HANDLER': 'apps.common.exceptions.validify_exception_handler'
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '192.168.1.120'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'rajesh.bk@inapp.com'
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
