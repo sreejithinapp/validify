@@ -5,14 +5,17 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class SharedService {  
 
-    private currentMessageObj:any = null;
+    private currentMessageObj:any = null;   
+    private bsForDialogOverlay;
     //.................................................
+
 
     //.................................................
     constructor() {
         //constructor
     }
     //.................................................
+
 
 
     //.................................................
@@ -45,6 +48,17 @@ export class SharedService {
     getCurrentMsg() { 
          return this.currentMessageObj;    
     }
+    //.................................................
+
+
+    //.................................................
+    isDialogOverlayCheckUsingBS() {  
+        this.bsForDialogOverlay = new BehaviorSubject(false);
+        return this.bsForDialogOverlay.asObservable();
+    }     
+    setIsDialogOverlayCheckUsingBS(boo:boolean) {
+        this.bsForDialogOverlay.next(boo);
+    }  
     //.................................................
 
 }

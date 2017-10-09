@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 
 import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
 import { GrowlModule } from "primeng/components/growl/growl";
+import {DialogModule} from 'primeng/primeng';
+import {OverlayPanelModule} from 'primeng/primeng';
 
 import { LayoutModule } from "app/layout/layout.module";
 import { UtilsModule } from 'app/utils/utils.module';
@@ -36,6 +38,8 @@ import { DraftGuard } from "app/common/guard/draft.guard"
     UtilsModule,
     ConfirmDialogModule,
     GrowlModule, 
+    DialogModule,
+    OverlayPanelModule,
     AppRouterModule
   ],
   declarations: [

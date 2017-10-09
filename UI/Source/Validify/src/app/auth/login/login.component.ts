@@ -20,7 +20,7 @@ import { SharedService } from "app/core/shared.service";
 export class LoginComponent implements OnInit, OnDestroy {
 
     //obsvGetUser: Subscription;
-    obsvLogin: Subscription;  
+    obsvLogin: Subscription;     
     //...................................................................
 
 
@@ -125,8 +125,18 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     //...................................................................
-    testBtnAction(){       
-        alert("testBtnAction")
+    private searchBtnAction():void{       
+        //alert("searchBtnAction");  
+        this.sharedService.setIsDialogOverlayCheckUsingBS(true);      
+    }
+    //...................................................................
+
+    
+    
+    //...................................................................
+    private testBtnAction():void{       
+        alert("testBtnAction");  
+        //this.sharedService.setIsDialogOverlayCheckUsingBS(true);       
     }
     //...................................................................
    

@@ -52,10 +52,17 @@
 
             <div class="col-md-6 col-sm-12 col-xs-12 mTop20">
                 <h4>Public Bond Search</h4>
-                <div class="nav-search form-group">
-                    <input type="search" class="form-control public-search" value="Search"><i class="public-search fa fa-search"></i>
-                    <div class="public-search-result mTop10"></div>
-                    <button type="button" (click)="testBtnAction()">Test</button>
+                <div class="nav-search form-group">                   
+                    <input type="search" class="form-control public-search" id="search" name="search" placeholder="Search here..." [(ngModel)]="search_txt">
+                    <i class="public-search fa fa-search" (click)="op.show($event, actualTarget)"></i>
+                   
+                    <div class="public-search-result mTop10" #actualTarget>
+                        search result                        
+                    </div>  
+                    <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
+                        Content
+                    </p-overlayPanel>                 
+                    <!--<button type="button" (click)="testBtnAction()">Test</button>-->
                 </div>
             </div> 
 

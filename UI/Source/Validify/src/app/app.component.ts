@@ -26,7 +26,8 @@ export class AppComponent implements AfterViewInit{
    
     public isUserLogined:boolean = false;
     public isWhichRole:string;  
-    //public isContentLoading:boolean = false;  
+    //public isContentLoading:boolean = false;   
+    public dialogDisplay: boolean = false;   
     //.......................................................................
 
 
@@ -46,6 +47,11 @@ export class AppComponent implements AfterViewInit{
         } else {
           this.loginFailMessage();
         }                
+      });
+
+      sharedService.isDialogOverlayCheckUsingBS().subscribe((bool) => {          
+        this.dialogDisplay = bool;   
+        console.log('AppComponent isDialogOverlayCheckUsingBS>> this.dialogDisplay:', this.dialogDisplay); 
       });
       
       /*
@@ -107,5 +113,8 @@ export class AppComponent implements AfterViewInit{
       });
     }
     //.......................................................................
+
+
+    
 }
 
