@@ -1,3 +1,4 @@
+/*
 import { TestBed, inject } from '@angular/core/testing';
 
 import { LoggerService } from './logger.service';
@@ -13,3 +14,4 @@ describe('LoggerService', () => {
     expect(service).toBeTruthy();
   }));
 });
+*/

@@ -1,4 +1,4 @@
-
+/*
 import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
@@ -8,9 +8,13 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class CapitalizePipe implements PipeTransform {
  transform(value: string, args: string[]): any {
   if (!value) return value;
-  return value.replace(/([^\W_]+[^\s-]*) */, function (txt) {
-   return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  */
+  //return value.replace(/([^\W_]+[^\s-]*) */, function (txt) {
+   /*return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
  }
 }
+*/
+
+
 

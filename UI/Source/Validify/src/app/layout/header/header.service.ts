@@ -1,5 +1,5 @@
 
-
+/*
 import {Injectable, EventEmitter} from '@angular/core';
 
 import {HttpService} from 'app/utils/http-service/http.service';
@@ -23,3 +23,4 @@ export class HeaderService {
   return this.httpServiceRef.httpDelete(Constants.deleteAllDrafts);
  }
 }
+*/

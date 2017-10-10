@@ -1,4 +1,4 @@
-
+/*
 import {Injectable, EventEmitter} from '@angular/core';
 
 import {HttpService} from "app/utils/http-service/http.service";
@@ -16,9 +16,10 @@ export class SidebarService {
         this.api_url = this.httpServiceRef.api_url;
     }
 }
+*/
+
 
 /*
-
 @Injectable()
 export class SidebarService {
  public api_url: string;

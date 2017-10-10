@@ -2,11 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-import { NotfoundComponent } from 'app/layout/notfound/notfound.component'; 
-import { LoginGuard } from "app/auth/login.guard";
-import { AuthGuard } from "app/auth/auth.guard";
-import { SidebarComponent } from "app/layout/sidebar/sidebar.component";
-import { HeaderComponent } from "app/layout/header/header.component";
+import { LoginGuard } from "./auth/login.guard";
+import { AuthGuard } from "./auth/auth.guard";
+
+//import { NotfoundComponent } from './layout/notfound/notfound.component';
+//import { SidebarComponent } from "./layout/sidebar/sidebar.component";
+//import { HeaderComponent } from "./layout/header/header.component";
 
 const ROUTES:Routes = [    
     {
@@ -17,7 +18,6 @@ const ROUTES:Routes = [
     {
         path: "dashboard",
         loadChildren: "app/dashboard/dashboard.module#DashboardModule",
-        
         canActivate: [AuthGuard]
     },      
     {
@@ -39,7 +39,7 @@ const ROUTES:Routes = [
         RouterModule.forRoot(ROUTES, {useHash: true, preloadingStrategy: PreloadAllModules})
     ],
     exports: [RouterModule],
-    declarations: [NotfoundComponent]
+    declarations: []
 })
 
 export class AppRouterModule {

@@ -1,3 +1,4 @@
+/*
 import {Injectable} from '@angular/core';
 import {CanDeactivate} from '@angular/router';
 import {Observable} from 'rxjs/Observable';
@@ -12,3 +13,4 @@ export class DraftGuard implements CanDeactivate<CanComponentDeactivate> {
     return component.canDeactivate ? component.canDeactivate() : true;
   }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +10,6 @@ export class NotfoundComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {  }
 }
+*/

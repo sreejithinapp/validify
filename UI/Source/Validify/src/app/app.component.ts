@@ -5,11 +5,10 @@ import { Message } from "primeng/components/common/message";
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ConfirmationService } from 'primeng/primeng';
 
-import { AuthService } from "app/auth/auth.service";
-import { HeaderService } from "app/layout/header/header.service";
-import { SidebarService } from "app/layout/sidebar/sidebar.service";
-import { SharedService } from "app/core/shared.service";
-
+import { AuthService } from "./auth/auth.service";
+import { SharedService } from "./core/shared.service";
+//import { HeaderService } from "./layout/header/header.service";
+//import { SidebarService } from "./layout/sidebar/sidebar.service";
 
 declare var $:any;
 
@@ -32,7 +31,7 @@ export class AppComponent implements AfterViewInit{
 
 
     //.......................................................................
-    constructor(private authService:AuthService, private headerService:HeaderService, private sidebarService:SidebarService, private sharedService:SharedService, private confirmationService:ConfirmationService, private messageService: MessageService) {
+    constructor(private authService:AuthService, private sharedService:SharedService, private confirmationService:ConfirmationService, private messageService: MessageService) {
       
       authService.isLoggedInCheckUsingBS().subscribe((bool) => {          
         this.isUserLogined = bool;
@@ -55,6 +54,7 @@ export class AppComponent implements AfterViewInit{
       });
       
       /*
+      //private headerService:HeaderService, private sidebarService:SidebarService,
       headerService.toggleSidebar.subscribe((sidebarStatus) => {
         if (sidebarStatus) {
           $('#wrapper').removeClass('toggled');

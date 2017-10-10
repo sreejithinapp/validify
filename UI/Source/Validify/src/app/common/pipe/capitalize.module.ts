@@ -1,3 +1,5 @@
+
+/*
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -15,3 +17,4 @@ import { CapitalizePipe } from 'app/common/pipe/capitalize.pipe';
 
 export class CapitalizeModule {
 }
+*/

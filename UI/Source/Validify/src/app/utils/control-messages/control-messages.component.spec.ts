@@ -1,3 +1,5 @@
+
+/*
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ControlMessagesComponent } from './control-messages.component';
@@ -23,3 +25,4 @@ describe('ControlMessagesComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+*/

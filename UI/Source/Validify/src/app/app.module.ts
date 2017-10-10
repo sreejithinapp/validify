@@ -7,24 +7,24 @@ import { RouterModule } from '@angular/router';
 
 import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
 import { GrowlModule } from "primeng/components/growl/growl";
-import {DialogModule} from 'primeng/primeng';
-import {OverlayPanelModule} from 'primeng/primeng';
+import { DialogModule } from 'primeng/primeng';
+import { OverlayPanelModule } from 'primeng/primeng';
 
-import { LayoutModule } from "app/layout/layout.module";
-import { UtilsModule } from 'app/utils/utils.module';
 import { AppRouterModule } from './app-router.module';
+import { UtilsModule } from './utils/utils.module';
+//import { LayoutModule } from './layout/layout.module';
 
 import { AppComponent } from './app.component';
-import { LoaderComponent } from "app/core/loader/loader.component";
+import { LoaderComponent } from './core/loader/loader.component';
 
-import { AuthGuard } from "app/auth/auth.guard";
-import { LoginGuard } from "app/auth/login.guard";
-import { AuthService } from "app/auth/auth.service";
-import { SharedService } from "app/core/shared.service";
-import { HttpService } from "app/utils/http-service/http.service";
-import { LoggerService } from "app/utils/logger.service";
-import { StorageService } from "app/utils/storage.service";
-import { DraftGuard } from "app/common/guard/draft.guard"
+import { AuthGuard } from './auth/auth.guard';
+import { LoginGuard } from './auth/login.guard';
+import { AuthService } from './auth/auth.service';
+import { SharedService } from './core/shared.service';
+import { HttpService } from './utils/http-service/http.service';
+import { StorageService } from './utils/storage.service';
+//import { LoggerService } from './utils/logger.service';
+//import { DraftGuard } from './common/guard/draft.guard';
 
 
 @NgModule({
@@ -34,12 +34,14 @@ import { DraftGuard } from "app/common/guard/draft.guard"
     FormsModule,
     HttpModule,
     RouterModule,
-    LayoutModule,
-    UtilsModule,
+
     ConfirmDialogModule,
     GrowlModule, 
     DialogModule,
     OverlayPanelModule,
+
+    //LayoutModule,
+    UtilsModule,    
     AppRouterModule
   ],
   declarations: [
@@ -48,13 +50,12 @@ import { DraftGuard } from "app/common/guard/draft.guard"
   ],  
   providers: [
     AuthGuard,
-    LoginGuard,
+    LoginGuard,    
     AuthService,  
     SharedService, 
-    HttpService,
-    LoggerService,      
-    StorageService,  
-    DraftGuard,  
+    HttpService,        
+    StorageService  
+    //DraftGuard, LoggerService,     
   ],
   bootstrap: [AppComponent]
 })

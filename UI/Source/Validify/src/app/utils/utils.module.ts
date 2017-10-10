@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from "@angular/forms";
+//import { CommonModule } from '@angular/common';
+//import { FormsModule } from "@angular/forms";
 
 //import { GrowlModule } from 'primeng/primeng';
 //import { PaginationModule } from "ngx-bootstrap/pagination";
 
-import { StorageService } from "app/utils/storage.service";
-import { SharedService } from "app/core/shared.service";
+import { StorageService } from "./storage.service";
+import { SharedService } from '../core/shared.service';
 
 //import { ControlMessagesComponent } from './control-messages/control-messages.component';
 //import { PaginationComponent } from './pagination/pagination.component';
@@ -14,13 +14,13 @@ import { SharedService } from "app/core/shared.service";
 @NgModule({
 
     imports: [
-        CommonModule,
-        FormsModule,
-        /*GrowlModule, PaginationModule.forRoot()*/
+        //CommonModule,
+        //FormsModule,
+        //GrowlModule, PaginationModule.forRoot()
     ],
 
     declarations: [
-        /*ControlMessagesComponent, PaginationComponent*/
+        //ControlMessagesComponent, PaginationComponent
     ],
 
     providers: [
@@ -29,7 +29,7 @@ import { SharedService } from "app/core/shared.service";
     ],
 
     exports: [
-        /*ControlMessagesComponent,GrowlModule,PaginationComponent*/
+        //ControlMessagesComponent, GrowlModule, PaginationComponent
     ]
     
 })
