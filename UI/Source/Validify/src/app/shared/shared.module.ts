@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 //import { PaginationModule } from "ngx-bootstrap/pagination";
 
 import { StorageService } from "./storage.service";
-import { SharedService } from '../core/shared.service';
+import { SharedService } from './shared.service';
 
 //import { ControlMessagesComponent } from './control-messages/control-messages.component';
 //import { PaginationComponent } from './pagination/pagination.component';
@@ -34,5 +34,5 @@ import { SharedService } from '../core/shared.service';
     
 })
 
-export class UtilsModule {
+export class SharedModule {
 }

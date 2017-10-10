@@ -3,11 +3,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 
-import { Login } from "app/auth/login/login";
-
-import { AuthService } from "app/auth/auth.service";
-import { StorageService } from "app/utils/storage.service";
-import { SharedService } from "app/core/shared.service";
+import { Login } from "./login";
+import { AuthService } from "../auth.service";
+import { StorageService } from "../../shared/storage.service";
+import { SharedService } from "../../shared/shared.service";
 
 
 @Component({

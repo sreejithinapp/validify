@@ -2,10 +2,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { HttpService } from "app/utils/http-service/http.service";
-import { StorageService } from "app/utils/storage.service";
-import { Login } from "app/auth/login/login";
-import { Constants } from "app/core/constants";
+import { Login } from "./login/login";
+
+import { HttpService } from "../shared/http-service/http.service";
+import { StorageService } from "../shared/storage.service";
+import { Constants } from "../shared/constants";
 
 
 @Injectable()

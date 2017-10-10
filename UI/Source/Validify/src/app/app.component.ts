@@ -6,9 +6,9 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { ConfirmationService } from 'primeng/primeng';
 
 import { AuthService } from "./auth/auth.service";
-import { SharedService } from "./core/shared.service";
-//import { HeaderService } from "./layout/header/header.service";
-//import { SidebarService } from "./layout/sidebar/sidebar.service";
+import { SharedService } from "./shared/shared.service";
+//import { HeaderService } from "./shared/header/header.service";
+//import { SidebarService } from "./shared/sidebar/sidebar.service";
 
 declare var $:any;
 

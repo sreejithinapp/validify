@@ -1,11 +1,11 @@
-
+/*
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 
 import {HeaderService} from "./header.service";
-import {SidebarService} from "app/layout/sidebar/sidebar.service";
-import {AuthService} from "app/auth/auth.service";
-import {StorageService} from "app/utils/storage.service";
+import {SidebarService} from "../sidebar/sidebar.service";
+import {AuthService} from "../auth/auth.service";
+import {StorageService} from "../shared/storage.service";
 
 
 @Component({
@@ -17,11 +17,13 @@ import {StorageService} from "app/utils/storage.service";
 export class HeaderComponent  {
     private sidebarStatus = false;
     constructor(){
-      /*this.sidebarService.sidebarStatus.subscribe((sidebarStatusb) => {
+      this.sidebarService.sidebarStatus.subscribe((sidebarStatusb) => {
         this.sidebarStatus = sidebarStatusb;
-      });*/
+      });
     }
 }
+*/
+
 
 /*
 import {ConfirmationService} from "primeng/components/common/confirmationservice";

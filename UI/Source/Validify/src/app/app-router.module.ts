@@ -5,9 +5,9 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { LoginGuard } from "./auth/login.guard";
 import { AuthGuard } from "./auth/auth.guard";
 
-//import { NotfoundComponent } from './layout/notfound/notfound.component';
-//import { SidebarComponent } from "./layout/sidebar/sidebar.component";
-//import { HeaderComponent } from "./layout/header/header.component";
+//import { NotfoundComponent } from './shared/notfound/notfound.component';
+//import { SidebarComponent } from "./shared/sidebar/sidebar.component";
+//import { HeaderComponent } from "./shared/header/header.component";
 
 const ROUTES:Routes = [    
     {

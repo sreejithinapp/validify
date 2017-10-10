@@ -2,13 +2,14 @@ import { Injectable } from "@angular/core";
 import { Headers, Http, Response } from "@angular/http";
 import { Router } from "@angular/router";
 
-import { HttpObject } from "app/utils/http-service/http.object";
-import { Constants } from "app/core/constants";
 import { Observable } from "rxjs/Observable";
-
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/observable/throw";
+
+import { HttpObject } from "./http.object";
+import { Constants } from "../constants";
+
 
 
 @Injectable()
