@@ -7,8 +7,6 @@ import { ConfirmationService } from 'primeng/primeng';
 
 import { AuthService } from "./auth/auth.service";
 import { SharedService } from "./shared/shared.service";
-//import { HeaderService } from "./shared/header/header.service";
-//import { SidebarService } from "./shared/sidebar/sidebar.service";
 
 declare var $:any;
 
@@ -25,6 +23,8 @@ export class AppComponent implements AfterViewInit{
    
     public isUserLogined:boolean = false;
     public isWhichRole:string;  
+    public isDoi:boolean = false;
+    public isSurety:boolean = false;
     //public isContentLoading:boolean = false;   
     public dialogDisplay: boolean = false;   
     //.......................................................................
@@ -40,9 +40,17 @@ export class AppComponent implements AfterViewInit{
 
       authService.isWhichRoleCheckUsingBS().subscribe((roleID) => {  
         this.isWhichRole = roleID;
+        this.isSurety = false;
+        this.isDoi = false;
+        //group2 - doi | group1 - surety
         //console.log('AppComponent isWhichRoleCheckUsingBS>> this.isWhichRole:', this.isWhichRole);       
-        if (this.isWhichRole == "group1" || this.isWhichRole == "group2"){
+        if (this.isWhichRole === "group1" || this.isWhichRole === "group2"){
           this.loginSuccessMessage();
+          if (this.isWhichRole === 'group1'){
+            this.isSurety = true;
+          } else if (this.isWhichRole === 'group2'){
+            this.isDoi = true;         
+          }
         } else {
           this.loginFailMessage();
         }                
@@ -51,19 +59,8 @@ export class AppComponent implements AfterViewInit{
       sharedService.isDialogOverlayCheckUsingBS().subscribe((bool) => {          
         this.dialogDisplay = bool;   
         console.log('AppComponent isDialogOverlayCheckUsingBS>> this.dialogDisplay:', this.dialogDisplay); 
-      });
+      });     
       
-      /*
-      //private headerService:HeaderService, private sidebarService:SidebarService,
-      headerService.toggleSidebar.subscribe((sidebarStatus) => {
-        if (sidebarStatus) {
-          $('#wrapper').removeClass('toggled');
-        } else {
-          $('#wrapper').addClass('toggled');
-        }
-        this.sidebarService.sidebarStatus.emit(!sidebarStatus);
-      });
-      */     
     }
     //.......................................................................
 
@@ -74,7 +71,6 @@ export class AppComponent implements AfterViewInit{
       //this.confirmationDialogRef.el.nativeElement.querySelector('.ui-confirmdialog').classList.add('logout-confirm'); 
     }
     //.......................................................................
-
 
     
     //.......................................................................
@@ -96,7 +92,6 @@ export class AppComponent implements AfterViewInit{
     //.......................................................................
 
 
-
     //.......................................................................
     confirm1(obj1) {
       let obj = this.sharedService.getConfirmDetails(); //dummy  
@@ -114,7 +109,19 @@ export class AppComponent implements AfterViewInit{
     }
     //.......................................................................
 
-
     
 }
 
+
+
+/*
+      //private headerService:HeaderService, private sidebarService:SidebarService,
+      headerService.toggleSidebar.subscribe((sidebarStatus) => {
+        if (sidebarStatus) {
+          $('#wrapper').removeClass('toggled');
+        } else {
+          $('#wrapper').addClass('toggled');
+        }
+        this.sidebarService.sidebarStatus.emit(!sidebarStatus);
+      });
+      */     

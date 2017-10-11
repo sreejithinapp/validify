@@ -22,8 +22,9 @@
         "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/font-awesome/css/font-awesome.css",  
         "../node_modules/primeng/resources/primeng.css",
-        "../node_modules/primeng/resources/themes/bootstrap/theme.css",          
-        "assets/css/common.css",        
+        "../node_modules/primeng/resources/themes/bootstrap/theme.css",  
+         "assets/css/simple-sidebar.css",          
+        "assets/css/common.css",             
         "assets/css/style.css",
         "styles.css"
       ],

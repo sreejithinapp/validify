@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     //...................................................................
     login() {          
-        this.loginAction(); //Deployment
-        //this.loginDummy(); //DUMMY       
+        //this.loginAction(); //Deployment
+        this.loginDummy('group1'); //DUMMY  //group2 - doi | group1 - surety        
     }
     //...................................................................
 
@@ -46,12 +46,17 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.loginFail(error);
         });
     }
-    private loginDummy(){
+    private loginDummy(id){
         this.authService.setIsLoggedInInCheckUsingBS(true);         
-        this.authService.setIsWhichRoleCheckUsingBS("group1");          
+        this.authService.setIsWhichRoleCheckUsingBS(id);       
         this.storage.set("auth_token", "abcd");
-        this.storage.set("user_role", "group1");
-        this.router.navigate(["/dashboard"]);          
+        this.storage.set("user_role", id);
+        if (id === 'group1'){
+            this.router.navigate(["/suretydashboard"]);    
+        } else if (id === 'group2'){
+            this.router.navigate(["/doidashboard"]);    
+        }
+        //this.router.navigate(["/dashboard"]);          
         //this.loginFail({message:"Login Failed message"});  //DUMMY LOGIN FAIL        
     }
     //...................................................................
@@ -75,7 +80,13 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.authService.setIsLoggedInInCheckUsingBS(true);         
             this.authService.setIsWhichRoleCheckUsingBS(response.data.user_role);  
 
-            this.router.navigate(["dashboard"]);  
+            let id = response.data["user_role"];
+            if (id === 'group1'){
+                this.router.navigate(["/suretydashboard"]);    
+            } else if (id === 'group2'){
+                this.router.navigate(["/doidashboard"]);    
+            }
+            //this.router.navigate(["/dashboard"]); 
         }
     } 
     

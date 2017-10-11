@@ -13,8 +13,8 @@
             <div class="col-md-12 col-sm-12">
                 <div class="login-wrap mBot20 text-center">
                     <ul>
-                        <li>
-                            <img src="assets/images/logo-validify.png" class="logo mBot10">                               
+                        <li>                            
+                            <img src="assets/images/validify_logo_primary.png" class="logo mBot10">                             
                         </li>
                     </ul>
                 </div>
@@ -54,7 +54,9 @@
                 <h4>Public Bond Search</h4>
                 <div class="nav-search form-group">                   
                     <input type="search" class="form-control public-search" id="search" name="search" placeholder="Search here..." [(ngModel)]="search_txt">
-                    <i class="public-search fa fa-search" (click)="op.show($event, actualTarget)"></i>
+                    
+                    <i class="public-search fa fa-search"></i>                    
+                    <!-- <i class="public-search fa fa-search" (click)="op.show($event, actualTarget)"></i> -->
                    
                     <div class="public-search-result mTop10" #actualTarget>
                         search result                        

@@ -8,17 +8,18 @@ import { AuthRoutesModule } from './auth.routes';
 
 import { LoginComponent } from './login/login.component';
 
-import { AuthService } from './auth.service';
+//import { AuthService } from './auth.service';
 
 
 @NgModule({ 
   imports: [
     CommonModule,
-    AuthRoutesModule,
     FormsModule,
-    GrowlModule
+    GrowlModule,
+    AuthRoutesModule    
   ],  
-  declarations: [LoginComponent]
+  declarations: [LoginComponent],
+  providers: []
 })
 
 export class AuthModule {

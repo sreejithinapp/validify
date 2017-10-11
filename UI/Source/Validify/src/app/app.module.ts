@@ -12,7 +12,6 @@ import { OverlayPanelModule } from 'primeng/primeng';
 
 import { AppRouterModule } from './app-router.module';
 import { SharedModule } from './shared/shared.module';
-//import { LayoutModule } from './layout/layout.module';
 
 import { AppComponent } from './app.component';
 import { LoaderComponent } from './shared/loader/loader.component';
@@ -23,7 +22,6 @@ import { AuthService } from './auth/auth.service';
 import { HttpService } from './shared/http-service/http.service';
 import { SharedService } from './shared/shared.service';
 import { StorageService } from './shared/storage.service';
-//import { LoggerService } from './shared/logger.service';
 //import { DraftGuard } from './shared/guard/draft.guard';
 
 
@@ -40,8 +38,7 @@ import { StorageService } from './shared/storage.service';
     GrowlModule, 
     DialogModule,
     OverlayPanelModule,
-
-    //LayoutModule,
+   
     SharedModule,    
     AppRouterModule
   ],
@@ -58,7 +55,7 @@ import { StorageService } from './shared/storage.service';
     HttpService, 
     SharedService,            
     StorageService  
-    //DraftGuard, LoggerService,     
+    //DraftGuard
   ],
 
   bootstrap: [AppComponent]

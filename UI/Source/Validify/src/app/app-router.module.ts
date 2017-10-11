@@ -5,25 +5,26 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { LoginGuard } from "./auth/login.guard";
 import { AuthGuard } from "./auth/auth.guard";
 
-//import { NotfoundComponent } from './shared/notfound/notfound.component';
-//import { SidebarComponent } from "./shared/sidebar/sidebar.component";
-//import { HeaderComponent } from "./shared/header/header.component";
-
 const ROUTES:Routes = [    
     {
         path: "login",
-        loadChildren: "app/auth/auth.module#AuthModule",
+        loadChildren: "./auth/auth.module#AuthModule",
         canActivate: [LoginGuard]
     },      
     {
-        path: "dashboard",
-        loadChildren: "app/dashboard/dashboard.module#DashboardModule",
+        path: "doidashboard",
+        loadChildren: "./doi-dashboard/doi-dashboard.module#DoiDashboardModule",
         canActivate: [AuthGuard]
-    },      
+    }, 
     {
-        path: "",
-        redirectTo: "/dashboard",
-        pathMatch: "full"
+        path: "suretydashboard",
+        loadChildren: "./surety-dashboard/surety-dashboard.module#SuretyDashboardModule",
+        canActivate: [AuthGuard]
+    },  
+    {
+        path: "dashboard",
+        loadChildren: "./dashboard/dashboard.module#DashboardModule",
+        canActivate: [AuthGuard]
     },
     {
         path: "**",
