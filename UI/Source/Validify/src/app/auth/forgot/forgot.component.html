@@ -1,0 +1,24 @@
+
+<p-dialog header="Forgot Password" [(visible)]="display" modal="modal" width="400" [responsive]="true">
+    
+    <p>An Email has been sent to your mailbox, please check for the instruction.</p>
+    
+     <form (ngSubmit)="submitBtnAction()" #forgotForm="ngForm" autocomplete="off">    
+                       
+        <div class="form-group">
+            <label for="email">Username or Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="eg:abc@abc.com, ram123"   required [(ngModel)]="username" required> 
+        </div>   
+
+        <div class="form-group">
+            <label for="personal-email">Personal Email:</label>
+            <input type="email" class="form-control" id="personal-email" name="personal-email" placeholder="Enter Personal Email"  required [(ngModel)]="email" required>
+        </div>                  
+
+        <div class="login-footer-box">                                  
+            <button type="submit" class="btn active-btn pull-right mRight10" [disabled]="!forgotForm.form.valid">Submit</button>
+            <button type="button" class="btn active-btn" (click)="display=false">Cancel</button>   
+        </div>
+    
+    </form>
+</p-dialog>
