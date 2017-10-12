@@ -2,6 +2,7 @@
 <div class="login-container">  
 
     <div class="login-box">
+
        
         <div class="row">
             <div class="col-md-12 col-sm-12">
@@ -21,7 +22,8 @@
             </div>
         </div> 
 
-        <div class="row">                  
+        <div class="row">    
+
             <div class="col-md-6 col-sm-12 col-xs-12 border-R">
                 <div class="login-inner-content mTop20">
                     <h4>User Login</h4>
@@ -50,29 +52,12 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-sm-12 col-xs-12 mTop20">
-                <h4>Public Bond Search</h4>
-                <div class="nav-search form-group">                   
-                    <input type="search" class="form-control public-search" id="search" name="search" placeholder="Search here..." [(ngModel)]="search_txt">
-                    
-                    <i class="public-search fa fa-search"></i>                    
-                    <!-- <i class="public-search fa fa-search" (click)="op.show($event, actualTarget)"></i> -->
-                   
-                    <div class="public-search-result mTop10" #actualTarget>
-                        search result                        
-                    </div>  
-                   <!-- <p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
-                        Content
-                    </p-overlayPanel>     
-                    -->            
-                    <!--<button type="button" (click)="testBtnAction()">Test</button>-->
-                </div>
-            </div> 
+            <vfy-bond-search></vfy-bond-search>        
 
-        </div>
-        
+        </div>    
+
         <div class="login-footer-box hidden">Validify all rights reserved</div>
-
+    
     </div>
     
 </div>

@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
 import { GrowlModule } from "primeng/components/growl/growl";
+import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
 import { DialogModule } from 'primeng/primeng';
 import { OverlayPanelModule } from 'primeng/primeng';
 
@@ -22,7 +22,7 @@ import { AuthService } from './auth/auth.service';
 import { HttpService } from './shared/http-service/http.service';
 import { SharedService } from './shared/shared.service';
 import { StorageService } from './shared/storage.service';
-//import { DraftGuard } from './shared/guard/draft.guard';
+import { DummyAPIService } from "./shared/dummy-api.service";
 
 
 @NgModule({
@@ -34,8 +34,8 @@ import { StorageService } from './shared/storage.service';
     HttpModule,
     RouterModule,
 
-    ConfirmDialogModule,
     GrowlModule, 
+    ConfirmDialogModule,    
     DialogModule,
     OverlayPanelModule,
    
@@ -54,8 +54,8 @@ import { StorageService } from './shared/storage.service';
     AuthService,  
     HttpService, 
     SharedService,            
-    StorageService  
-    //DraftGuard
+    StorageService,
+    DummyAPIService     
   ],
 
   bootstrap: [AppComponent]

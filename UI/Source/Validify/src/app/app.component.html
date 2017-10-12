@@ -1,27 +1,12 @@
 
 <router-outlet name="login" *ngIf="!isUserLogined"></router-outlet> 
 
-<!-- <router-outlet name="dashboard" *ngIf="isUserLogined"></router-outlet>-->
 <router-outlet name="doidashboard" *ngIf="isUserLogined && isDoi"></router-outlet> 
 <router-outlet name="suretydashboard" *ngIf="isUserLogined && isSurety"></router-outlet> 
 
 
-<!--
-<div id="wrapper" *ngIf="isUserLogined" class="toggled">  
-    <div *ngIf="isRole1User">
-        <router-outlet name='role1-dashboard'></router-outlet>  
-        router-outlet name='header1'></router-outlet>
-        <router-outlet name='sidebar1'></router-outlet>   
-        <vfy-loader *ngIf="isContentLoading"></vfy-loader>  
-        
-    </div>  
-    <div *ngIf="isRole2User">
-       <router-outlet name='role2-dashboard'></router-outlet>  
-    </div>
-</div>
--->
+<p-growl [(value)]="growlTxt" [life]="3000" [sticky]=false></p-growl>
 
-<p-growl [(value)]="msgs" [life]="3000" [sticky]=false></p-growl> 
 <p-confirmDialog  [closeOnEscape]="false" [closable]="true" width="425" #cdRef>
      <p-footer>
         <button type="button" pButton icon="fa-close" label="No" (click)="cdRef.reject()"></button>

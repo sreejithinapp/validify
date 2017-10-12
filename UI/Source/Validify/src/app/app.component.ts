@@ -17,77 +17,69 @@ declare var $:any;
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit{  
-
-    @ViewChild('cdRef') confirmationDialogRef;
+export class AppComponent implements AfterViewInit{      
    
     public isUserLogined:boolean = false;
     public isWhichRole:string;  
     public isDoi:boolean = false;
-    public isSurety:boolean = false;
-    //public isContentLoading:boolean = false;   
+    public isSurety:boolean = false;   
     public dialogDisplay: boolean = false;   
-    //.......................................................................
-
-
-    //.......................................................................
+   
     constructor(private authService:AuthService, private sharedService:SharedService, private confirmationService:ConfirmationService, private messageService: MessageService) {
-      
-      authService.isLoggedInCheckUsingBS().subscribe((bool) => {          
-        this.isUserLogined = bool;
-        //console.log('AppComponent isLoggedInCheckUsingBS>> this.isUserLogined:', this.isUserLogined);
-      });
-
-      authService.isWhichRoleCheckUsingBS().subscribe((roleID) => {  
-        this.isWhichRole = roleID;
-        this.isSurety = false;
-        this.isDoi = false;
-        //group2 - doi | group1 - surety
-        //console.log('AppComponent isWhichRoleCheckUsingBS>> this.isWhichRole:', this.isWhichRole);       
-        if (this.isWhichRole === "group1" || this.isWhichRole === "group2"){
-          this.loginSuccessMessage();
-          if (this.isWhichRole === 'group1'){
-            this.isSurety = true;
-          } else if (this.isWhichRole === 'group2'){
-            this.isDoi = true;         
-          }
-        } else {
-          this.loginFailMessage();
-        }                
-      });
-
-      sharedService.isDialogOverlayCheckUsingBS().subscribe((bool) => {          
-        this.dialogDisplay = bool;   
-        console.log('AppComponent isDialogOverlayCheckUsingBS>> this.dialogDisplay:', this.dialogDisplay); 
-      });     
-      
+      this.checkUserIsLogined(); 
+      this.bondSearchResultNotFoundCheck();       
+      //this.checkDialogCompShowStatus();    
     }
-    //.......................................................................
 
-
-
-    //.......................................................................
     ngAfterViewInit() {
+      //@ViewChild('cdRef') confirmationDialogRef;
       //this.confirmationDialogRef.el.nativeElement.querySelector('.ui-confirmdialog').classList.add('logout-confirm'); 
     }
     //.......................................................................
 
+
+
+    //.......................................................................
+    checkUserIsLogined(){
+      this.authService.isLoggedInCheckUsingBS().subscribe((bool) => {          
+        this.isUserLogined = bool;
+        this.checkWhichDashboard();          
+      });
+    }
+
+    checkWhichDashboard(){
+      this.authService.isWhichRoleCheckUsingBS().subscribe((roleID) => {  
+        this.isWhichRole = roleID;
+        this.isSurety = false;
+        this.isDoi = false;      
+        //console.log('AppComponent isWhichRoleCheckUsingBS>> this.isWhichRole:', this.isWhichRole);       
+        if (this.isWhichRole === 'group1'){
+          this.isSurety = true;
+        } else if (this.isWhichRole === 'group2'){
+          this.isDoi = true;         
+        } 
+        this.showGrowlMessage();              
+      });
+    }
+
+    bondSearchResultNotFoundCheck(){
+      this.authService.behaviorSubjectBondSearchResult().subscribe((bool) => { 
+        if (bool){
+          this.showGrowlMessage();     
+        }   
+      });
+    }
+    //.......................................................................
+
+
     
     //.......................................................................
-    loginSuccessMessage() {
-        var obj = this.sharedService.getCurrentMsg();
+    showGrowlMessage(){
+       var obj = this.sharedService.getCurrentMsg();
         if (obj){
           this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
         }        
         //this.messageService.clear();//clear message
-    }
-
-    loginFailMessage() {
-        var obj = this.sharedService.getCurrentMsg();
-        //console.log('loginFailMessage', obj)
-        if (obj){
-          this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
-        }      
     }    
     //.......................................................................
 
@@ -107,6 +99,13 @@ export class AppComponent implements AfterViewInit{
           }
       });
     }
+
+    checkDialogCompShowStatus(){
+      this.sharedService.isDialogOverlayCheckUsingBS().subscribe((bool) => {          
+        this.dialogDisplay = bool;   
+        //console.log('AppComponent isDialogOverlayCheckUsingBS>> this.dialogDisplay:', this.dialogDisplay); 
+      });
+    }
     //.......................................................................
 
     
@@ -115,13 +114,13 @@ export class AppComponent implements AfterViewInit{
 
 
 /*
-      //private headerService:HeaderService, private sidebarService:SidebarService,
-      headerService.toggleSidebar.subscribe((sidebarStatus) => {
-        if (sidebarStatus) {
-          $('#wrapper').removeClass('toggled');
-        } else {
-          $('#wrapper').addClass('toggled');
-        }
-        this.sidebarService.sidebarStatus.emit(!sidebarStatus);
-      });
-      */     
+//private headerService:HeaderService, private sidebarService:SidebarService,
+headerService.toggleSidebar.subscribe((sidebarStatus) => {
+  if (sidebarStatus) {
+    $('#wrapper').removeClass('toggled');
+  } else {
+    $('#wrapper').addClass('toggled');
+  }
+  this.sidebarService.sidebarStatus.emit(!sidebarStatus);
+});
+*/     

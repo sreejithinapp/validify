@@ -7,7 +7,7 @@ import { Login } from "./login";
 import { AuthService } from "../auth.service";
 import { StorageService } from "../../shared/storage.service";
 import { SharedService } from "../../shared/shared.service";
-
+import { DummyAPIService } from "../../shared/dummy-api.service";
 
 @Component({
     selector: 'vfy-login',
@@ -16,62 +16,70 @@ import { SharedService } from "../../shared/shared.service";
     providers: [Login]
 })
 
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {    
 
-    //obsvGetUser: Subscription;
-    obsvLogin: Subscription;     
-    //...................................................................
-
-
-    //...................................................................
-    constructor(private router:Router, private authService:AuthService, private loginModel:Login, private storage:StorageService, private sharedService:SharedService) {
+    obsvLogin: Subscription;    
+  
+    constructor(private router:Router, private loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         //constructor         
+    }
+
+    ngOnInit() {
+        this.hasAuthToken();
+        this.hasRole();
+    }
+
+    ngOnDestroy() {
+        if (this.obsvLogin) this.obsvLogin.unsubscribe();        
     }
     //...................................................................
 
+
+    //...................................................................
+    hasAuthToken() {
+        setTimeout(() => {  
+            if (!this.authService.isLoggedIn()) {  
+                this.authService.setIsLoggedInInCheckUsingBS(false);
+            }
+        }, 0);
+    }
+
+    hasRole() {
+        setTimeout(() => {  
+            if (!this.authService.getWhichRole()) {  
+                this.authService.setIsWhichRoleCheckUsingBS("NONE");
+            }
+        }, 0);
+    }    
+    //...................................................................
+   
 
     //...................................................................
     login() {          
-        //this.loginAction(); //Deployment
-        this.loginDummy('group1'); //DUMMY  //group2 - doi | group1 - surety        
-    }
-    //...................................................................
-
-
-    //...................................................................
-    private loginAction(){
         this.obsvLogin = this.authService.login(this.loginModel).subscribe((response) => {
-            this.loginSuccess(response);
-        }, (error) => {
-            this.loginFail(error);
+            //this.loginSuccess(response); //Depolyment
+            this.dummyLoginResponse(); //DUMMY Test
+        }, (error) => {            
+            this.loginFail(error); //Depolyment
+           // this.dummyLoginResponse(); //DUMMY Test
         });
     }
-    private loginDummy(id){
-        this.authService.setIsLoggedInInCheckUsingBS(true);         
-        this.authService.setIsWhichRoleCheckUsingBS(id);       
-        this.storage.set("auth_token", "abcd");
-        this.storage.set("user_role", id);
-        if (id === 'group1'){
-            this.router.navigate(["/suretydashboard"]);    
-        } else if (id === 'group2'){
-            this.router.navigate(["/doidashboard"]);    
-        }
-        //this.router.navigate(["/dashboard"]);          
-        //this.loginFail({message:"Login Failed message"});  //DUMMY LOGIN FAIL        
+   
+    dummyLoginResponse(){
+        let response = this.dummyAPIService.getLoginResponseSurety(); //getLoginResponseDOI / getLoginResponseSurety
+        console.log('dummyLoginResponse: ', response);
+        this.loginSuccess(response);
     }
-    //...................................................................
 
-
-    //...................................................................
-    private loginSuccess(response:any){
+    loginSuccess(response:any){
         console.log('loginSuccess>> response: ', response);       
         if (response.data) {
 
-            if (response.data["auth_token"]) {
-                this.storage.set("auth_token", response.data.access_token);
+            if (response.data.auth_token) {
+                this.storageService.set("auth_token", response.data.auth_token);
             }
-            if (response.data["user_role"]) {
-                this.storage.set("user_role", response.data.user_role);
+            if (response.data.user_role) {
+                this.storageService.set("user_role", response.data.user_role);
             }
             
             let msgObj = {severity: 'success', summary: 'Dashboard', detail:'Logined Successfully!'};            
@@ -80,76 +88,25 @@ export class LoginComponent implements OnInit, OnDestroy {
             this.authService.setIsLoggedInInCheckUsingBS(true);         
             this.authService.setIsWhichRoleCheckUsingBS(response.data.user_role);  
 
-            let id = response.data["user_role"];
+            let id = response.data.user_role;
             if (id === 'group1'){
                 this.router.navigate(["/suretydashboard"]);    
             } else if (id === 'group2'){
                 this.router.navigate(["/doidashboard"]);    
-            }
-            //this.router.navigate(["/dashboard"]); 
+            }            
         }
     } 
     
-    private loginFail(error: any){
+    loginFail(error: any){
         console.log('loginFail error: ', error);   
 
         let msgObj = {severity: 'error', summary: 'Error', detail: error.statusText};            
         this.sharedService.setCurrentMsg(msgObj); 
 
         this.authService.setIsLoggedInInCheckUsingBS(false);  
-        this.authService.setIsWhichRoleCheckUsingBS("NONE");             
+        this.authService.setIsWhichRoleCheckUsingBS("NONE");                  
     }
     //...................................................................     
-        
-
-   
-
-    //...................................................................
-    private hasAuthToken() {
-        setTimeout(() => {  
-            if (!this.authService.isLoggedIn()) {  
-                this.authService.setIsLoggedInInCheckUsingBS(false);
-            }
-        }, 0);
-    }
-    private hasRole() {
-        setTimeout(() => {  
-            if (!this.authService.getWhichRole()) {  
-                this.authService.setIsWhichRoleCheckUsingBS("NONE");
-            }
-        }, 0);
-    }
-    //...................................................................
-
-
-    //...................................................................
-    ngOnInit() {
-        this.hasAuthToken();
-        this.hasRole();
-    }
-    ngOnDestroy() {
-        if (this.obsvLogin) this.obsvLogin.unsubscribe();
-        //if (this.obsvGetUser) this.obsvGetUser.unsubscribe();
-    }
-    //...................................................................
-
-
-    //...................................................................
-    private searchBtnAction():void{       
-        //alert("searchBtnAction");  
-        this.sharedService.setIsDialogOverlayCheckUsingBS(true);      
-    }
-    //...................................................................
-
-    
-    
-    //...................................................................
-    private testBtnAction():void{       
-        alert("testBtnAction");  
-        //this.sharedService.setIsDialogOverlayCheckUsingBS(true);       
-    }
-    //...................................................................
-   
 
 }
 
@@ -157,19 +114,19 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 /*
 //...................................................................
-//this.storage.remove("auth_token"); this.storage.remove("user_role"); 
+//this.storageService.remove("auth_token"); this.storageService.remove("user_role"); 
 
 //................
 fetchUserDetails(){
     this.obsvGetUser = this.authService.getUserDetails().subscribe((response) => {
         console.log('fetchUserDetails>> response: ', response);
         if (response.user) {
-            this.storage.set('user_details', JSON.stringify(response.user));      
-            let role_id = this.storage.get('user_details').role_id;
+            this.storageService.set('user_details', JSON.stringify(response.user));      
+            let role_id = this.storageService.get('user_details').role_id;
             if (role_id === 1) {//DUMMY
                 response.permission = {};
             }
-            this.storage.setPermissions(response.permission);
+            this.storageService.setPermissions(response.permission);
             this.router.navigate(["/dashboard"]);       
             this.authService.setIsLoggedInInCheckUsingBS(true);
         }                        
