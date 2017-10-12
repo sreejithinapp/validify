@@ -1,0 +1,86 @@
+
+<div class="col-md-6 col-sm-12 col-xs-12 mTop20">
+    
+    <h4>Public Bond Search</h4>
+
+    <!-- nav-search form-group START -->
+    <div class="nav-search form-group">   
+        
+        <input type="search" class="form-control public-search" id="search" name="search" placeholder="Search here..." [(ngModel)]="bondSearchTxt">
+        
+        <i class="public-search fa fa-search" (click)="bondSearchBtnAction()"></i>    
+        
+        <!-- public-search-result START --> 
+        <div class="public-search-result mTop10" *ngIf="bondSearchResultElemStatus">
+            
+            <button type="button" class="public-search fa fa-close" (click)="bondSearchCloseBtnAction()" aria-label="Close"></button>
+
+            <ul class="list-group">
+                <li class="list-group-item justify-content-between">
+                    Defendant Name
+                    <span class="">{{searchResultObj.defendant_name }}</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Charges    
+                    <span> {{ searchResultObj.charge }} </span>
+                </li> 
+                <li class="list-group-item justify-content-between">
+                    Bond Amount 
+                    <span>$ {{ searchResultObj.bond_amount }}</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Next Court Date 
+                    <span> {{ searchResultObj.next_court_date }} </span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Court Time 
+                    <span>{{ searchResultObj.court_time }}</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Court Address
+                    <span>{{ searchResultObj.court_address }}</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Court City
+                    <span>{{ searchResultObj.court_city }}</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Court State
+                    <span> {{ searchResultObj.court_state }}</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Court Type
+                    <span> {{ searchResultObj.court_type }} </span>
+                </li>
+            </ul>
+
+            <div>
+                <h5>Court Date History</h5>
+                <table class="table">
+                    <thead>
+                        <tr><th>Court Date</th><th>Show Y/N</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>{{ searchResultObj.court_date_history[0].date }}</td><td>{{ searchResultObj.court_date_history[0].availability }}</td></tr>
+                        <tr><td>{{ searchResultObj.court_date_history[1].date}}</td><td>{{ searchResultObj.court_date_history[1].availability }}</td></tr>                                
+                    </tbody>
+                </table>
+            </div>    
+
+        </div>
+        <!-- public-search-result END --> 
+
+
+    </div>
+    <!-- nav-search form-group END -->
+
+</div> 
+
+
+
+<!-- 
+<i class="public-search fa fa-search" (click)="op.show($event, actualTarget)"></i> 
+<p-overlayPanel #op [dismissable]="true" [showCloseIcon]="true">
+    Content
+</p-overlayPanel>  
+-->  
