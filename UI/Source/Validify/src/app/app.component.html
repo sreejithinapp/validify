@@ -7,11 +7,14 @@
 
 <p-growl [(value)]="growlTxt" [life]="3000" [sticky]=false></p-growl>
 
+
+
+<!-- 
 <p-confirmDialog  [closeOnEscape]="false" [closable]="true" width="425" #cdRef>
-     <p-footer>
+    <p-footer>
         <button type="button" pButton icon="fa-close" label="No" (click)="cdRef.reject()"></button>
         <button type="button" pButton icon="fa-check" label="Yes" (click)="cdRef.accept()"></button>
-        <!-- <button type="button" pButton icon="fa-close" label="Close" (click)="cdRef.hide()"></button> --> 
+        <button type="button" pButton icon="fa-close" label="Close" (click)="cdRef.hide()"></button> 
     </p-footer>
 </p-confirmDialog>
 
@@ -19,7 +22,8 @@
     Content
 </p-dialog>
 
-<!--<button type="button" (click)="confirm1(obj)" pButton icon="fa-check" label="Confirm"></button> -->
+<button type="button" (click)="confirm1(obj)" pButton icon="fa-check" label="Confirm"></button> 
+-->
 
 
 

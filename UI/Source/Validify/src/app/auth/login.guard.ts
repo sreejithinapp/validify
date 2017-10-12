@@ -17,7 +17,7 @@ export class LoginGuard implements CanActivate {
     
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
         if (this.authService.isLoggedIn()) {    
-            this.authService.isWhichRoleCheckUsingBS().subscribe((roleID) => {  
+            this.authService.behaviorSubjectRoleInit().subscribe((roleID) => {  
                 this.isSurety = false;  this.isDoi = false;      
                 //group2 - doi | group1 - surety      
                 if (roleID === "group1" || roleID === "group2"){       

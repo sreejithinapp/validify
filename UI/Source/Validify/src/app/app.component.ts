@@ -22,37 +22,34 @@ export class AppComponent implements AfterViewInit{
     public isUserLogined:boolean = false;
     public isWhichRole:string;  
     public isDoi:boolean = false;
-    public isSurety:boolean = false;   
-    public dialogDisplay: boolean = false;   
+    public isSurety:boolean = false;       
    
     constructor(private authService:AuthService, private sharedService:SharedService, private confirmationService:ConfirmationService, private messageService: MessageService) {
-      this.checkUserIsLogined(); 
-      this.bondSearchResultNotFoundCheck();       
-      //this.checkDialogCompShowStatus();    
+      this.loginCheck(); 
+      this.bondSearchCheck(); 
+      this.forgotCheck();            
     }
 
     ngAfterViewInit() {
-      //@ViewChild('cdRef') confirmationDialogRef;
-      //this.confirmationDialogRef.el.nativeElement.querySelector('.ui-confirmdialog').classList.add('logout-confirm'); 
+      //ngAfterViewInit
     }
     //.......................................................................
 
 
 
     //.......................................................................
-    checkUserIsLogined(){
-      this.authService.isLoggedInCheckUsingBS().subscribe((bool) => {          
+    loginCheck(){
+      this.authService.behaviorSubjectLoginInit().subscribe((bool) => {          
         this.isUserLogined = bool;
-        this.checkWhichDashboard();          
+        this.roleCheck();          
       });
     }
 
-    checkWhichDashboard(){
-      this.authService.isWhichRoleCheckUsingBS().subscribe((roleID) => {  
+    roleCheck(){
+      this.authService.behaviorSubjectRoleInit().subscribe((roleID) => {  
         this.isWhichRole = roleID;
         this.isSurety = false;
-        this.isDoi = false;      
-        //console.log('AppComponent isWhichRoleCheckUsingBS>> this.isWhichRole:', this.isWhichRole);       
+        this.isDoi = false;  
         if (this.isWhichRole === 'group1'){
           this.isSurety = true;
         } else if (this.isWhichRole === 'group2'){
@@ -62,8 +59,16 @@ export class AppComponent implements AfterViewInit{
       });
     }
 
-    bondSearchResultNotFoundCheck(){
-      this.authService.behaviorSubjectBondSearchResult().subscribe((bool) => { 
+    bondSearchCheck(){
+      this.authService.behaviorSubjectBondSearchInit().subscribe((bool) => { 
+        if (bool){
+          this.showGrowlMessage();     
+        }   
+      });
+    }
+
+    forgotCheck(){
+      this.authService.behaviorSubjectForgotInit().subscribe((bool) => { 
         if (bool){
           this.showGrowlMessage();     
         }   
@@ -85,6 +90,7 @@ export class AppComponent implements AfterViewInit{
 
 
     //.......................................................................
+    /*
     confirm1(obj1) {
       let obj = this.sharedService.getConfirmDetails(); //dummy  
       this.confirmationService.confirm({
@@ -99,13 +105,15 @@ export class AppComponent implements AfterViewInit{
           }
       });
     }
-
+    public dialogDisplay: boolean = false;   
+    //this.checkDialogCompShowStatus();   
     checkDialogCompShowStatus(){
       this.sharedService.isDialogOverlayCheckUsingBS().subscribe((bool) => {          
         this.dialogDisplay = bool;   
         //console.log('AppComponent isDialogOverlayCheckUsingBS>> this.dialogDisplay:', this.dialogDisplay); 
       });
     }
+    */
     //.......................................................................
 
     
@@ -114,6 +122,10 @@ export class AppComponent implements AfterViewInit{
 
 
 /*
+ngAfterViewInit() {
+  //@ViewChild('cdRef') confirmationDialogRef;
+  //this.confirmationDialogRef.el.nativeElement.querySelector('.ui-confirmdialog').classList.add('logout-confirm'); 
+}
 //private headerService:HeaderService, private sidebarService:SidebarService,
 headerService.toggleSidebar.subscribe((sidebarStatus) => {
   if (sidebarStatus) {

@@ -342,7 +342,7 @@ export class DummyAPIService {
                     {
                         "date": "08/07/2017",
                         "availability": "N"
-                    }
+                    }                   
                 ],
 
                 "charge": "5000",

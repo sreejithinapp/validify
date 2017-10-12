@@ -12,10 +12,15 @@ import { Constants } from "../shared/constants";
 @Injectable()
 export class AuthService {  
   
-  private bsForLoginCheck;
-  private bsForRoleCheck;
+  private behaviorSubjectLogin;
+
+  private behaviorSubjectRole;
+
   private behaviorSubjectBondSearch;
-  private isBondSearchResultNotFound:boolean = false;
+  private isBondSearchResponseFound:boolean = false;
+
+  private behaviorSubjectForgot;
+  private isForgotResponseFound:boolean = false;
 
   constructor(private storage:StorageService, private httpService:HttpService) {
     //constructor
@@ -24,57 +29,72 @@ export class AuthService {
 
 
   //...............................................
-  //LOGIN CHECK
-  isLoggedIn() {     
-    //this.storage.remove("auth_token"); this.storage.remove("user_role"); //dummy
+  //LOGIN  
+  behaviorSubjectLoginInit() {  
+    this.behaviorSubjectLogin = new BehaviorSubject(this.isLoggedIn());
+    return this.behaviorSubjectLogin.asObservable();
+  }  
+  isLoggedIn() { 
     return this.storage.get('auth_token') ? true : false;
-  } 
-  isLoggedInCheckUsingBS() {  
-    this.bsForLoginCheck = new BehaviorSubject(this.isLoggedIn());
-    return this.bsForLoginCheck.asObservable();
-  }     
+  }    
   setIsLoggedInInCheckUsingBS(bool:boolean) {
-    this.bsForLoginCheck.next(bool);
+    this.behaviorSubjectLogin.next(bool);
   }  
   //...............................................
 
 
 
   //...............................................
-  //ROLE CHECK
+  //ROLE
+  behaviorSubjectRoleInit() {  
+    this.behaviorSubjectRole = new BehaviorSubject(this.getWhichRole());
+    return this.behaviorSubjectRole.asObservable();
+  }  
   getWhichRole() {   
     return this.storage.get('user_role');  
-  } 
-  isWhichRoleCheckUsingBS() {  
-    this.bsForRoleCheck = new BehaviorSubject(this.getWhichRole());
-    return this.bsForRoleCheck.asObservable();
-  }     
+  }    
   setIsWhichRoleCheckUsingBS(roleID:string) {
-    this.bsForRoleCheck.next(roleID);
+    this.behaviorSubjectRole.next(roleID);
   }  
   //...............................................
 
 
   //...............................................
-  //BOND SERACH RESULT CHECK   
-  behaviorSubjectBondSearchResult() {  
+  //BOND SERACH 
+  behaviorSubjectBondSearchInit() {  
     this.behaviorSubjectBondSearch = new BehaviorSubject(this.getBehaviorSubjectBondSearchResult());
     return this.behaviorSubjectBondSearch.asObservable();
   } 
   getBehaviorSubjectBondSearchResult() {   
-    return this.isBondSearchResultNotFound;
+    return this.isBondSearchResponseFound;
   }    
   setBehaviorSubjectBondSearchNotFound(bool:boolean) {
-    this.isBondSearchResultNotFound = bool;
+    this.isBondSearchResponseFound = bool;
     this.behaviorSubjectBondSearch.next(bool);
   }  
   //...............................................
 
 
+  //...............................................
+  //FORGOT 
+  behaviorSubjectForgotInit() {  
+    this.behaviorSubjectForgot = new BehaviorSubject(this.getBehaviorSubjectForgot());
+    return this.behaviorSubjectForgot.asObservable();
+  } 
+  getBehaviorSubjectForgot() {   
+    return this.isForgotResponseFound;
+  }    
+  setBehaviorSubjectForgot(bool:boolean) {
+    this.isForgotResponseFound = bool;
+    this.behaviorSubjectForgot.next(bool);
+  }  
+  //...............................................
 
 
-  //API Service...............................................
-  //LOGIN ACTION - POST API
+
+
+
+  //API Service..................................... 
   login(loginModel:Login) {      
     return this.httpService.httpPost(Constants.login, {email: loginModel.username, password: loginModel.password, remember: loginModel.remember});
   }
@@ -83,20 +103,29 @@ export class AuthService {
     return this.httpService.httpPost(Constants.bondsearch, {search: searchTxt});
   }
 
-  //LOGOUT ACTION - POST API
-  logout() {
-    return this.httpService.httpPost(Constants.logout, {});
-  }
-  
-  //GET USER
-  getUserDetails() {
-    return this.httpService.httpGet(Constants.userdetails);
-  } 
-
-  //GET PERMISSIONS 
-  getPermissions(role_id) {
-     return this.httpService.httpGet('role/role_permission/' + role_id);
+  forgot(username:string, email:string) {      
+    return this.httpService.httpPost(Constants.forgot, {username: username, email: email});
   }
  
+  logout() {
+    return this.httpService.httpPost(Constants.logout, {});
+  } 
+  //..................................................
+
+
 }
 
+
+//...................................................
+/*
+//GET USER
+getUserDetails() {
+  return this.httpService.httpGet(Constants.userdetails);
+} 
+
+//GET PERMISSIONS 
+getPermissions(role_id) {
+    return this.httpService.httpGet('role/role_permission/' + role_id);
+}
+*/
+//...................................................

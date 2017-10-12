@@ -61,8 +61,10 @@
                         <tr><th>Court Date</th><th>Show Y/N</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td>{{ searchResultObj.court_date_history[0].date }}</td><td>{{ searchResultObj.court_date_history[0].availability }}</td></tr>
-                        <tr><td>{{ searchResultObj.court_date_history[1].date}}</td><td>{{ searchResultObj.court_date_history[1].availability }}</td></tr>                                
+                        <tr *ngFor="let history of searchResultObj.court_date_history">
+                            <td>{{ history.date }}</td>
+                            <td>{{ history.availability }}</td>
+                        </tr>                   
                     </tbody>
                 </table>
             </div>    
