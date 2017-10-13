@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     private subscriptionLogin:Subscription; 
     
-    constructor(private router:Router, private loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+    constructor(private router:Router, public loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         //constructor         
     }
 
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     //...................................................................
-    loginCheck() {
+    private loginCheck() {
         setTimeout(() => {  
             if (!this.authService.getLogin()) {  
                 this.authService.setBehaviorSubjectLogin(false);
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }, 0);                
     }
 
-    roleCheck() {
+    private roleCheck() {
         setTimeout(() => {  
             if (!this.authService.getRole()) {  
                 this.authService.setBehaviorSubjectRole("NONE");
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     //...................................................................
-    login() {        
+    public login() {        
         
         this.subscriptionLogin = this.authService.login(this.loginModel).subscribe((response) => {
             //this.loginSuccess(response); //Depolyment
@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         });
     }
    
-    dummyLoginResponse(obj){
+    private dummyLoginResponse(obj){
         let response:any;
         if (obj.username === "surety@validify.com"){
             response = this.dummyAPIService.getLoginResponseSurety(); 
@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loginSuccess(response);
     }
 
-    loginSuccess(response:any){
+    private loginSuccess(response:any){
         console.log('loginSuccess>> response: ', response);  
 
         if (response.data) {
@@ -106,7 +106,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         }
     } 
     
-    loginFail(error: any){
+    private loginFail(error: any){
         console.log('loginFail error: ', error);   
         this.setFailInfoMessageAndBehaviourSubject(error);                         
     }
@@ -115,7 +115,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     //................................................................... 
-    setSuccessInfoMessageAndBehaviourSubject(login:boolean, role:string){
+    private setSuccessInfoMessageAndBehaviourSubject(login:boolean, role:string){
         //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
         
         let msgObj = {severity: 'success', summary: 'Login', detail:'Logined Successfully!'};            
@@ -126,7 +126,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authService.setBehaviorSubjectRole(role);  
     }
 
-    setFailInfoMessageAndBehaviourSubject(obj:any){
+    private setFailInfoMessageAndBehaviourSubject(obj:any){
         //console.log('setMessageAndBehaviourSubject obj: ', obj); 
 
         let detailTxt = 'Login Failed'; //obj.statusText          

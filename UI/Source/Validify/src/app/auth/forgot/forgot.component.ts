@@ -15,9 +15,9 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 export class ForgotComponent implements OnInit, OnDestroy {    
     
     private subscriptionForgot:Subscription;       
-    private username:string;
-    private email:string;   
-    private display:boolean = false;
+    public username:string;
+    public email:string;   
+    public display:boolean = false;
    
     constructor(private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         //constructor         
@@ -36,20 +36,20 @@ export class ForgotComponent implements OnInit, OnDestroy {
 
 
     //................................................................... 
-    showForgot(){        
+    public showForgot(){        
         this.display = true;
     }
     //................................................................... 
 
 
     //...................................................................
-    closeBtnAction(){      
+    public closeBtnAction(){      
         this.username = "";
         this.email = "";
         this.display = false;
     }
 
-    submitBtnAction() {  
+    public submitBtnAction() {  
         
         if (this.username.length > 3 && this.email.length > 3) {
             
@@ -67,12 +67,12 @@ export class ForgotComponent implements OnInit, OnDestroy {
         }
     }
    
-    dummyHttpResponse(){
+    private dummyHttpResponse(){
         let response = this.dummyAPIService.getForgotResponse();       
         this.httpSuccess(response);
     }
 
-    httpSuccess(response:any){
+    private httpSuccess(response:any){
         //console.log('httpSuccess>> response: ', response);       
         if (response.data) {   
             this.setSuccessInfoMessageAndBehaviourSubject({statusText: response.data.status});  
@@ -80,7 +80,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
         }                   
     }  
 
-    httpFail(error:any){
+    private httpFail(error:any){
         //console.log('httpFail error: ', error);  
         this.setFailInfoMessageAndBehaviourSubject(error);             
     }
@@ -89,7 +89,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
 
 
     //................................................................... 
-    setSuccessInfoMessageAndBehaviourSubject(obj:any){
+    private setSuccessInfoMessageAndBehaviourSubject(obj:any){
         //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
         
         let msgObj = {severity: 'success', summary: 'Forgot Password', detail: obj.statusText};            
@@ -98,7 +98,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
         this.authService.setBehaviorSubjectBondSearch(true);  
     }
 
-    setFailInfoMessageAndBehaviourSubject(obj:any){
+    private setFailInfoMessageAndBehaviourSubject(obj:any){
         //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);   
         
         let msgObj = {severity: 'error', summary: 'Forgot Password', detail: obj.statusText};            

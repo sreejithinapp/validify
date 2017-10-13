@@ -15,9 +15,9 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 export class BondSearchComponent implements OnInit, OnDestroy {    
     
     private subscriptionBondSearch:Subscription;    
-    private bondSearchResultElemStatus:boolean = false;
-    private bondSearchTxt:string;
-    private searchResultObj;
+    public bondSearchResultElemStatus:boolean = false;
+    public bondSearchTxt:string;
+    public searchResultObj;
 
     constructor(private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         //constructor         
@@ -36,12 +36,12 @@ export class BondSearchComponent implements OnInit, OnDestroy {
 
 
     //...................................................................
-    bondSearchCloseBtnAction(){
+    public bondSearchCloseBtnAction(){
         this.bondSearchResultElemStatus = false;
         this.bondSearchTxt = "";
     }
 
-    bondSearchBtnAction() { 
+    public bondSearchBtnAction() { 
         
         if (this.bondSearchTxt.length > 3) {
 
@@ -59,13 +59,13 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         }
     }
    
-    dummyBondSearchResponse(){
+    private dummyBondSearchResponse(){
         let response = this.dummyAPIService.getBondSearchResponse();
         //console.log('dummyBondSearchResponse: ', response);
         this.bondSearchSuccess(response);
     }
 
-    bondSearchSuccess(response:any){
+    private bondSearchSuccess(response:any){
         //console.log('bondSearchSuccess>> response: ', response);       
         if (response.data) {           
             this.searchResultObj = {};  
@@ -75,7 +75,7 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         this.bondSearchResultElemStatus = true;        
     }  
 
-    bondSearchFail(error:any){
+    private bondSearchFail(error:any){
         //console.log('bondSearchFail error: ', error); 
         this.setFailInfoMessageAndBehaviourSubject(error);       
     }
@@ -83,7 +83,7 @@ export class BondSearchComponent implements OnInit, OnDestroy {
 
 
     //................................................................... 
-    setSuccessInfoMessageAndBehaviourSubject(obj:any){
+    private setSuccessInfoMessageAndBehaviourSubject(obj:any){
         //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
         
         let msgObj = {severity: 'success', summary: 'Public Bond Search', detail: obj.statusText};            
@@ -92,7 +92,7 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         this.authService.setBehaviorSubjectBondSearch(true);  
     }
 
-    setFailInfoMessageAndBehaviourSubject(obj:any){
+    private setFailInfoMessageAndBehaviourSubject(obj:any){
         //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);   
         
         let msgObj = {severity: 'error', summary: 'Public Bond Search', detail: obj.statusText};            

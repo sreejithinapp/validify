@@ -35,7 +35,7 @@ export class SuretyDashboardComponent implements OnInit, OnDestroy {
 
 
     //................................................................... 
-    logoutBtnAction() {      
+    public logoutBtnAction() {      
         this.subscriptionLogout = this.authService.logout().subscribe((response) => {
             //this.logoutSuccess(response); //Depolyment
             this.dummyLogoutResponse(); //DUMMY Test
@@ -46,13 +46,13 @@ export class SuretyDashboardComponent implements OnInit, OnDestroy {
         });        
     }
 
-    dummyLogoutResponse(){
+    private dummyLogoutResponse(){
         let response = this.dummyAPIService.getLogoutResponse();
         //console.log('dummyBondSearchResponse: ', response);
         this.logoutSuccess(response);        
     }
 
-    logoutSuccess(response:any){
+    private logoutSuccess(response:any){
         //console.log('logoutSuccess>> response: ', response);       
         if (response.data) {   
             this.goToLogin(); 
@@ -60,13 +60,13 @@ export class SuretyDashboardComponent implements OnInit, OnDestroy {
         }  
     }  
 
-    logoutFail(error:any){
+    private logoutFail(error:any){
         //console.log('logoutFail error: ', error);         
         this.goToLogin();  
         //this.setFailInfoMessageAndBehaviourSubject(error);     
     }
 
-    goToLogin(){
+    private goToLogin(){
         this.storageService.remove("auth_token");
         this.storageService.remove("user_role");
         //this.storageService.set("loggedIn", "false");  

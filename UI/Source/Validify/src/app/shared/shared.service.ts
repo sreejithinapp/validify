@@ -15,7 +15,7 @@ export class SharedService {
 
 
     //.................................................
-    getConfirmDetails() { 
+    public getConfirmDetails() { 
         const obj = { 
             message: "Are you sure that you want to proceed?",
             header: "Confirmation",
@@ -33,7 +33,7 @@ export class SharedService {
 
 
     //.................................................
-    setCurrentMsg(messageObj) { 
+    public setCurrentMsg(messageObj) { 
         this.currentMessageObj = { 
             severity: messageObj.severity,
             summary: messageObj.summary,
@@ -42,7 +42,7 @@ export class SharedService {
         return this.currentMessageObj;    
     }
 
-    getCurrentMsg() { 
+    public getCurrentMsg() { 
          return this.currentMessageObj;    
     }
     //.................................................

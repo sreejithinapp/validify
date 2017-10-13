@@ -12,7 +12,7 @@ export class DummyAPIService {
 
 
     //.................................................
-    getLoginResponseDOI() {
+    public getLoginResponseDOI() {
 
         const obj = {  
 
@@ -158,7 +158,7 @@ export class DummyAPIService {
 
 
     //.................................................
-    getLoginResponseSurety() {
+    public getLoginResponseSurety() {
 
         const obj = {  
 
@@ -309,7 +309,7 @@ export class DummyAPIService {
 
 
     //.................................................
-    getForgotResponse() {
+    public getForgotResponse() {
         const obj = {  
 	        "status_code": 200,
 	        "data": {
@@ -322,7 +322,7 @@ export class DummyAPIService {
 
 
     //.................................................
-    getLogoutResponse() {
+    public getLogoutResponse() {
         const obj = {  
 	        "status_code": 200,
 	        "data": {
@@ -335,7 +335,7 @@ export class DummyAPIService {
 
 
     //.................................................
-    getBondSearchResponse() {
+    public getBondSearchResponse() {
 
         const obj = {  
 

@@ -20,9 +20,10 @@ declare var $:any;
 export class AppComponent implements AfterViewInit{      
    
     public isUserLogined:boolean = false;
-    public isWhichRole:string;  
     public isDoi:boolean = false;
-    public isSurety:boolean = false;       
+    public isSurety:boolean = false; 
+    //public msgs: Message[] = []; 
+    public msgs:any;     
    
     constructor(private authService:AuthService, private sharedService:SharedService, private confirmationService:ConfirmationService, private messageService: MessageService) {
       this.loginCheck(); 
@@ -46,13 +47,12 @@ export class AppComponent implements AfterViewInit{
     }
 
     roleCheck(){
-      this.authService.behaviorSubjectRoleInit().subscribe((role) => {  
-        this.isWhichRole = role;
+      this.authService.behaviorSubjectRoleInit().subscribe((role) => {         
         this.isSurety = false;
         this.isDoi = false;  
-        if (this.isWhichRole === 'group1'){
+        if (role === 'group1'){
           this.isSurety = true;
-        } else if (this.isWhichRole === 'group2'){
+        } else if (role === 'group2'){
           this.isDoi = true;         
         } 
         this.showGrowlMessage();              
