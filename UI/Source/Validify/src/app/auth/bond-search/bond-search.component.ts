@@ -42,17 +42,20 @@ export class BondSearchComponent implements OnInit, OnDestroy {
     }
 
     bondSearchBtnAction() { 
+        
         if (this.bondSearchTxt.length > 3) {
+
             this.subscriptionBondSearch = this.authService.bondSearch(this.bondSearchTxt).subscribe((response) => {
                 //this.bondSearchSuccess(response); //Depolyment
                 this.dummyBondSearchResponse(); //DUMMY Test
+            
             }, (error) => {            
-                //this.bondSearchFail(error); //Depolyment
-                //this.bondSearchFail({statusText:"No Result Found!"});
+                //this.bondSearchFail(error); //Depolyment               
                 this.dummyBondSearchResponse(); //DUMMY Test
             });
-        } else {           
-            this.bondSearchFail({statusText:"Bond Search Text Contains Atleast Four Characters!"});
+
+        } else { 
+            this.setFailInfoMessageAndBehaviourSubject({statusText: "Bond Search Text Contains Atleast Four Characters!"});             
         }
     }
    
@@ -66,18 +69,39 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         //console.log('bondSearchSuccess>> response: ', response);       
         if (response.data) {           
             this.searchResultObj = {};  
-            this.searchResultObj = response.data;         
+            this.searchResultObj = response.data;   
+            this.setSuccessInfoMessageAndBehaviourSubject({statusText: "Bond Search Success!"});       
         }        
         this.bondSearchResultElemStatus = true;        
     }  
 
     bondSearchFail(error:any){
-        //console.log('bondSearchFail error: ', error);   
-        let msgObj = {severity: 'error', summary: 'Error', detail: error.statusText};            
-        this.sharedService.setCurrentMsg(msgObj);  
-        this.authService.setBehaviorSubjectBondSearchNotFound(true);           
+        //console.log('bondSearchFail error: ', error); 
+        this.setFailInfoMessageAndBehaviourSubject(error);       
     }
-    //...................................................................   
+    //...................................................................  
+
+
+    //................................................................... 
+    setSuccessInfoMessageAndBehaviourSubject(obj:any){
+        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
+        
+        let msgObj = {severity: 'success', summary: 'Public Bond Search', detail: obj.statusText};            
+        this.sharedService.setCurrentMsg(msgObj);  
+
+        this.authService.setBehaviorSubjectBondSearch(true);  
+    }
+
+    setFailInfoMessageAndBehaviourSubject(obj:any){
+        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);   
+        
+        let msgObj = {severity: 'error', summary: 'Public Bond Search', detail: obj.statusText};            
+        this.sharedService.setCurrentMsg(msgObj);  
+
+        this.authService.setBehaviorSubjectBondSearch(true);  
+    }
+    //................................................................... 
+ 
 
 }
 

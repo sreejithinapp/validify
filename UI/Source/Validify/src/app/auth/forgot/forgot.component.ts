@@ -16,8 +16,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
     
     private subscriptionForgot:Subscription;       
     private username:string;
-    private email:string;
-    private resultObj;
+    private email:string;   
     private display:boolean = false;
    
     constructor(private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
@@ -51,16 +50,20 @@ export class ForgotComponent implements OnInit, OnDestroy {
     }
 
     submitBtnAction() {  
+        
         if (this.username.length > 3 && this.email.length > 3) {
+            
             this.subscriptionForgot = this.authService.forgot(this.username, this.email).subscribe((response) => {
                 //this.httpSuccess(response); //Depolyment
                 this.dummyHttpResponse(); //DUMMY Test
+            
             }, (error) => {            
                 //this.httpFail(error); //Depolyment              
                 this.dummyHttpResponse(); //DUMMY Test
             });
-        } else {           
-            this.httpFail({statusText:"Please fill all the fields!"});
+
+        } else { 
+            this.setFailInfoMessageAndBehaviourSubject({statusText:"Please fill all the fields!"});
         }
     }
    
@@ -71,19 +74,41 @@ export class ForgotComponent implements OnInit, OnDestroy {
 
     httpSuccess(response:any){
         //console.log('httpSuccess>> response: ', response);       
-        if (response.data) {           
-            this.httpFail({statusText: response.data.status});   
+        if (response.data) {   
+            this.setSuccessInfoMessageAndBehaviourSubject({statusText: response.data.status});  
             this.closeBtnAction();   
         }                   
     }  
 
     httpFail(error:any){
-        //console.log('httpFail error: ', error);   
-        let msgObj = {severity: 'error', summary: 'Error', detail: error.statusText};            
-        this.sharedService.setCurrentMsg(msgObj);  
-        //this.authService.setBehaviorSubjectForgot(true);           
+        //console.log('httpFail error: ', error);  
+        this.setFailInfoMessageAndBehaviourSubject(error);             
     }
-    //...................................................................   
+    //................................................................... 
+
+
+
+    //................................................................... 
+    setSuccessInfoMessageAndBehaviourSubject(obj:any){
+        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
+        
+        let msgObj = {severity: 'success', summary: 'Forgot Password', detail: obj.statusText};            
+        this.sharedService.setCurrentMsg(msgObj);  
+
+        this.authService.setBehaviorSubjectBondSearch(true);  
+    }
+
+    setFailInfoMessageAndBehaviourSubject(obj:any){
+        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);   
+        
+        let msgObj = {severity: 'error', summary: 'Forgot Password', detail: obj.statusText};            
+        this.sharedService.setCurrentMsg(msgObj);  
+
+        this.authService.setBehaviorSubjectForgot(true);  
+    }
+    //................................................................... 
+
+
 
 }
 

@@ -1,5 +1,6 @@
 
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Subscription } from "rxjs/Subscription";
 
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ConfirmationService } from 'primeng/primeng';
@@ -45,8 +46,8 @@ export class AppComponent implements AfterViewInit{
     }
 
     roleCheck(){
-      this.authService.behaviorSubjectRoleInit().subscribe((roleID) => {  
-        this.isWhichRole = roleID;
+      this.authService.behaviorSubjectRoleInit().subscribe((role) => {  
+        this.isWhichRole = role;
         this.isSurety = false;
         this.isDoi = false;  
         if (this.isWhichRole === 'group1'){
@@ -78,12 +79,12 @@ export class AppComponent implements AfterViewInit{
 
     
     //.......................................................................
-    showGrowlMessage(){
-       var obj = this.sharedService.getCurrentMsg();
-        if (obj){
-          this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
-        }        
-        //this.messageService.clear();//clear message
+    showGrowlMessage(){     
+      var obj = this.sharedService.getCurrentMsg();
+      if (obj){
+        this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
+      }        
+      //this.messageService.clear();//clear message
     }    
     //.......................................................................
 

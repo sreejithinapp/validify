@@ -16,10 +16,13 @@ export class LoginGuard implements CanActivate {
     }
     
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-        if (this.authService.isLoggedIn()) {    
+        if (this.authService.getLogin()) {    
+            
             this.authService.behaviorSubjectRoleInit().subscribe((roleID) => {  
-                this.isSurety = false;  this.isDoi = false;      
-                //group2 - doi | group1 - surety      
+                
+                this.isSurety = false;  
+                this.isDoi = false; 
+
                 if (roleID === "group1" || roleID === "group2"){       
                     if (roleID === 'group1'){
                         this.isSurety = true;
@@ -29,6 +32,7 @@ export class LoginGuard implements CanActivate {
                 }  
                 if (this.isSurety){
                     this.router.navigate(['suretydashboard']);
+                    
                 } else if (this.isDoi){
                     this.router.navigate(['doidashboard']);
                 }

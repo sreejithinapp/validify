@@ -10,16 +10,15 @@ export class StorageService {
         value = (typeof value == "string") ? value : JSON.stringify(value);
         window.localStorage.setItem(name, value);
     }
+
     get(name:string) {
-        return window.localStorage.getItem(name);
-        /*let val;
         try {
-            val = JSON.parse(window.localStorage.getItem(name));
+            return JSON.parse(window.localStorage.getItem(name));
         } catch (error) {
-            val = window.localStorage.getItem(name);
-        }
-        return val;*/
+            return window.localStorage.getItem(name);
+        }    
     }
+    
     remove(name:string){
         window.localStorage.removeItem(name);
     }

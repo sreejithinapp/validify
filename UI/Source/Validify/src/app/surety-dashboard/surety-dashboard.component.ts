@@ -2,8 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 
-// import { LoggerService } from "app/utils/logger.service"; import * as _ from
-// "lodash";
+import { AuthService } from "../auth/auth.service";
+import { SharedService } from "../shared/shared.service";
+import { DummyAPIService } from "../shared/dummy-api.service";
+
+
 
 @Component({
     selector: 'vfy-surety-dashboard', 
@@ -14,15 +17,47 @@ import {Subscription} from "rxjs/Subscription";
 export class SuretyDashboardComponent implements OnInit {
 
     
-    constructor() {
-        console.log('SuretyDashboardComponent init..')
+    constructor(private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+        //constructor         
     }
+
     ngOnInit() : void {
         console.log('SuretyDashboardComponent Module OnInit');
+        //this.setSuccessInfoMessageAndBehaviourSubject({statusText: "Login  Success test!"}); 
     }
+    //................................................................... 
+
+
+    //................................................................... 
+    /*
+    setSuccessInfoMessageAndBehaviourSubject(obj:any){
+        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
+        
+        let msgObj = {severity: 'success', summary: 'Public Bond Search', detail: obj.statusText};            
+        this.sharedService.setCurrentMsg(msgObj);  
+
+        this.authService.setBehaviorSubjectBondSearch(true);  
+    }
+
+    setFailInfoMessageAndBehaviourSubject(obj:any){
+        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);   
+        
+        let msgObj = {severity: 'error', summary: 'Public Bond Search', detail: obj.statusText};            
+        this.sharedService.setCurrentMsg(msgObj);  
+
+        this.authService.setBehaviorSubjectBondSearch(true);  
+    }
+    */
+    //................................................................... 
 }
 
+
+
+
+
 /*
+//import { LoggerService } from "app/utils/logger.service"; 
+//import * as _ from  "lodash";
 //logger.$log(this,"Test");
 //logger.$log(this,_.VERSION);
 data: any;  bardata: any;  chartOptions:any;

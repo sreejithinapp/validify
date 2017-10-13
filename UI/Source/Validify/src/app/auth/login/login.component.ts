@@ -18,36 +18,36 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 
 export class LoginComponent implements OnInit, OnDestroy {    
 
-    private obsvLogin:Subscription; 
+    private subscriptionLogin:Subscription; 
     
     constructor(private router:Router, private loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         //constructor         
     }
 
     ngOnInit() {
-        this.hasAuthToken();
-        this.hasRole();
+        this.loginCheck();
+        this.roleCheck();
     }
 
     ngOnDestroy() {
-        if (this.obsvLogin) this.obsvLogin.unsubscribe();        
+        if (this.subscriptionLogin) this.subscriptionLogin.unsubscribe();        
     }
     //...................................................................
 
 
     //...................................................................
-    hasAuthToken() {
+    loginCheck() {
         setTimeout(() => {  
-            if (!this.authService.isLoggedIn()) {  
-                this.authService.setIsLoggedInInCheckUsingBS(false);
+            if (!this.authService.getLogin()) {  
+                this.authService.setBehaviorSubjectLogin(false);
             }
-        }, 0);
+        }, 0);                
     }
 
-    hasRole() {
+    roleCheck() {
         setTimeout(() => {  
-            if (!this.authService.getWhichRole()) {  
-                this.authService.setIsWhichRoleCheckUsingBS("NONE");
+            if (!this.authService.getRole()) {  
+                this.authService.setBehaviorSubjectRole("NONE");
             }
         }, 0);
     }    
@@ -56,12 +56,14 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     //...................................................................
     login() {          
-        this.obsvLogin = this.authService.login(this.loginModel).subscribe((response) => {
+        
+        this.subscriptionLogin = this.authService.login(this.loginModel).subscribe((response) => {
             //this.loginSuccess(response); //Depolyment
             this.dummyLoginResponse(); //DUMMY Test
+        
         }, (error) => {            
-            this.loginFail(error); //Depolyment
-           // this.dummyLoginResponse(); //DUMMY Test
+            //this.loginFail(error); //Depolyment
+            this.dummyLoginResponse(); //DUMMY Test
         });
     }
    
@@ -72,41 +74,61 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
 
     loginSuccess(response:any){
-        console.log('loginSuccess>> response: ', response);       
+        console.log('loginSuccess>> response: ', response);  
+
         if (response.data) {
 
             if (response.data.auth_token) {
                 this.storageService.set("auth_token", response.data.auth_token);
             }
+
             if (response.data.user_role) {
                 this.storageService.set("user_role", response.data.user_role);
             }
             
-            let msgObj = {severity: 'success', summary: 'Dashboard', detail:'Logined Successfully!'};            
-            this.sharedService.setCurrentMsg(msgObj);  
-
-            this.authService.setIsLoggedInInCheckUsingBS(true);         
-            this.authService.setIsWhichRoleCheckUsingBS(response.data.user_role);  
+            this.setSuccessInfoMessageAndBehaviourSubject(true, response.data.user_role); 
 
             let id = response.data.user_role;
             if (id === 'group1'){
                 this.router.navigate(["/suretydashboard"]);    
             } else if (id === 'group2'){
                 this.router.navigate(["/doidashboard"]);    
-            }            
+            }                      
         }
     } 
     
     loginFail(error: any){
         console.log('loginFail error: ', error);   
-
-        let msgObj = {severity: 'error', summary: 'Error', detail: error.statusText};            
-        this.sharedService.setCurrentMsg(msgObj); 
-
-        this.authService.setIsLoggedInInCheckUsingBS(false);  
-        this.authService.setIsWhichRoleCheckUsingBS("NONE");                  
+        this.setFailInfoMessageAndBehaviourSubject(error);                         
     }
-    //...................................................................     
+    //...................................................................  
+
+
+
+    //................................................................... 
+    setSuccessInfoMessageAndBehaviourSubject(login:boolean, role:string){
+        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
+        
+        let msgObj = {severity: 'success', summary: 'Login', detail:'Logined Successfully!'};            
+        this.sharedService.setCurrentMsg(msgObj);  
+
+        this.authService.setBehaviorSubjectLogin(login);  
+
+        this.authService.setBehaviorSubjectRole(role);  
+    }
+
+    setFailInfoMessageAndBehaviourSubject(obj:any){
+        //console.log('setMessageAndBehaviourSubject obj: ', obj); 
+
+        let detailTxt = 'Login Failed'; //obj.statusText          
+        let msgObj = {severity: 'error', summary: 'Login', detail: detailTxt};            
+        this.sharedService.setCurrentMsg(msgObj);  
+
+        this.authService.setBehaviorSubjectLogin(false);  
+
+        this.authService.setBehaviorSubjectRole("NONE");  
+    }
+    //...................................................................    
     
 }
 
