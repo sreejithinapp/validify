@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loginCheck();
-        this.roleCheck();
+        this.roleCheck();        
     }
 
     ngOnDestroy() {
@@ -50,25 +50,34 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.authService.setBehaviorSubjectRole("NONE");
             }
         }, 0);
-    }    
+    }      
     //...................................................................
    
 
+
     //...................................................................
-    login() {          
+    login() {        
         
         this.subscriptionLogin = this.authService.login(this.loginModel).subscribe((response) => {
             //this.loginSuccess(response); //Depolyment
-            this.dummyLoginResponse(); //DUMMY Test
+            this.dummyLoginResponse(this.loginModel); //DUMMY Test
         
         }, (error) => {            
             //this.loginFail(error); //Depolyment
-            this.dummyLoginResponse(); //DUMMY Test
+            this.dummyLoginResponse(this.loginModel); //DUMMY Test
         });
     }
    
-    dummyLoginResponse(){
-        let response = this.dummyAPIService.getLoginResponseDOI(); //getLoginResponseDOI / getLoginResponseSurety
+    dummyLoginResponse(obj){
+        let response:any;
+        if (obj.username === "surety@validify.com"){
+            response = this.dummyAPIService.getLoginResponseSurety(); 
+        } else if (obj.username === "doi@validify.com"){
+            response = this.dummyAPIService.getLoginResponseDOI(); 
+        } else{
+            this.setFailInfoMessageAndBehaviourSubject({}); 
+            return;
+        } 
         //console.log('dummyLoginResponse: ', response);
         this.loginSuccess(response);
     }

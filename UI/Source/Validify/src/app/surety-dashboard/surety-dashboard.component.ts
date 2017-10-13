@@ -1,11 +1,13 @@
+
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subscription} from "rxjs/Subscription";
 
 import { AuthService } from "../auth/auth.service";
 import { SharedService } from "../shared/shared.service";
-import { DummyAPIService } from "../shared/dummy-api.service";
+import { StorageService } from "../shared/storage.service";
 
+import { DummyAPIService } from "../shared/dummy-api.service";
 
 
 @Component({
@@ -14,42 +16,89 @@ import { DummyAPIService } from "../shared/dummy-api.service";
     styleUrls: ['./surety-dashboard.component.css']
 })
 
-export class SuretyDashboardComponent implements OnInit {
+export class SuretyDashboardComponent implements OnInit, OnDestroy {   
 
-    
-    constructor(private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+    private subscriptionLogout:Subscription;    
+
+    constructor(private router:Router, private authService:AuthService, private sharedService:SharedService, private storageService:StorageService, private dummyAPIService:DummyAPIService) {
         //constructor         
     }
 
-    ngOnInit() : void {
-        console.log('SuretyDashboardComponent Module OnInit');
-        //this.setSuccessInfoMessageAndBehaviourSubject({statusText: "Login  Success test!"}); 
+    ngOnInit() : void {     
+        //ngOnInit
+    }
+
+    ngOnDestroy() {        
+        if (this.subscriptionLogout) this.subscriptionLogout.unsubscribe(); 
     }
     //................................................................... 
 
 
     //................................................................... 
-    /*
-    setSuccessInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
-        
-        let msgObj = {severity: 'success', summary: 'Public Bond Search', detail: obj.statusText};            
-        this.sharedService.setCurrentMsg(msgObj);  
+    logoutBtnAction() {      
+        this.subscriptionLogout = this.authService.logout().subscribe((response) => {
+            //this.logoutSuccess(response); //Depolyment
+            this.dummyLogoutResponse(); //DUMMY Test
 
-        this.authService.setBehaviorSubjectBondSearch(true);  
+        }, (error) => {            
+            //this.logoutFail(error); //Depolyment               
+            this.dummyLogoutResponse(); //DUMMY Test
+        });        
+    }
+
+    dummyLogoutResponse(){
+        let response = this.dummyAPIService.getLogoutResponse();
+        //console.log('dummyBondSearchResponse: ', response);
+        this.logoutSuccess(response);        
+    }
+
+    logoutSuccess(response:any){
+        //console.log('logoutSuccess>> response: ', response);       
+        if (response.data) {   
+            this.goToLogin(); 
+            //this.setSuccessInfoMessageAndBehaviourSubject({statusText: response.data.status});       
+        }  
+    }  
+
+    logoutFail(error:any){
+        //console.log('logoutFail error: ', error);         
+        this.goToLogin();  
+        //this.setFailInfoMessageAndBehaviourSubject(error);     
+    }
+
+    goToLogin(){
+        this.storageService.remove("auth_token");
+        this.storageService.remove("user_role");
+        //this.storageService.set("loggedIn", "false");  
+        location.replace('/');  //location.reload(true);      
+    }
+    //................................................................... 
+
+
+
+    //...................................................................
+    /*     
+    setSuccessInfoMessageAndBehaviourSubject(obj:any){
+        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);           
+        let msgObj = {severity: 'success', summary: 'Logout', detail: obj.statusText};            
+        this.sharedService.setCurrentMsg(msgObj);  
+        this.authService.setBehaviorSubjectLogout(true);  
     }
 
     setFailInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);   
-        
-        let msgObj = {severity: 'error', summary: 'Public Bond Search', detail: obj.statusText};            
+        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);          
+        let msgObj = {severity: 'error', summary: 'Logout', detail: obj.statusText};            
         this.sharedService.setCurrentMsg(msgObj);  
-
-        this.authService.setBehaviorSubjectBondSearch(true);  
+        this.authService.setBehaviorSubjectLogout(true);  
     }
-    */
-    //................................................................... 
+    */  
+    //...................................................................
+
+   
 }
+
+
+
 
 
 

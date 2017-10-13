@@ -27,11 +27,11 @@ export class AppComponent implements AfterViewInit{
     constructor(private authService:AuthService, private sharedService:SharedService, private confirmationService:ConfirmationService, private messageService: MessageService) {
       this.loginCheck(); 
       this.bondSearchCheck(); 
-      this.forgotCheck();            
+      this.forgotCheck();             
     }
 
     ngAfterViewInit() {
-      //ngAfterViewInit
+      //ngAfterViewInit     
     }
     //.......................................................................
 
@@ -81,7 +81,7 @@ export class AppComponent implements AfterViewInit{
     //.......................................................................
     showGrowlMessage(){     
       var obj = this.sharedService.getCurrentMsg();
-      if (obj){
+      if (obj){      
         this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
       }        
       //this.messageService.clear();//clear message
