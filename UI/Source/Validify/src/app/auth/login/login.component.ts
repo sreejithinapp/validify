@@ -68,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
    
     dummyLoginResponse(){
-        let response = this.dummyAPIService.getLoginResponseSurety(); //getLoginResponseDOI / getLoginResponseSurety
+        let response = this.dummyAPIService.getLoginResponseDOI(); //getLoginResponseDOI / getLoginResponseSurety
         //console.log('dummyLoginResponse: ', response);
         this.loginSuccess(response);
     }
