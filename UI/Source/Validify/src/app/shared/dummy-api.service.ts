@@ -4,18 +4,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class DummyAPIService {  
-
-    //private currentMessageObj:any = null;   
-    //private bsForDialogOverlay;
-    //.................................................
-
-
-    //.................................................
+   
     constructor() {
         //constructor
     }
     //.................................................
-
 
 
     //.................................................
@@ -316,6 +309,24 @@ export class DummyAPIService {
 
 
     //.................................................
+    getForgotResponse() {
+
+        const obj = {  
+
+	        "status_code": 200,
+
+	        "data": {
+
+                "status": "Forgot password action completed!",                
+	        }
+        };   
+              
+        return obj;    
+    }
+    //.................................................
+
+
+    //.................................................
     getBondSearchResponse() {
 
         const obj = {  
@@ -355,19 +366,7 @@ export class DummyAPIService {
         return obj;    
     }
     //.................................................
-
-
-    //.................................................
-    /*
-    isDialogOverlayCheckUsingBS() {  
-        this.bsForDialogOverlay = new BehaviorSubject(false);
-        return this.bsForDialogOverlay.asObservable();
-    }     
-    setIsDialogOverlayCheckUsingBS(boo:boolean) {
-        this.bsForDialogOverlay.next(boo);
-    }  
-    */
-    //.................................................   
+     
 
 }
 

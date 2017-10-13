@@ -1,7 +1,6 @@
 
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 
-import { Message } from "primeng/components/common/message";
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ConfirmationService } from 'primeng/primeng';
 

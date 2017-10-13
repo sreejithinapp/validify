@@ -2,10 +2,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs/Subscription";
 
-import { Message } from "primeng/components/common/message";
-import { MessageService } from 'primeng/components/common/messageservice';
-import { ConfirmationService } from 'primeng/primeng';
-
 import { AuthService } from "../auth.service";
 import { SharedService } from "../../shared/shared.service";
 import { DummyAPIService } from "../../shared/dummy-api.service";
@@ -18,23 +14,20 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 
 export class ForgotComponent implements OnInit, OnDestroy {    
     
-    private subscriptionForgot:Subscription;    
-    //private forgotElemStatus:boolean = false;
+    private subscriptionForgot:Subscription;       
     private username:string;
     private email:string;
     private resultObj;
     private display:boolean = false;
-
+   
     constructor(private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         //constructor         
     }
 
-    ngOnInit() {
-        //ngOnInit
-        //this.forgotElemStatus = false;
+    ngOnInit() {        
         this.username = "";
         this.email = "";
-        this.display = true;
+        this.display = false;
     } 
 
     ngOnDestroy() {        
@@ -43,21 +36,27 @@ export class ForgotComponent implements OnInit, OnDestroy {
     //...................................................................
 
 
+    //................................................................... 
+    showForgot(){        
+        this.display = true;
+    }
+    //................................................................... 
+
+
     //...................................................................
-    closeBtnAction(){
-        //this.forgotElemStatus = false;
+    closeBtnAction(){      
         this.username = "";
         this.email = "";
+        this.display = false;
     }
 
-    submitBtnAction() { 
+    submitBtnAction() {  
         if (this.username.length > 3 && this.email.length > 3) {
             this.subscriptionForgot = this.authService.forgot(this.username, this.email).subscribe((response) => {
                 //this.httpSuccess(response); //Depolyment
                 this.dummyHttpResponse(); //DUMMY Test
             }, (error) => {            
-                //this.httpFail(error); //Depolyment
-                //this.httpFail({statusText:"No Result Found!"});
+                //this.httpFail(error); //Depolyment              
                 this.dummyHttpResponse(); //DUMMY Test
             });
         } else {           
@@ -66,19 +65,16 @@ export class ForgotComponent implements OnInit, OnDestroy {
     }
    
     dummyHttpResponse(){
-        let response = this.dummyAPIService.getBondSearchResponse();
-        //console.log('dummyHttpResponse: ', response);
+        let response = this.dummyAPIService.getForgotResponse();       
         this.httpSuccess(response);
     }
 
     httpSuccess(response:any){
         //console.log('httpSuccess>> response: ', response);       
         if (response.data) {           
-            this.resultObj = {};  
-            this.resultObj = response.data;         
-        }        
-        //this.forgotElemStatus = true;   
-        this.httpFail({statusText:"Forgot password action completed!"});     
+            this.httpFail({statusText: response.data.status});   
+            this.closeBtnAction();   
+        }                   
     }  
 
     httpFail(error:any){

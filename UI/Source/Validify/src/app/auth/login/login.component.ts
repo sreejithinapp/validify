@@ -19,8 +19,7 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 export class LoginComponent implements OnInit, OnDestroy {    
 
     private obsvLogin:Subscription; 
-    private isForgot:boolean = false   
-  
+    
     constructor(private router:Router, private loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         //constructor         
     }
@@ -68,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
    
     dummyLoginResponse(){
         let response = this.dummyAPIService.getLoginResponseSurety(); //getLoginResponseDOI / getLoginResponseSurety
-        console.log('dummyLoginResponse: ', response);
+        //console.log('dummyLoginResponse: ', response);
         this.loginSuccess(response);
     }
 
@@ -108,18 +107,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.authService.setIsWhichRoleCheckUsingBS("NONE");                  
     }
     //...................................................................     
-
-
-    //................................................................... 
-    showForgot(){ 
-        if (this.isForgot){
-            this.isForgot = false;
-        } else {
-            this.isForgot = true;
-        }
-    }
-    //................................................................... 
-
+    
 }
 
 

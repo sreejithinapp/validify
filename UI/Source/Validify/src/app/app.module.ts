@@ -6,9 +6,9 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
 import { GrowlModule } from "primeng/components/growl/growl";
-import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
-import { DialogModule } from 'primeng/primeng';
-import { OverlayPanelModule } from 'primeng/primeng';
+//import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
+//import { DialogModule } from 'primeng/primeng';
+//import { OverlayPanelModule } from 'primeng/primeng';
 
 import { AppRouterModule } from './app-router.module';
 import { SharedModule } from './shared/shared.module';
@@ -35,9 +35,7 @@ import { DummyAPIService } from "./shared/dummy-api.service";
     RouterModule,
 
     GrowlModule, 
-    ConfirmDialogModule,    
-    DialogModule,
-    OverlayPanelModule,
+    //ConfirmDialogModule, DialogModule,OverlayPanelModule,
    
     SharedModule,    
     AppRouterModule

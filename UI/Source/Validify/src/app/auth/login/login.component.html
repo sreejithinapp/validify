@@ -2,7 +2,6 @@
 <div class="login-container">  
 
     <div class="login-box">
-
        
         <div class="row">
             <div class="col-md-12 col-sm-12">
@@ -45,8 +44,8 @@
                             </div>                           
                             <button type="submit" class="btn active-btn pull-right mRight10" [disabled]="!loginForm.form.valid">Login</button>
                         </div>
-                      
-                        <a href="javascript:void(0);" class="forgot-pwd-link mTop20" (click)="showForgot()">Forgot Password</a>
+                        
+                        <vfy-forgot></vfy-forgot>                    
 
                     </form>
                 </div>
@@ -62,7 +61,5 @@
     
 </div>
 
-<vfy-forgot *ngIf="isForgot"></vfy-forgot>
 
 
-<!--javascript:void(0); -->
