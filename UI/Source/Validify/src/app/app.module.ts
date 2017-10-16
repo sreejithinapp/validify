@@ -14,7 +14,6 @@ import { AppRouterModule } from './app-router.module';
 import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
-import { LoaderComponent } from './shared/loader/loader.component';
 
 import { AuthGuard } from './auth/auth.guard';
 import { LoginGuard } from './auth/login.guard';
@@ -44,8 +43,7 @@ import { DummyAPIService } from "./shared/dummy-api.service";
   ],
 
   declarations: [
-    AppComponent,
-    LoaderComponent
+    AppComponent    
   ],  
 
   providers: [
