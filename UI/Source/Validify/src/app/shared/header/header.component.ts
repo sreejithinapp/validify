@@ -1,11 +1,15 @@
-/*
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
 
-import {HeaderService} from "./header.service";
-import {SidebarService} from "../sidebar/sidebar.service";
-import {AuthService} from "../auth/auth.service";
-import {StorageService} from "../shared/storage.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
+import { Subscription } from "rxjs/Subscription";
+
+import { AuthService } from "../../auth/auth.service";
+import { SharedService } from "../../shared/shared.service";
+import { StorageService } from "../../shared/storage.service";
+import { DummyAPIService } from "../../shared/dummy-api.service";
+
+//import {HeaderService} from "./header.service";
+//import {SidebarService} from "../sidebar/sidebar.service";
 
 
 @Component({
@@ -15,14 +19,92 @@ import {StorageService} from "../shared/storage.service";
 })
 
 export class HeaderComponent  {
-    private sidebarStatus = false;
-    constructor(){
-      this.sidebarService.sidebarStatus.subscribe((sidebarStatusb) => {
+
+    private subscriptionLogout:Subscription; 
+    //private sidebarStatus = false;
+
+    constructor(private router:Router, private authService:AuthService, private sharedService:SharedService, private storageService:StorageService, private dummyAPIService:DummyAPIService){      
+      /*this.sidebarService.sidebarStatus.subscribe((sidebarStatusb) => {
         this.sidebarStatus = sidebarStatusb;
-      });
+      });*/
     }
+
+    ngOnInit() {
+        //ngOnInit      
+    } 
+
+    ngOnDestroy() {        
+        //ngOnDestroy
+        if (this.subscriptionLogout) this.subscriptionLogout.unsubscribe(); 
+    }
+    //.......................................
+
+
+    //................................................................... 
+    public logoutBtnAction() {      
+        this.subscriptionLogout = this.authService.logout().subscribe((response) => {
+            //this.logoutSuccess(response); //Depolyment
+            this.dummyLogoutResponse(); //DUMMY Test
+
+        }, (error) => {            
+            //this.logoutFail(error); //Depolyment               
+            this.dummyLogoutResponse(); //DUMMY Test
+        });        
+    }
+
+    private dummyLogoutResponse(){
+        let response = this.dummyAPIService.getLogoutResponse();
+        //console.log('dummyBondSearchResponse: ', response);
+        this.logoutSuccess(response);        
+    }
+
+    private logoutSuccess(response:any){
+        //console.log('logoutSuccess>> response: ', response);       
+        if (response.data) {   
+            this.goToLogin(); 
+            //this.setSuccessInfoMessageAndBehaviourSubject({statusText: response.data.status});       
+        }  
+    }  
+
+    private logoutFail(error:any){
+        //console.log('logoutFail error: ', error);         
+        this.goToLogin();  
+        //this.setFailInfoMessageAndBehaviourSubject(error);     
+    }
+
+    private goToLogin(){
+        this.storageService.remove("auth_token");
+        this.storageService.remove("user_role");
+        //this.storageService.set("loggedIn", "false");  
+        location.replace('/');  //location.reload(true);      
+    }
+    //................................................................... 
+
+
 }
-*/
+
+
+
+
+//...................................................................
+/*     
+setSuccessInfoMessageAndBehaviourSubject(obj:any){
+    //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);           
+    let msgObj = {severity: 'success', summary: 'Logout', detail: obj.statusText};            
+    this.sharedService.setCurrentMsg(msgObj);  
+    this.authService.setBehaviorSubjectLogout(true);  
+}
+
+setFailInfoMessageAndBehaviourSubject(obj:any){
+    //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);          
+    let msgObj = {severity: 'error', summary: 'Logout', detail: obj.statusText};            
+    this.sharedService.setCurrentMsg(msgObj);  
+    this.authService.setBehaviorSubjectLogout(true);  
+}
+*/  
+//...................................................................
+
+
 
 
 /*
