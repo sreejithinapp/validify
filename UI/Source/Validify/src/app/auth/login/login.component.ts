@@ -99,9 +99,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
             let id = response.data.user_role;
             if (id === 'group1'){
-                this.router.navigate(["/suretydashboard"]);    
+                this.router.navigate(["/surety"]);    
             } else if (id === 'group2'){
-                this.router.navigate(["/doidashboard"]);    
+                this.router.navigate(["/doi"]);    
             }                      
         }
     } 

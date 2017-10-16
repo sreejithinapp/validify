@@ -31,10 +31,10 @@ export class LoginGuard implements CanActivate {
                     }       
                 }  
                 if (this.isSurety){
-                    this.router.navigate(['suretydashboard']);
+                    this.router.navigate(['/surety']);
                     
                 } else if (this.isDoi){
-                    this.router.navigate(['doidashboard']);
+                    this.router.navigate(['/doi']);
                 }
 
                 console.log("Alreday Logined..goto Dashboard");

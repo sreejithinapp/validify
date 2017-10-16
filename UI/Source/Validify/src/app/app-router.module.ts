@@ -11,20 +11,15 @@ const ROUTES:Routes = [
         canActivate: [LoginGuard]
     },      
     {
-        path: "doidashboard",
-        loadChildren: "./doi-dashboard/doi-dashboard.module#DoiDashboardModule",
+        path: "doi",
+        loadChildren: "./doi/doi.module#DoiModule",
         canActivate: [AuthGuard]
     }, 
     {
-        path: "suretydashboard",
-        loadChildren: "./surety-dashboard/surety-dashboard.module#SuretyDashboardModule",
+        path: "surety",
+        loadChildren: "./surety/surety.module#SuretyModule",
         canActivate: [AuthGuard]
-    },  
-    {
-        path: "dashboard",
-        loadChildren: "./dashboard/dashboard.module#DashboardModule",
-        canActivate: [AuthGuard]
-    },
+    },      
     {
         path: "**",
         redirectTo: "/login",

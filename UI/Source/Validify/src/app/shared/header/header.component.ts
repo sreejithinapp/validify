@@ -18,7 +18,7 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
  styleUrls: ['./header.component.css']
 })
 
-export class HeaderComponent  {
+export class HeaderComponent implements OnInit, OnDestroy {  
 
     private subscriptionLogout:Subscription; 
     //private sidebarStatus = false;
