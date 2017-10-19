@@ -16,7 +16,8 @@ export class SharedService {
 
 
     //.................................................
-    public setDashboardObj(obj) { 
+    //Dashboard
+    public setDashboardObj(obj:any) { 
         this.dashboardObj = obj;           
     }
 
@@ -28,13 +29,14 @@ export class SharedService {
 
 
     //.................................................
-    public setCurrentMsg(messageObj) { 
+    //Message
+    public setCurrentMsg(messageObj:any) { 
         this.currentMessageObj = { 
             severity: messageObj.severity,
             summary: messageObj.summary,
             detail: messageObj.detail         
         } 
-        return this.currentMessageObj;    
+        this.currentMessageObj;    
     }
 
     public getCurrentMsg() { 

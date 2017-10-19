@@ -1,9 +1,12 @@
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-//import {Subscription} from "rxjs/Subscription";
+import {Subscription} from "rxjs/Subscription";
 
-//import { SharedService } from "../../shared/shared.service";
+import { MessageService } from 'primeng/components/common/messageservice';
+
+import { SuretyService } from "../surety.service";
+import { SharedService } from "../../shared/shared.service";
 //import { StorageService } from "../../shared/storage.service";
 //import { DummyAPIService } from "../../shared/dummy-api.service";
 
@@ -11,27 +14,62 @@ import {ActivatedRoute, Router} from "@angular/router";
 @Component({
     selector: 'vfy-surety-dashboard', 
     templateUrl: './dashboard.component.html', 
-    styleUrls: ['./dashboard.component.css']
+    styleUrls: ['./dashboard.component.css'],
+    providers: [MessageService]
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {       
     
+    private subscriptionMessage:Subscription; 
+    private subscriptionDashboard:Subscription; 
 
-    constructor(private router:Router) {
-        //constructor         
+    constructor(private router:Router, private messageService: MessageService, private suretyService:SuretyService, private sharedService:SharedService) {
+        this.messageCheck();
+        this.dashboardCheck();      
     }
 
     ngOnInit() : void {     
-        //ngOnInit
+        //ngOnInit       
     }
 
     ngOnDestroy() {        
-        //ngOnDestroy       
+        if (this.subscriptionMessage) this.subscriptionMessage.unsubscribe(); 
+        if (this.subscriptionDashboard) this.subscriptionDashboard.unsubscribe();    
     }
     //................................................................... 
 
 
- 
+    
+    //...................................................................
+    messageCheck(){        
+        this.subscriptionMessage = this.suretyService.behaviorSubjectMessageInit().subscribe((response) => {   
+            console.log('SURETY messageCheck SUCCESS>> message Obj,', response);  
+            this.showGrowlMessage(response);
+        }, (error) => {  
+            console.log('SURETY messageCheck ERROR>> Error: ', error);   
+        });
+    } 
+
+    private showGrowlMessage(obj:any){        
+      if (obj){  
+        //console.log('SURETY showGrowlMessage Obj,', obj); 
+        this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
+      }  
+    } 
+    //...................................................................
+
+
+
+    //...................................................................
+    dashboardCheck(){        
+        this.subscriptionDashboard = this.suretyService.behaviorSubjectDashboardInit().subscribe((response) => {   
+            console.log('SURETY dashboardCheck SUCCESS>> dashboard Obj,', response);   
+        }, (error) => {  
+            console.log('SURETY dashboardCheck ERROR>> Error: ', error);   
+        });
+    }    
+    //...................................................................
+
 
    
 }
