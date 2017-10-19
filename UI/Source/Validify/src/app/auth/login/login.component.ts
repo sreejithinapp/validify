@@ -92,18 +92,27 @@ export class LoginComponent implements OnInit, OnDestroy {
             }
 
             if (response.data.user_role) {
+                
                 this.storageService.set("user_role", response.data.user_role);
-            }
-            
-            this.setSuccessInfoMessageAndBehaviourSubject(true, response.data.user_role); 
+                this.setSuccessInfoMessageAndBehaviourSubject(true, response.data.user_role); 
+                
+                if (response.data.dashboard) {
+                
+                    this.sharedService.setDashboardObj(response.data.dashboard);  
 
-            let id = response.data.user_role;
-            if (id === 'group1'){
-                this.router.navigate(["/surety"]);    
-            } else if (id === 'group2'){
-                this.router.navigate(["/doi"]);    
-            }                      
-        }
+                    let id = response.data.user_role;
+                    
+                    if (id === 'group1'){                
+                        this.router.navigate(["/surety"]);    
+                    
+                    } else if (id === 'group2'){
+                        this.router.navigate(["/doi"]);    
+                    }  
+                }
+
+            }//dashboard data end 
+
+        }//response.data end
     } 
     
     private loginFail(error: any){

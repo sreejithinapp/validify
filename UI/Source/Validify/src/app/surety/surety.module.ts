@@ -9,6 +9,10 @@ import { SuretyComponent } from "./surety.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 
+import { DashboardService } from './dashboard/dashboard.service';
+//import { SidebarService } from './sidebar/sidebar.service';
+
+
 @NgModule({  
 
   imports: [
@@ -21,6 +25,10 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
     SuretyComponent,    
     SidebarComponent,    
     DashboardComponent  
+  ],
+
+  providers: [
+    DashboardService   
   ]
 
 })

@@ -1,17 +1,46 @@
+
 import {Injectable} from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 
 @Injectable()
 export class SharedService {  
 
+    private dashboardObj:any = null; 
     private currentMessageObj:any = null;   
         
     constructor() {
         //constructor
     }
     //.................................................
+ 
 
+
+    //.................................................
+    public setDashboardObj(obj) { 
+        this.dashboardObj = obj;           
+    }
+
+    public getDashboardObj() { 
+         return this.dashboardObj;    
+    }
+    //.................................................
+
+
+
+    //.................................................
+    public setCurrentMsg(messageObj) { 
+        this.currentMessageObj = { 
+            severity: messageObj.severity,
+            summary: messageObj.summary,
+            detail: messageObj.detail         
+        } 
+        return this.currentMessageObj;    
+    }
+
+    public getCurrentMsg() { 
+         return this.currentMessageObj;    
+    }
+    //.................................................
 
 
     //.................................................
@@ -32,39 +61,24 @@ export class SharedService {
     //.................................................
 
 
-    //.................................................
-    public setCurrentMsg(messageObj) { 
-        this.currentMessageObj = { 
-            severity: messageObj.severity,
-            summary: messageObj.summary,
-            detail: messageObj.detail         
-        } 
-        return this.currentMessageObj;    
-    }
-
-    public getCurrentMsg() { 
-         return this.currentMessageObj;    
-    }
-    //.................................................
-
-
-
-    //.................................................
-    /*
-    private bsForDialogOverlay;
-    isDialogOverlayCheckUsingBS() {  
-        this.bsForDialogOverlay = new BehaviorSubject(false);
-        return this.bsForDialogOverlay.asObservable();
-    }     
-    setIsDialogOverlayCheckUsingBS(boo:boolean) {
-        this.bsForDialogOverlay.next(boo);
-    } 
-    */ 
-    //.................................................
-
    
 
 }
 
 
+
+//.................................................
+/*
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+private bsForDialogOverlay;
+isDialogOverlayCheckUsingBS() {  
+    this.bsForDialogOverlay = new BehaviorSubject(false);
+    return this.bsForDialogOverlay.asObservable();
+}     
+setIsDialogOverlayCheckUsingBS(boo:boolean) {
+    this.bsForDialogOverlay.next(boo);
+} 
+*/ 
+//.................................................
 
