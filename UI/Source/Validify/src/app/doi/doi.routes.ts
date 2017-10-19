@@ -11,8 +11,7 @@ import { DoiComponent } from "./doi.component";
 const ROUTES:Routes = [
   {
     path: "",
-    component: DoiComponent,
-    outlet: 'doi'
+    component: DoiComponent    
   }
 ];
 
@@ -25,7 +24,7 @@ const ROUTES:Routes = [
 })
 
 export class DoiRoutesModule {
-  constructor(){
-  }
- }
+  constructor(){ }
+}
 
+//outlet: 'doi'

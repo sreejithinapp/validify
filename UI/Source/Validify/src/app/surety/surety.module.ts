@@ -2,6 +2,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { GrowlModule } from "primeng/components/growl/growl";
+import { DialogModule } from 'primeng/primeng';
+
 import { SharedModule} from '../shared/shared.module';
 import { SuretyRoutesModule } from "./surety.routes";
 
@@ -9,15 +12,16 @@ import { SuretyComponent } from "./surety.component";
 import { SidebarComponent } from "./sidebar/sidebar.component";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 
-import { DashboardService } from './dashboard/dashboard.service';
-//import { SidebarService } from './sidebar/sidebar.service';
+import { SuretyService } from './surety.service';
 
 
 @NgModule({  
 
   imports: [
     CommonModule,
-    SharedModule,
+    GrowlModule,    
+    DialogModule,
+    SharedModule,     
     SuretyRoutesModule  
   ],
 
@@ -28,7 +32,7 @@ import { DashboardService } from './dashboard/dashboard.service';
   ],
 
   providers: [
-    DashboardService   
+    SuretyService   
   ]
 
 })

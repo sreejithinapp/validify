@@ -2,6 +2,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs/Subscription";
 
+import { MessageService } from 'primeng/components/common/messageservice';
+//import { ConfirmationService } from 'primeng/primeng';
+
 import { AuthService } from "../auth.service";
 import { SharedService } from "../../shared/shared.service";
 import { DummyAPIService } from "../../shared/dummy-api.service";
@@ -9,7 +12,8 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 @Component({
     selector: 'vfy-bond-search',
     templateUrl: './bond-search.component.html',
-    styleUrls: ['./bond-search.component.css']   
+    styleUrls: ['./bond-search.component.css'],
+    providers: [MessageService]   
 })
 
 export class BondSearchComponent implements OnInit, OnDestroy {    
@@ -19,12 +23,11 @@ export class BondSearchComponent implements OnInit, OnDestroy {
     public bondSearchTxt:string;
     public searchResultObj;
 
-    constructor(private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
-        //constructor         
+    constructor(private messageService: MessageService, private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+        this.bondSearchCheck();      
     }
 
-    ngOnInit() {
-        //ngOnInit
+    ngOnInit() {      
         this.bondSearchResultElemStatus = false;
         this.bondSearchTxt = "";
     } 
@@ -33,6 +36,27 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         if (this.subscriptionBondSearch) this.subscriptionBondSearch.unsubscribe(); 
     }
     //...................................................................
+
+
+
+    //...................................................................
+    bondSearchCheck(){
+      this.authService.behaviorSubjectBondSearchInit().subscribe((bool) => { 
+        if (bool){
+          this.showGrowlMessage();     
+        }   
+      });
+    }
+    
+    showGrowlMessage(){     
+      var obj = this.sharedService.getCurrentMsg();
+      if (obj){      
+        this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
+      }        
+      //this.messageService.clear();//clear message
+    }   
+    //...................................................................
+
 
 
     //...................................................................

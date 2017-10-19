@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { GrowlModule } from "primeng/components/growl/growl";
 import { DialogModule } from 'primeng/primeng';
 
 import { AuthRoutesModule } from './auth.routes';
@@ -15,7 +16,8 @@ import { ForgotComponent } from './forgot/forgot.component';
 @NgModule({ 
   imports: [
     CommonModule,
-    FormsModule,     
+    FormsModule,   
+    GrowlModule,    
     DialogModule,  
     AuthRoutesModule    
   ],  

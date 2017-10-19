@@ -4,12 +4,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SuretyComponent } from "./surety.component";
+//import { SidebarComponent } from "./sidebar/sidebar.component";
+//import { DashboardComponent } from "./dashboard/dashboard.component";
 
 const ROUTES:Routes = [
   {
     path: "",
-    component: SuretyComponent,
-    outlet:'surety'
+    component: SuretyComponent    
   }
 ];
 
@@ -22,7 +23,7 @@ const ROUTES:Routes = [
 })
 
 export class SuretyRoutesModule {
-  constructor(){
-  }
- }
+  constructor(){ }
+}
 
+//outlet:'surety'

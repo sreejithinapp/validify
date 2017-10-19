@@ -22,13 +22,14 @@ export class AuthService {
   private behaviorSubjectForgot;
   private isForgotResponseFound:boolean = false;
 
-  private behaviorSubjectLogoutt;
+  private behaviorSubjectLogout;
   private isLogoutResponseFound:boolean = false;
 
   constructor(private storage:StorageService, private httpService:HttpService) {
     //constructor
   }
   //............................................
+
 
 
   //...............................................
@@ -100,12 +101,12 @@ export class AuthService {
   //...............................................
   //LOGOUT 
   behaviorSubjectLogoutInit() {  
-    this.behaviorSubjectLogoutt = new BehaviorSubject(this.getLogout());
-    return this.behaviorSubjectLogoutt.asObservable();
+    this.behaviorSubjectLogout = new BehaviorSubject(this.getLogout());
+    return this.behaviorSubjectLogout.asObservable();
   }       
   setBehaviorSubjectLogout(bool:boolean) {
     this.isLogoutResponseFound = bool;
-    this.behaviorSubjectLogoutt.next(bool);
+    this.behaviorSubjectLogout.next(bool);
   }  
   getLogout() {   
     return this.isLogoutResponseFound;
@@ -135,6 +136,7 @@ export class AuthService {
 
 
 }
+
 
 
 //...................................................

@@ -2,6 +2,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs/Subscription";
 
+import { MessageService } from 'primeng/components/common/messageservice';
+//import { ConfirmationService } from 'primeng/primeng';
+
 import { AuthService } from "../auth.service";
 import { SharedService } from "../../shared/shared.service";
 import { DummyAPIService } from "../../shared/dummy-api.service";
@@ -9,7 +12,8 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 @Component({
     selector: 'vfy-forgot',
     templateUrl: './forgot.component.html',
-    styleUrls: ['./forgot.component.css']   
+    styleUrls: ['./forgot.component.css'],
+    providers: [MessageService]
 })
 
 export class ForgotComponent implements OnInit, OnDestroy {    
@@ -19,8 +23,8 @@ export class ForgotComponent implements OnInit, OnDestroy {
     public email:string;   
     public display:boolean = false;
    
-    constructor(private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
-        //constructor         
+    constructor(private messageService: MessageService, private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+        this.forgotCheck();                  
     }
 
     ngOnInit() {        
@@ -33,6 +37,26 @@ export class ForgotComponent implements OnInit, OnDestroy {
         if (this.subscriptionForgot) this.subscriptionForgot.unsubscribe(); 
     }
     //...................................................................
+
+
+    //...................................................................
+    forgotCheck(){
+      this.authService.behaviorSubjectForgotInit().subscribe((bool) => { 
+        if (bool){
+          this.showGrowlMessage();     
+        }   
+      });
+    }
+
+    showGrowlMessage(){     
+      var obj = this.sharedService.getCurrentMsg();
+      if (obj){      
+        this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
+      }        
+      //this.messageService.clear();//clear message
+    }   
+    //...................................................................
+
 
 
     //................................................................... 
@@ -95,7 +119,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
         let msgObj = {severity: 'success', summary: 'Forgot Password', detail: obj.statusText};            
         this.sharedService.setCurrentMsg(msgObj);  
 
-        this.authService.setBehaviorSubjectBondSearch(true);  
+        this.authService.setBehaviorSubjectForgot(true);  
     }
 
     private setFailInfoMessageAndBehaviourSubject(obj:any){

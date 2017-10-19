@@ -1,128 +1,26 @@
 
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
-import { Subscription } from "rxjs/Subscription";
-
-import { MessageService } from 'primeng/components/common/messageservice';
-import { ConfirmationService } from 'primeng/primeng';
-
-import { AuthService } from "./auth/auth.service";
-import { SharedService } from "./shared/shared.service";
-
-declare var $:any;
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'body',
   templateUrl: './app.component.html',
-  providers: [ConfirmationService, MessageService],
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements AfterViewInit{      
-   
-    public isUserLogined:boolean = false;
-    public isDoi:boolean = false;
-    public isSurety:boolean = false; 
-    //public msgs: Message[] = []; 
-    public msgs:any;     
-   
-    constructor(private authService:AuthService, private sharedService:SharedService, private confirmationService:ConfirmationService, private messageService: MessageService) {
-      this.loginCheck(); 
-      this.bondSearchCheck(); 
-      this.forgotCheck();             
-    }
-
-    ngAfterViewInit() {
-      //ngAfterViewInit     
-    }
-    //.......................................................................
-
-
-
-    //.......................................................................
-    loginCheck(){
-      this.authService.behaviorSubjectLoginInit().subscribe((bool) => {          
-        this.isUserLogined = bool;
-        this.roleCheck();          
-      });
-    }
-
-    roleCheck(){
-      this.authService.behaviorSubjectRoleInit().subscribe((role) => {         
-        this.isSurety = false;
-        this.isDoi = false;  
-        if (role === 'group1'){
-          this.isSurety = true;
-        } else if (role === 'group2'){
-          this.isDoi = true;         
-        } 
-        this.showGrowlMessage();              
-      });
-    }
-
-    bondSearchCheck(){
-      this.authService.behaviorSubjectBondSearchInit().subscribe((bool) => { 
-        if (bool){
-          this.showGrowlMessage();     
-        }   
-      });
-    }
-
-    forgotCheck(){
-      this.authService.behaviorSubjectForgotInit().subscribe((bool) => { 
-        if (bool){
-          this.showGrowlMessage();     
-        }   
-      });
-    }
-    //.......................................................................
-
-
-    
-    //.......................................................................
-    showGrowlMessage(){     
-      var obj = this.sharedService.getCurrentMsg();
-      if (obj){      
-        this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
-      }        
-      //this.messageService.clear();//clear message
-    }    
-    //.......................................................................
-
-
-
-    //.......................................................................
-    /*
-    confirm1(obj1) {
-      let obj = this.sharedService.getConfirmDetails(); //dummy  
-      this.confirmationService.confirm({
-          message: obj.message,
-          header: obj.header,
-          icon:  obj.icon,
-          accept: () => {
-              this.messageService.add({severity: obj.accept_severity, summary: obj.accept_summary, detail: obj.accept_detail});              
-          },
-          reject: () => {
-              this.messageService.add({severity: obj.reject_severity, summary: obj.reject_summary, detail: obj.reject_detail});             
-          }
-      });
-    }
-    public dialogDisplay: boolean = false;   
-    //this.checkDialogCompShowStatus();   
-    checkDialogCompShowStatus(){
-      this.sharedService.isDialogOverlayCheckUsingBS().subscribe((bool) => {          
-        this.dialogDisplay = bool;   
-        //console.log('AppComponent isDialogOverlayCheckUsingBS>> this.dialogDisplay:', this.dialogDisplay); 
-      });
-    }
-    */
-    //.......................................................................
-
-    
+export class AppComponent {   
+    constructor() { }       
 }
+//.......................................................................
 
 
 
+
+
+//.......................................................................
 /*
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
+export class AppComponent implements AfterViewInit{  
+declare var $:any;
 ngAfterViewInit() {
   //@ViewChild('cdRef') confirmationDialogRef;
   //this.confirmationDialogRef.el.nativeElement.querySelector('.ui-confirmdialog').classList.add('logout-confirm'); 
@@ -137,3 +35,36 @@ headerService.toggleSidebar.subscribe((sidebarStatus) => {
   this.sidebarService.sidebarStatus.emit(!sidebarStatus);
 });
 */     
+
+
+
+//.......................................................................
+/*
+//import { MessageService } from 'primeng/components/common/messageservice';
+import { ConfirmationService } from 'primeng/primeng';
+providers: [MessageService],
+//public msgs: Message[] = []; 
+confirm1(obj1) {
+  let obj = this.sharedService.getConfirmDetails(); //dummy  
+  this.confirmationService.confirm({
+      message: obj.message,
+      header: obj.header,
+      icon:  obj.icon,
+      accept: () => {
+          this.messageService.add({severity: obj.accept_severity, summary: obj.accept_summary, detail: obj.accept_detail});              
+      },
+      reject: () => {
+          this.messageService.add({severity: obj.reject_severity, summary: obj.reject_summary, detail: obj.reject_detail});             
+      }
+  });
+}
+public dialogDisplay: boolean = false;   
+//this.checkDialogCompShowStatus();   
+checkDialogCompShowStatus(){
+  this.sharedService.isDialogOverlayCheckUsingBS().subscribe((bool) => {          
+    this.dialogDisplay = bool;   
+    //console.log('AppComponent isDialogOverlayCheckUsingBS>> this.dialogDisplay:', this.dialogDisplay); 
+  });
+}
+*/
+//.......................................................................

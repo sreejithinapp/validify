@@ -3,6 +3,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 
+import { MessageService } from 'primeng/components/common/messageservice';
+
 import { Login } from "./login";
 import { AuthService } from "../auth.service";
 import { StorageService } from "../../shared/storage.service";
@@ -13,20 +15,19 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
     selector: 'vfy-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    providers: [Login]
+    providers: [Login, MessageService]
 })
 
 export class LoginComponent implements OnInit, OnDestroy {    
 
     private subscriptionLogin:Subscription; 
     
-    constructor(private router:Router, public loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
-        //constructor         
+    constructor(private router:Router, private messageService: MessageService, public loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+       this.loginCheck();                
     }
 
-    ngOnInit() {
-        this.loginCheck();
-        this.roleCheck();        
+    ngOnInit() {  
+        //ngOnInit         
     }
 
     ngOnDestroy() {
@@ -35,24 +36,41 @@ export class LoginComponent implements OnInit, OnDestroy {
     //...................................................................
 
 
+
     //...................................................................
-    private loginCheck() {
-        setTimeout(() => {  
-            if (!this.authService.getLogin()) {  
-                this.authService.setBehaviorSubjectLogin(false);
-            }
-        }, 0);                
+    loginCheck(){
+      this.authService.behaviorSubjectLoginInit().subscribe((boo) => {  
+        if (boo){
+            this.roleCheck();  
+        } else {
+            this.showGrowlMessage(); 
+        }                        
+      });
     }
 
-    private roleCheck() {
-        setTimeout(() => {  
-            if (!this.authService.getRole()) {  
-                this.authService.setBehaviorSubjectRole("NONE");
-            }
-        }, 0);
-    }      
-    //...................................................................
+    roleCheck(){
+      this.authService.behaviorSubjectRoleInit().subscribe((role) => {   
+        if (role === 'group1'){       
+          this.router.navigate(['/surety']);
+        } else if (role === 'group2'){
+          this.router.navigate(['/doi']);           
+        } else {
+            this.router.navigate(['/login']); 
+        }
+        this.showGrowlMessage();              
+      });
+    }    
    
+    showGrowlMessage(){     
+      var obj = this.sharedService.getCurrentMsg();
+      if (obj){      
+        this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
+      }        
+      //this.messageService.clear();//clear message
+    } 
+    //...................................................................
+
+     
 
 
     //...................................................................
@@ -124,14 +142,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     //................................................................... 
-    private setSuccessInfoMessageAndBehaviourSubject(login:boolean, role:string){
+    private setSuccessInfoMessageAndBehaviourSubject(isLogined:boolean, role:string){
         //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
         
         let msgObj = {severity: 'success', summary: 'Login', detail:'Logined Successfully!'};            
         this.sharedService.setCurrentMsg(msgObj);  
 
-        this.authService.setBehaviorSubjectLogin(login);  
-
+        this.authService.setBehaviorSubjectLogin(isLogined);  
         this.authService.setBehaviorSubjectRole(role);  
     }
 
@@ -142,13 +159,13 @@ export class LoginComponent implements OnInit, OnDestroy {
         let msgObj = {severity: 'error', summary: 'Login', detail: detailTxt};            
         this.sharedService.setCurrentMsg(msgObj);  
 
-        this.authService.setBehaviorSubjectLogin(false);  
-
-        this.authService.setBehaviorSubjectRole("NONE");  
+        this.authService.setBehaviorSubjectLogin(false);        
     }
     //...................................................................    
     
 }
+
+
 
 
 

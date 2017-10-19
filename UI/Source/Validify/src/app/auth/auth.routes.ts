@@ -8,8 +8,7 @@ import { LoginComponent } from './login/login.component';
 const ROUTES:Routes = [
   {
     path: "",
-    component: LoginComponent,
-    outlet: 'login'
+    component: LoginComponent    
   }
 ];
 
@@ -22,3 +21,6 @@ const ROUTES:Routes = [
 })
 
 export class AuthRoutesModule { }
+
+
+//outlet: 'login'

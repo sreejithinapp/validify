@@ -5,13 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { GrowlModule } from "primeng/components/growl/growl";
-import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
-import { DialogModule } from 'primeng/primeng';
-import { OverlayPanelModule } from 'primeng/primeng';
-
 import { AppRouterModule } from './app-router.module';
-import { SharedModule } from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 
@@ -31,14 +25,7 @@ import { DummyAPIService } from "./shared/dummy-api.service";
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    RouterModule,
-
-    GrowlModule, 
-    ConfirmDialogModule, 
-    DialogModule,
-    OverlayPanelModule,
-   
-    SharedModule,    
+    RouterModule,    
     AppRouterModule
   ],
 
@@ -62,3 +49,10 @@ import { DummyAPIService } from "./shared/dummy-api.service";
 export class AppModule {   
 }
 
+
+
+//import { GrowlModule } from "primeng/components/growl/growl";
+//import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
+//import { DialogModule } from 'primeng/primeng';
+//import { OverlayPanelModule } from 'primeng/primeng';
+////GrowlModule, ConfirmDialogModule, DialogModule, OverlayPanelModule,   
