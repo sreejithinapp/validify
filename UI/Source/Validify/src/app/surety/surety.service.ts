@@ -3,8 +3,8 @@ import {Injectable} from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { SharedService } from "../shared/shared.service";
+import { StorageService } from "../shared/storage.service";
 //import { HttpService } from "../../shared/http-service/http.service";
-//import { StorageService } from "../../shared/storage.service";
 //import { Constants } from "./surety.constants";
 
 
@@ -15,7 +15,7 @@ export class SuretyService {
     private behaviorSubjectMessage;
     private behaviorSubjectDashboard;    
     
-    constructor(private sharedService:SharedService) {
+    constructor(private sharedService:SharedService, private storageService:StorageService) {
         //constructor
     }
     //.................................................
@@ -46,8 +46,8 @@ export class SuretyService {
         this.behaviorSubjectDashboard.next(obj);
     }     
     getDashboardObj() { 
-        //return this.storage.get('dashboard');         
-        return this.sharedService.getDashboardObj();           
+        return this.storageService.get('dashboard');         
+        //return this.sharedService.getDashboardObj();           
     }
     //...............................................
    

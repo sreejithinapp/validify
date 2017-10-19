@@ -3,30 +3,31 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 
+import { MessageService } from 'primeng/components/common/messageservice';
+
 import { AuthService } from "../../auth/auth.service";
-import { SharedService } from "../../shared/shared.service";
-import { StorageService } from "../../shared/storage.service";
-import { DummyAPIService } from "../../shared/dummy-api.service";
+import { SharedService } from "../shared.service";
+import { StorageService } from "../storage.service";
 
-//import {HeaderService} from "./header.service";
-//import {SidebarService} from "../sidebar/sidebar.service";
-
+import { DummyAPIService } from "../dummy-api.service";
+import { HeaderService } from "./header.service";
 
 @Component({
  selector: 'vfy-header',
  templateUrl: './header.component.html',
- styleUrls: ['./header.component.css']
+ styleUrls: ['./header.component.css'],
+ providers: [HeaderService,MessageService]
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {  
 
     private subscriptionLogout:Subscription; 
-    //private sidebarStatus = false;
+    private subscriptionMessage:Subscription; 
+    private subscriptionDashboard:Subscription; 
+    public dashboardObj;
 
-    constructor(private router:Router, private authService:AuthService, private sharedService:SharedService, private storageService:StorageService, private dummyAPIService:DummyAPIService){      
-      /*this.sidebarService.sidebarStatus.subscribe((sidebarStatusb) => {
-        this.sidebarStatus = sidebarStatusb;
-      });*/
+    constructor(private router:Router, private messageService:MessageService, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private headerService:HeaderService, private dummyAPIService:DummyAPIService){      
+        //constructor
     }
 
     ngOnInit() {
@@ -38,6 +39,40 @@ export class HeaderComponent implements OnInit, OnDestroy {
         if (this.subscriptionLogout) this.subscriptionLogout.unsubscribe(); 
     }
     //.......................................
+
+
+
+     //...................................................................
+    messageCheck(){        
+        this.subscriptionMessage = this.headerService.behaviorSubjectMessageInit().subscribe((response) => {   
+            console.log('SURETY messageCheck SUCCESS>> message Obj,', response);  
+            this.showGrowlMessage(response);
+        }, (error) => {  
+            console.log('SURETY messageCheck ERROR>> Error: ', error);   
+        });
+    } 
+
+    private showGrowlMessage(obj:any){        
+      if (obj){  
+        //console.log('SURETY showGrowlMessage Obj,', obj); 
+        this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
+      }  
+    } 
+    //...................................................................
+
+
+
+    //...................................................................
+    dashboardCheck(){        
+        this.subscriptionDashboard = this.headerService.behaviorSubjectDashboardInit().subscribe((response) => {   
+            console.log('SURETY dashboardCheck SUCCESS>> dashboard Obj,', response);  
+            this.dashboardObj = response;
+        }, (error) => {  
+            console.log('SURETY dashboardCheck ERROR>> Error: ', error);   
+        });
+    }    
+    //...................................................................
+
 
 
     //................................................................... 

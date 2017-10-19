@@ -1,26 +1,50 @@
+import {Injectable} from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-/*
-import {Injectable, EventEmitter} from '@angular/core';
+import { SharedService } from "../shared.service";
+import { StorageService } from "../storage.service";
 
-import {HttpService} from 'app/utils/http-service/http.service';
-import {Constants} from "app/layout/header/header.constant";
 
 @Injectable()
 export class HeaderService {
+
+    private behaviorSubjectMessage;
+    private behaviorSubjectDashboard;    
     
- public toggleSidebar: EventEmitter<any> = new EventEmitter();
- public api_url: string;
+    constructor(private sharedService:SharedService, private storageService:StorageService) {
+        //constructor
+    }
+    //.................................................
 
- constructor(private httpServiceRef: HttpService) {
-  this.api_url = this.httpServiceRef.api_url;
- }
 
- getDraftCount() {
-  return this.httpServiceRef.httpGet(Constants.getDraftCount);
- }
+    //...............................................  
+    //MESSAGE 
+    behaviorSubjectMessageInit() {  
+        this.behaviorSubjectMessage = new BehaviorSubject(this.getMessageObj());
+        return this.behaviorSubjectMessage.asObservable();
+    }       
+    setBehaviorSubjectMessage(obj:any) {
+        this.behaviorSubjectMessage.next(obj);
+    }     
+    getMessageObj() {       
+        return this.sharedService.getCurrentMsg();           
+    }
+    //...............................................
 
- deleteAllDrafts() {
-  return this.httpServiceRef.httpDelete(Constants.deleteAllDrafts);
- }
+
+    //...............................................  
+    //DASHBOARD 
+    behaviorSubjectDashboardInit() {  
+        this.behaviorSubjectDashboard = new BehaviorSubject(this.getDashboardObj());
+        return this.behaviorSubjectDashboard.asObservable();
+    }       
+    setBehaviorSubjectDashboard(obj:any) {
+        this.behaviorSubjectDashboard.next(obj);
+    }     
+    getDashboardObj() { 
+        return this.storageService.get('dashboard');         
+        //return this.sharedService.getDashboardObj();           
+    }
+    //...............................................
+
 }
-*/

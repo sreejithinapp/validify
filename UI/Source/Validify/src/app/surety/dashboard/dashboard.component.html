@@ -25,7 +25,7 @@
                         <div class="row sub-head">
                             <div class="col-md-12 text-center">
                                 <h3 class="d-inline-block"># Bonds: </h3>
-                                <h1 class="d-inline-block">3</h1>
+                                <h1 class="d-inline-block">{{ dashboardObj.bond_increase_requests.bonds }}</h1>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                         </div>
                         <div class="row sub-head">                                    
                             <div class="col-md-12 text-center">
-                                <h1 class="d-inline-block">$12,540,500 </h1>
+                                <h1 class="d-inline-block">$ {{ dashboardObj.inventory_remaining.amount }} </h1>
                             </div>
                             
                         </div>
@@ -62,7 +62,7 @@
         <!-- Block - Inventory Remaining END -->
 
 
-        <!-- Block -Suspensions START -->
+        <!-- Block - Suspensions START -->
         <div class="col-lg-2 col-sm-4 col-md-3 col-lg-offset-1 mTop50">
             <div class="panel dash-tiles suspension-pod liability">
                 <div class="panel-body mTop5 mBot5">
@@ -100,14 +100,14 @@
                             </div>
                             <div class="col-md-12 col-xs-12 text-center">
                                 <h3>Liabilities</h3>
-                                <h1>$5.2B</h1>
+                                <h1>${{ dashboardObj.liabilities.amount }}</h1>
                             </div>
                         </div>
 
                         <div class="row sub-head">
                             <div class="col-md-12 text-center mTop10">
                                 <h3 class="d-inline-block"># Bonds: </h3>
-                                <h1 class="d-inline-block">40,000</h1>
+                                <h1 class="d-inline-block">{{ dashboardObj.liabilities.bonds }}</h1>
                             </div>
                         </div>
 
@@ -129,13 +129,13 @@
                             </div>
                             <div class="col-md-12 col-xs-12 text-center">
                                 <h3>Forfeitures</h3>
-                                <h1>$1.2M</h1>
+                                <h1>$ {{ dashboardObj.forfeitures.amount }}</h1>
                             </div>
                         </div>
                         <div class="row sub-head">                               
                             <div class="col-md-12 text-center mTop10">
                                 <h3 class="d-inline-block"># Bonds: </h3>
-                                <h1 class="d-inline-block">250</h1>
+                                <h1 class="d-inline-block">{{ dashboardObj.forfeitures.bonds }}</h1>
                             </div>                                
                         </div>
                     </div>
@@ -156,13 +156,13 @@
                             </div>
                             <div class="col-md-12 col-xs-12 text-center">
                                 <h3>Unpaid Judgements</h3>
-                                <h1>$2.3k</h1>
+                                <h1>${{ dashboardObj.unpaid_judgements.amount }}</h1>
                             </div>
                         </div>
                         <div class="row sub-head">
                             <div class="col-md-12 text-center mTop10">
                                 <h3 class="d-inline-block"># Bonds: </h3>
-                                <h1 class="d-inline-block">200</h1>
+                                <h1 class="d-inline-block">{{ dashboardObj.unpaid_judgements.bonds }}</h1>
                             </div>
                         </div>
                     </div>

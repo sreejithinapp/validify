@@ -27,8 +27,8 @@ export class DummyAPIService {
                 "username": "doi",
                 "email": "doi@validify.com",
 
-                "first_name": "DOI",
-                "last_name": "Validify",
+                "first_name": "DOI California",
+                "last_name": "John Smith",
 
                 "is_active": true,
                 "date_joined": "2017-09-25T10:42:30Z",
@@ -173,8 +173,8 @@ export class DummyAPIService {
                 "username": "surety",
                 "email": "surety@validify.com",
 
-                "first_name": "Surety",
-                "last_name": "Validify",
+                "first_name": "CBB SURETY COMPANY",
+                "last_name": "John Smith",
 
                 "is_active": true,
                 "date_joined": "2017-09-25T10:42:30Z",

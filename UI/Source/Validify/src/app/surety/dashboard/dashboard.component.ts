@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     
     private subscriptionMessage:Subscription; 
     private subscriptionDashboard:Subscription; 
+    public dashboardObj;
 
     constructor(private router:Router, private messageService: MessageService, private suretyService:SuretyService, private sharedService:SharedService) {
         this.messageCheck();
@@ -63,7 +64,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     //...................................................................
     dashboardCheck(){        
         this.subscriptionDashboard = this.suretyService.behaviorSubjectDashboardInit().subscribe((response) => {   
-            console.log('SURETY dashboardCheck SUCCESS>> dashboard Obj,', response);   
+            console.log('SURETY dashboardCheck SUCCESS>> dashboard Obj,', response);  
+            this.dashboardObj = response;
         }, (error) => {  
             console.log('SURETY dashboardCheck ERROR>> Error: ', error);   
         });

@@ -115,8 +115,9 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.setSuccessInfoMessageAndBehaviourSubject(true, response.data.user_role); 
                 
                 if (response.data.dashboard) {
-                
-                    this.sharedService.setDashboardObj(response.data.dashboard);  
+                    
+                    this.storageService.set("dashboard", response.data.dashboard);
+                    //this.sharedService.setDashboardObj(response.data.dashboard);  
 
                     let id = response.data.user_role;
                     
