@@ -13,7 +13,7 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
     selector: 'vfy-forgot',
     templateUrl: './forgot.component.html',
     styleUrls: ['./forgot.component.css'],
-    providers: [MessageService]
+    providers: []
 })
 
 export class ForgotComponent implements OnInit, OnDestroy {    
@@ -33,8 +33,11 @@ export class ForgotComponent implements OnInit, OnDestroy {
         this.display = false;
     } 
 
-    ngOnDestroy() {        
-        if (this.subscriptionForgot) this.subscriptionForgot.unsubscribe(); 
+    ngOnDestroy() {           
+        if (this.subscriptionForgot) {
+            this.subscriptionForgot.unsubscribe(); 
+            this.clearMessageService();
+        }
     }
     //...................................................................
 
@@ -52,9 +55,12 @@ export class ForgotComponent implements OnInit, OnDestroy {
       var obj = this.sharedService.getCurrentMsg();
       if (obj){      
         this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
-      }        
-      //this.messageService.clear();//clear message
-    }   
+      }  
+    }  
+
+    clearMessageService(){
+        this.messageService.clear();
+    } 
     //...................................................................
 
 
@@ -62,6 +68,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
     //................................................................... 
     public showForgot(){        
         this.display = true;
+        this.clearMessageService();
     }
     //................................................................... 
 
@@ -70,10 +77,12 @@ export class ForgotComponent implements OnInit, OnDestroy {
     public closeBtnAction(){      
         this.username = "";
         this.email = "";
-        this.display = false;
+        this.display = false;       
     }
 
     public submitBtnAction() {  
+        
+        this.clearMessageService();
         
         if (this.username.length > 3 && this.email.length > 3) {
             

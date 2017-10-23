@@ -25,7 +25,7 @@ export class AuthService {
   private behaviorSubjectLogout;
   private isLogoutResponseFound:boolean = false;
 
-  constructor(private storage:StorageService, private httpService:HttpService) {
+  constructor(private storageService:StorageService, private httpService:HttpService) {
     //constructor
   }
   //............................................
@@ -42,10 +42,10 @@ export class AuthService {
     this.behaviorSubjectLogin.next(bool);
   }    
   getLogin() { 
-    return this.storage.get('auth_token') ? true : false;
+    return this.storageService.get('auth_token') ? true : false;
   } 
   getToken() { 
-    return this.storage.get('auth_token') ? this.storage.get('auth_token') : null;
+    return this.storageService.get('auth_token') ? this.storageService.get('auth_token') : null;
   }  
   //...............................................
 
@@ -61,7 +61,7 @@ export class AuthService {
     this.behaviorSubjectRole.next(roleID);
   }  
   getRole() {   
-    return this.storage.get('user_role');  
+    return this.storageService.get('user_role');  
   } 
   //...............................................
 
@@ -110,6 +110,12 @@ export class AuthService {
   }  
   getLogout() {   
     return this.isLogoutResponseFound;
+  }
+  clearStorageItems(){
+    this.storageService.remove("auth_token");
+    this.storageService.remove("user_role");
+    this.storageService.remove("dashboard");
+    this.storageService.remove("header");       
   }
   //...............................................
 

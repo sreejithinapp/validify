@@ -8,67 +8,83 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { AuthService } from "../../auth/auth.service";
 import { SharedService } from "../shared.service";
 import { StorageService } from "../storage.service";
-
-import { DummyAPIService } from "../dummy-api.service";
 import { HeaderService } from "./header.service";
+import { DummyAPIService } from "../dummy-api.service";
+
+//providers: [HeaderService, MessageService]
 
 @Component({
  selector: 'vfy-header',
  templateUrl: './header.component.html',
  styleUrls: ['./header.component.css'],
- providers: [HeaderService,MessageService]
+ providers: []
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {  
 
     private subscriptionLogout:Subscription; 
     private subscriptionMessage:Subscription; 
-    private subscriptionDashboard:Subscription; 
-    public dashboardObj;
+    private subscriptionHeader:Subscription; 
+    public headerObj;
 
     constructor(private router:Router, private messageService:MessageService, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private headerService:HeaderService, private dummyAPIService:DummyAPIService){      
         //constructor
+        this.messageCheck();
+        this.headerCheck(); 
     }
 
     ngOnInit() {
         //ngOnInit      
     } 
 
-    ngOnDestroy() {        
-        //ngOnDestroy
-        if (this.subscriptionLogout) this.subscriptionLogout.unsubscribe(); 
+    ngOnDestroy() {  
+        if (this.subscriptionMessage) {
+            this.subscriptionMessage.unsubscribe(); 
+            this.clearMessageService();
+        }
+
+        if (this.subscriptionHeader) {
+            this.subscriptionHeader.unsubscribe(); 
+        }
+
+        if (this.subscriptionLogout) {
+            this.subscriptionLogout.unsubscribe(); 
+        }
     }
     //.......................................
 
 
 
-     //...................................................................
+    //...................................................................
     messageCheck(){        
         this.subscriptionMessage = this.headerService.behaviorSubjectMessageInit().subscribe((response) => {   
-            console.log('SURETY messageCheck SUCCESS>> message Obj,', response);  
             this.showGrowlMessage(response);
         }, (error) => {  
-            console.log('SURETY messageCheck ERROR>> Error: ', error);   
+            console.log('Header messageCheck ERROR>> Error: ', error);   
         });
     } 
 
     private showGrowlMessage(obj:any){        
       if (obj){  
-        //console.log('SURETY showGrowlMessage Obj,', obj); 
+        console.log('Header showGrowlMessage Obj,', obj); 
         this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
       }  
+    } 
+
+    clearMessageService(){
+        this.messageService.clear();
     } 
     //...................................................................
 
 
 
     //...................................................................
-    dashboardCheck(){        
-        this.subscriptionDashboard = this.headerService.behaviorSubjectDashboardInit().subscribe((response) => {   
-            console.log('SURETY dashboardCheck SUCCESS>> dashboard Obj,', response);  
-            this.dashboardObj = response;
+    headerCheck(){        
+        this.subscriptionHeader = this.headerService.behaviorSubjectHeaderInit().subscribe((response) => {   
+            console.log('Header headerObj SUCCESS>> ', response);  
+            this.headerObj = response;
         }, (error) => {  
-            console.log('SURETY dashboardCheck ERROR>> Error: ', error);   
+            console.log('Header headerObj ERROR>> ', error);   
         });
     }    
     //...................................................................
@@ -108,10 +124,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     private goToLogin(){
-        this.storageService.remove("auth_token");
-        this.storageService.remove("user_role");
-        //this.storageService.set("loggedIn", "false");  
-        location.replace('/');  //location.reload(true);      
+        this.authService.clearStorageItems();        
+        location.replace('/'); 
     }
     //................................................................... 
 

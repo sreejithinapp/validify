@@ -15,7 +15,7 @@ import { SharedService } from "../../shared/shared.service";
     selector: 'vfy-surety-dashboard', 
     templateUrl: './dashboard.component.html', 
     styleUrls: ['./dashboard.component.css'],
-    providers: [MessageService]
+    providers: []
 })
 
 export class DashboardComponent implements OnInit, OnDestroy {       
@@ -25,7 +25,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public dashboardObj;
 
     constructor(private router:Router, private messageService: MessageService, private suretyService:SuretyService, private sharedService:SharedService) {
-        this.messageCheck();
         this.dashboardCheck();      
     }
 
@@ -34,33 +33,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {        
-        if (this.subscriptionMessage) this.subscriptionMessage.unsubscribe(); 
-        if (this.subscriptionDashboard) this.subscriptionDashboard.unsubscribe();    
-    }
+        if (this.subscriptionDashboard){
+            this.subscriptionDashboard.unsubscribe();  
+        }  
+    }        
     //................................................................... 
 
 
     
-    //...................................................................
-    messageCheck(){        
-        this.subscriptionMessage = this.suretyService.behaviorSubjectMessageInit().subscribe((response) => {   
-            console.log('SURETY messageCheck SUCCESS>> message Obj,', response);  
-            this.showGrowlMessage(response);
-        }, (error) => {  
-            console.log('SURETY messageCheck ERROR>> Error: ', error);   
-        });
-    } 
-
-    private showGrowlMessage(obj:any){        
-      if (obj){  
-        //console.log('SURETY showGrowlMessage Obj,', obj); 
-        this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
-      }  
-    } 
-    //...................................................................
-
-
-
     //...................................................................
     dashboardCheck(){        
         this.subscriptionDashboard = this.suretyService.behaviorSubjectDashboardInit().subscribe((response) => {   

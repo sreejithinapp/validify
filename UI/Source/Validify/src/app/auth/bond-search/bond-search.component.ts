@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs/Subscription";
 
 import { MessageService } from 'primeng/components/common/messageservice';
-//import { ConfirmationService } from 'primeng/primeng';
 
 import { AuthService } from "../auth.service";
 import { SharedService } from "../../shared/shared.service";
@@ -13,7 +12,7 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
     selector: 'vfy-bond-search',
     templateUrl: './bond-search.component.html',
     styleUrls: ['./bond-search.component.css'],
-    providers: [MessageService]   
+    providers: []   
 })
 
 export class BondSearchComponent implements OnInit, OnDestroy {    
@@ -32,8 +31,11 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         this.bondSearchTxt = "";
     } 
 
-    ngOnDestroy() {        
-        if (this.subscriptionBondSearch) this.subscriptionBondSearch.unsubscribe(); 
+    ngOnDestroy() {               
+        if (this.subscriptionBondSearch) {
+            this.subscriptionBondSearch.unsubscribe(); 
+            this.clearMessageService();
+        }
     }
     //...................................................................
 
@@ -52,9 +54,12 @@ export class BondSearchComponent implements OnInit, OnDestroy {
       var obj = this.sharedService.getCurrentMsg();
       if (obj){      
         this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
-      }        
-      //this.messageService.clear();//clear message
-    }   
+      }  
+    } 
+
+    clearMessageService(){
+        this.messageService.clear();
+    }  
     //...................................................................
 
 
@@ -63,10 +68,12 @@ export class BondSearchComponent implements OnInit, OnDestroy {
     public bondSearchCloseBtnAction(){
         this.bondSearchResultElemStatus = false;
         this.bondSearchTxt = "";
+        this.clearMessageService();
     }
 
     public bondSearchBtnAction() { 
-        
+        this.clearMessageService();
+
         if (this.bondSearchTxt.length > 3) {
 
             this.subscriptionBondSearch = this.authService.bondSearch(this.bondSearchTxt).subscribe((response) => {

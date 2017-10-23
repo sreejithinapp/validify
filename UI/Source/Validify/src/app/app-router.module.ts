@@ -1,3 +1,4 @@
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
@@ -39,6 +40,9 @@ const ROUTES:Routes = [
 export class AppRouterModule {
     constructor() {}
 }
+//.............................................................................................
+
+
 
 
 

@@ -9,7 +9,7 @@ import { StorageService } from "../storage.service";
 export class HeaderService {
 
     private behaviorSubjectMessage;
-    private behaviorSubjectDashboard;    
+    private behaviorSubjectHeader;    
     
     constructor(private sharedService:SharedService, private storageService:StorageService) {
         //constructor
@@ -33,17 +33,16 @@ export class HeaderService {
 
 
     //...............................................  
-    //DASHBOARD 
-    behaviorSubjectDashboardInit() {  
-        this.behaviorSubjectDashboard = new BehaviorSubject(this.getDashboardObj());
-        return this.behaviorSubjectDashboard.asObservable();
+    //Header 
+    behaviorSubjectHeaderInit() {  
+        this.behaviorSubjectHeader = new BehaviorSubject(this.getHeaderObj());
+        return this.behaviorSubjectHeader.asObservable();
     }       
-    setBehaviorSubjectDashboard(obj:any) {
-        this.behaviorSubjectDashboard.next(obj);
+    setBehaviorSubjectHeader(obj:any) {
+        this.behaviorSubjectHeader.next(obj);
     }     
-    getDashboardObj() { 
-        return this.storageService.get('dashboard');         
-        //return this.sharedService.getDashboardObj();           
+    getHeaderObj() { 
+        return this.storageService.get('header');   
     }
     //...............................................
 

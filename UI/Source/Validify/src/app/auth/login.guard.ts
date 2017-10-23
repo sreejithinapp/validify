@@ -20,6 +20,7 @@ export class LoginGuard implements CanActivate {
                 } else if (roleID === 'group2'){
                     this.router.navigate(['/doi']);       
                 } else {
+                    this.authService.clearStorageItems();
                     this.router.navigate(['/login']);
                     console.log("Logined but Role Not found");                  
                     return true;
@@ -29,6 +30,7 @@ export class LoginGuard implements CanActivate {
             });            
             
         } else {
+            this.authService.clearStorageItems();
             console.log("Not Logined");          
             return true;
         }

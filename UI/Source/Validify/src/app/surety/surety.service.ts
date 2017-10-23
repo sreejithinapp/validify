@@ -46,8 +46,7 @@ export class SuretyService {
         this.behaviorSubjectDashboard.next(obj);
     }     
     getDashboardObj() { 
-        return this.storageService.get('dashboard');         
-        //return this.sharedService.getDashboardObj();           
+        return this.storageService.get('dashboard');  
     }
     //...............................................
    

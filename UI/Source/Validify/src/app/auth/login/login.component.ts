@@ -15,7 +15,7 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
     selector: 'vfy-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css'],
-    providers: [Login, MessageService]
+    providers: [Login]
 })
 
 export class LoginComponent implements OnInit, OnDestroy {    
@@ -30,8 +30,11 @@ export class LoginComponent implements OnInit, OnDestroy {
         //ngOnInit         
     }
 
-    ngOnDestroy() {
-        if (this.subscriptionLogin) this.subscriptionLogin.unsubscribe();        
+    ngOnDestroy() {       
+        if (this.subscriptionLogin) {
+            this.subscriptionLogin.unsubscribe();   
+            this.clearMessageService();  
+        }   
     }
     //...................................................................
 
@@ -55,6 +58,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         } else if (role === 'group2'){
           this.router.navigate(['/doi']);           
         } else {
+            this.authService.clearStorageItems();
             this.router.navigate(['/login']); 
         }
         this.showGrowlMessage();              
@@ -66,8 +70,11 @@ export class LoginComponent implements OnInit, OnDestroy {
       if (obj){      
         this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
       }        
-      //this.messageService.clear();//clear message
     } 
+
+    clearMessageService(){
+        this.messageService.clear();
+    }
     //...................................................................
 
      
@@ -76,6 +83,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     //...................................................................
     public login() {        
         
+        this.clearMessageService();
+
         this.subscriptionLogin = this.authService.login(this.loginModel).subscribe((response) => {
             //this.loginSuccess(response); //Depolyment
             this.dummyLoginResponse(this.loginModel); //DUMMY Test
@@ -115,15 +124,21 @@ export class LoginComponent implements OnInit, OnDestroy {
                 this.setSuccessInfoMessageAndBehaviourSubject(true, response.data.user_role); 
                 
                 if (response.data.dashboard) {
-                    
-                    this.storageService.set("dashboard", response.data.dashboard);
-                    //this.sharedService.setDashboardObj(response.data.dashboard);  
 
-                    let id = response.data.user_role;
-                    
+                    let headerObj = {
+                        "username": response.data.username,
+                        "email": response.data.email,
+                        "first_name": response.data.first_name,
+                        "last_name": response.data.last_name
+                    };
+                    //console.log('headerObj: ', headerObj);                    
+                    this.storageService.set("header", headerObj);
+
+                    this.storageService.set("dashboard", response.data.dashboard);
+                   
+                    let id = response.data.user_role;                    
                     if (id === 'group1'){                
-                        this.router.navigate(["/surety"]);    
-                    
+                        this.router.navigate(["/surety"]);                       
                     } else if (id === 'group2'){
                         this.router.navigate(["/doi"]);    
                     }  
