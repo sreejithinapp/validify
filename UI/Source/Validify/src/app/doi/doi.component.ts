@@ -3,6 +3,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 //import {Subscription} from "rxjs/Subscription";
 
+//import { MessageService } from 'primeng/components/common/messageservice';
+//import { SuretyService } from "./surety.service";
 //import { SharedService } from "../shared/shared.service";
 //import { StorageService } from "../shared/storage.service";
 //import { DummyAPIService } from "../shared/dummy-api.service";

@@ -53,6 +53,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     //...................................................................
 
 
+    onAgencyClick(item:any){
+        console.log('onAgencyClick:', item);
+    }
+
    
 }
 

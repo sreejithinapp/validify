@@ -4,6 +4,10 @@ import { NgModule } from '@angular/core';
 import { LoaderComponent } from './loader/loader.component';
 import { HeaderComponent } from './header/header.component';
 
+import { CategoryPipe } from './pipes/category.pipe';
+import { OrderByPipe } from './pipes/orderby.pipe';
+//import { TruncatePipe } from './pipes/truncate.pipe';
+//import { MinToTimePipe } from './pipes/min-to-time.pipe';
 
 @NgModule({
 
@@ -11,14 +15,18 @@ import { HeaderComponent } from './header/header.component';
 
     declarations: [
         LoaderComponent,
-        HeaderComponent
+        HeaderComponent,
+        CategoryPipe,
+        OrderByPipe
     ],
 
     providers: [],
 
     exports: [
         LoaderComponent,
-        HeaderComponent
+        HeaderComponent,
+        CategoryPipe,
+        OrderByPipe
     ] 
        
 })

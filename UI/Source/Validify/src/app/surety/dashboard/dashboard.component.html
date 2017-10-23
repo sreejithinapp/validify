@@ -192,40 +192,29 @@
                             <tr>
                                 <th width="30%">Name</th>
                                 <th width="20%">License No.</th>
+
                                 <th width="10%">Inventory Remaining</th>
+
                                 <th width="15%">No of Forfeited Bonds</th>
                                 <th width="10%" class="sort">Forfeited $</th>
                                 <th width="10%">Forfeited %</th>                                        
                             </tr>
                         </thead>
-
+                        
                         <tbody>
-                            <tr>
-                                <td class="clickable-row agency">Ami First Bail Bonds</td>
-                                <td>FELO2584659</td>
-                                <td>$ 350,000</td>
-                                <td>4</td>
-                                <td class="sort">$600,000</td>
-                                <td>6.22%</td>                                      
-                            </tr>
-                            <tr>
-                                <td>Capitol Bail Bonds</td>
-                                <td>FELO2584659</td>
-                                <td>$ 600,000</td>
-                                <td>4</td>
-                                <td class="sort">$550,000</td>
-                                <td>5.85%</td>                                     
-                            </tr>
-                            <tr>
-                                <td>Great South Bail Bonding</td>
-                                <td>FELO2584659</td>
-                                <td>$ 450,000</td>
-                                <td>3</td>
-                                <td class="sort">$375,000</td>
-                                <td>3.93%</td>                                       
-                            </tr>                              
-                        </tbody>
+                            <tr *ngFor="let item of dashboardObj.top_agencies">
+                                
+                                <td class="clickable-row" (click)="onAgencyClick(item)">{{ item.name }}</td>
+                                <td>{{ item.licence_no }}</td>
 
+                                <td>$ {{ item.inventory_remaining }}</td>
+
+                                <td>{{ item.no_of_forfeited_bond }}</td>
+                                <td class="sort">$ {{ item.forfeited_in }}</td>                                
+                                <td>{{ item.forfeited_percent }} %</td>
+
+                            </tr>                   
+                        </tbody>
                     </table>
                 </div>
 
@@ -259,26 +248,20 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>Hardford Bail Bonds</td>
-                                <td>FBAO25234</td>
-                                <td class="clickable-row agent">Dwayne Smith</td>
-                                <td>FELO2584659</td>
-                                <td>2</td>
-                                <td class="sort">$325,000</td>
-                                <td>3.46%</td>
-                            </tr>
-                            <tr>
-                                <td>Hudson River Bail Bonds</td>
-                                <td>TAZO586858</td>
-                                <td>Andrew Smalltown</td>
-                                <td>XAQ09863548</td>
-                                <td>2</td>
-                                <td class="sort">$300,000</td>
-                                <td>3.14%</td>
-                            </tr>                                                          
-                        </tbody>
+                            <tr *ngFor="let item of dashboardObj.top_agents">
+                                
+                                <td>{{ item.agency_name }}</td>
+                                <td>{{ item.agency_licence_no }}</td>
 
+                                <td class="clickable-row">{{ item.agent_name }}</td>
+                                <td>{{ item.agent_licence_no }}</td>
+
+                                <td>{{ item.no_of_forfeited_bond }}</td>  
+                                <td class="sort">$ {{ item.forfeited_in }}</td>                                
+                                <td>{{ item.forfeited_percent }} %</td>
+                            </tr>                   
+                        </tbody>
+                      
                     </table>
                 </div>
 

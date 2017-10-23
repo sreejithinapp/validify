@@ -39,12 +39,12 @@ export class DummyAPIService {
 
                     "liabilities": {
                         "amount": "5.2B",
-                        "bonds": '40,000'
+                        "bonds": "40,000"
                     },
 
                     "forfeitures": {
                         "amount": "1.2M",
-                        "bonds": '250'
+                        "bonds": "250"
                     },
 
                     "bond_increase_requests": null,
@@ -209,93 +209,93 @@ export class DummyAPIService {
                     },
 
                     "top_agents": [
-                        {
+                        {    
+                            "agency_name": "Hardford Bail Bonds...",
+                            "agency_licence_no": "FBAO25234",                            
                             "agent_name": "Dwayne Smith",
-                            "forfeited_in": "325,000",
-                            "agency_name": "Hardford Bail Bonds",
-                            "no_of_forfeited_bond": 2,
                             "agent_licence_no": "FELO2584659",
-                            "agency_licence_no": "FBAO25234",
+                            "no_of_forfeited_bond": 2,
+                            "forfeited_in": "325,000",                           
                             "forfeited_percent": 3.46
                         },
-                        {
-                            "agent_name": "Andrew Smalltown",
-                            "forfeited_in": "300,000",
-                            "agency_name": "Hudson River Bail Bonds",
-                            "no_of_forfeited_bond": 2,
-                            "agent_licence_no": "XAQ09863548",
+                        {                            
+                            "agency_name": "Hudson River Bail Bonds...",
                             "agency_licence_no": "TAZO586858",
+                            "agent_name": "Andrew Smalltown",
+                            "agent_licence_no": "XAQ09863548",
+                            "no_of_forfeited_bond": 2,
+                            "forfeited_in": "300,000",
                             "forfeited_percent": 3.14
                         },
-                        {
-                            "agent_name": "Pablo Goldsmith",
-                            "forfeited_in": "200,000",
-                            "agency_name": "Fordelity Bail Bonds",
-                            "no_of_forfeited_bond": 5,
-                            "agent_licence_no": "ADX0856974",
+                        {                                                        
+                            "agency_name": "Fordelity Bail Bonds...",
                             "agency_licence_no": "XAZ895334",
+                            "agent_name": "Pablo Goldsmith",
+                            "agent_licence_no": "ADX0856974",
+                            "no_of_forfeited_bond": 5,
+                            "forfeited_in": "200,000",
                             "forfeited_percent": 2.16
                         },
-                        {
-                            "agent_name": "Xavier Montgomery",
-                            "forfeited_in": "160,000",
-                            "agency_name": "Lexington City Bail Bonds",
-                            "no_of_forfeited_bond": 4,
-                            "agent_licence_no": "OPN014254728",
+                        {                                                        
+                            "agency_name": "Lexington City Bail Bonds...",
                             "agency_licence_no": "ZASO252585",
+                            "agent_name": "Xavier Montgomery",
+                            "agent_licence_no": "OPN014254728",
+                            "no_of_forfeited_bond": 4,
+                            "forfeited_in": "160,000",                            
                             "forfeited_percent": 1.73
                         },
-                        {
-                            "agent_name": "Yoest Shane",
-                            "forfeited_in": "100,000",
-                            "agency_name": "Pacific Life",
-                            "no_of_forfeited_bond": 2,
-                            "agent_licence_no": "YSN014254728",
+                        {     
+                            "agency_name": "Pacific Life...",
                             "agency_licence_no": "PASO363636",
+                            "agent_name": "Yoest Shane",
+                            "agent_licence_no": "YSN014254728",
+                            "no_of_forfeited_bond": 2,
+                            "forfeited_in": "100,000",
                             "forfeited_percent": 1.13
                         }
                     ],
 
                     "top_agencies": [
-                        {
+                        {                            
+                            "name": "Ami First Bail Bonds..",
+                            "licence_no": "FELO2584659",
+                            "inventory_remaining": "350,000",                            
+                            "no_of_forfeited_bond": 4,
                             "forfeited_in": "600,000",
-                            "name": "Ami First Bail Bonds",
-                            "no_of_forfeited_bond": 4,
-                            "inventory_remaining": "350,000",
-                            "forfeited_percent": 6.22,
-                            "licence_no": "FELO2584659"
+                            "forfeited_percent": 6.22                            
                         },
-                        {
-                            "forfeited_in": "550,000",
-                            "name": "Capitol Bail Bond",
-                            "no_of_forfeited_bond": 4,
+                        {                            
+                            "name": "Capitol Bail Bond..",
+                            "licence_no": "FELO2584659",
                             "inventory_remaining": "600,000",
-                            "forfeited_percent": 5.85,
-                            "licence_no": "FELO2584659"
+                            "no_of_forfeited_bond": 4, 
+                            "forfeited_in": "550,000",                           
+                            "forfeited_percent": 5.85                            
                         },
-                        {
-                            "forfeited_in": "375,000",
-                            "name": "Great South Bail Bonding",
-                            "no_of_forfeited_bond": 3,
+                        {                            
+                            "name": "Great South Bail Bonding..",
+                            "licence_no": "FELO2584659",
                             "inventory_remaining": "450,000",
-                            "forfeited_percent": 3.93,
-                            "licence_no": "FELO2584659"
-                        },
-                        {
-                            "forfeited_in": "285,000",
-                            "name": "Mint Valley Bail Bonds",
                             "no_of_forfeited_bond": 3,
-                            "inventory_remaining": "750,000",
-                            "forfeited_percent": 3.08,
-                            "licence_no": "FELO2584659"
+                            "forfeited_in": "375,000",
+                            "forfeited_percent": 3.93                            
                         },
-                        {
-                            "forfeited_in": "105,000",
-                            "name": "Symetra",
+                        {                            
+                            "name": "Mint Valley Bail Bonds..",
+                            "licence_no": "FELO2584659",
+                            "inventory_remaining": "750,000",
+                            "no_of_forfeited_bond": 3,
+                            "forfeited_in": "285,000",
+                            "forfeited_percent": 3.08                            
+                        },
+                        {                            
+                            "name": "Symetra..",
+                            "licence_no": "FELO2584659",
+                            "inventory_remaining": "500,000",                            
                             "no_of_forfeited_bond": 2,
-                            "inventory_remaining": "500,000",
-                            "forfeited_percent": 0.28,
-                            "licence_no": "FELO2584659"
+                            "forfeited_in": "105,000",
+                            "forfeited_percent": 0.28                            
                         }
                     ]
 
