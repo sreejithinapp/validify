@@ -2,7 +2,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
-import { MessageService } from 'primeng/components/common/messageservice';
+
+import {MessageService} from 'primeng/components/common/messageservice';
 
 import { Login } from "./login";
 import { AuthService } from "../auth.service";
@@ -31,9 +32,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {       
         if (this.subscriptionLogin) {
-            this.subscriptionLogin.unsubscribe();   
-            this.clearMessageService();  
+            this.subscriptionLogin.unsubscribe();               
         }   
+        this.clearMessageService();  
     }
     //...................................................................
 

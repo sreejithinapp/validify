@@ -6,8 +6,8 @@ import { HeaderComponent } from './header/header.component';
 
 import { CategoryPipe } from './pipes/category.pipe';
 import { OrderByPipe } from './pipes/orderby.pipe';
-//import { TruncatePipe } from './pipes/truncate.pipe';
-//import { MinToTimePipe } from './pipes/min-to-time.pipe';
+import { TruncatePipe } from './pipes/truncate.pipe';
+import { MinToTimePipe } from './pipes/min-to-time.pipe';
 
 @NgModule({
 
@@ -17,7 +17,9 @@ import { OrderByPipe } from './pipes/orderby.pipe';
         LoaderComponent,
         HeaderComponent,
         CategoryPipe,
-        OrderByPipe
+        OrderByPipe,
+        TruncatePipe,
+        MinToTimePipe
     ],
 
     providers: [],
@@ -26,7 +28,9 @@ import { OrderByPipe } from './pipes/orderby.pipe';
         LoaderComponent,
         HeaderComponent,
         CategoryPipe,
-        OrderByPipe
+        OrderByPipe,
+        TruncatePipe,
+        MinToTimePipe
     ] 
        
 })

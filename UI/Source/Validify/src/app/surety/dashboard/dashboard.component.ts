@@ -66,6 +66,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
             this.subscriptionSaveAgentDetails.unsubscribe();  
         }
         this.clearVars();
+        this.clearMessageService();  
     } 
     
     ngAfterViewInit() {  

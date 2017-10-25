@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
+import { GrowlModule } from "primeng/components/growl/growl";
 import { MessageService } from 'primeng/components/common/messageservice';
 
 import { AppRouterModule } from './app-router.module';
@@ -29,7 +30,8 @@ import { DummyAPIService } from "./shared/dummy-api.service";
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
-    RouterModule,    
+    RouterModule, 
+    GrowlModule,   
     AppRouterModule
   ],
 

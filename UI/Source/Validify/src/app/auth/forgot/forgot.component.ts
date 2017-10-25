@@ -33,10 +33,10 @@ export class ForgotComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {           
         if (this.subscriptionForgot) {
-            this.subscriptionForgot.unsubscribe(); 
-            this.clearMessageService();
+            this.subscriptionForgot.unsubscribe();            
         }
         this.clearVars();
+        this.clearMessageService();  
     }
     //...................................................................
 
@@ -99,7 +99,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
             });
 
         } else { 
-            this.setFailInfoMessageAndBehaviourSubject({statusText:"Please fill all the fields!"});
+            this.setFailInfoMessageAndBehaviourSubject({status_text:"Please fill all the fields!"});
         }
     }
    

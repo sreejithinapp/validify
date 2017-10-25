@@ -32,10 +32,10 @@ export class BondSearchComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {               
         if (this.subscriptionBondSearch) {
-            this.subscriptionBondSearch.unsubscribe(); 
-            this.clearMessageService();
+            this.subscriptionBondSearch.unsubscribe();             
         }
         this.clearVars();
+        this.clearMessageService();  
     }    
     //...................................................................
 
