@@ -282,7 +282,9 @@
                     <div class="row">
 
                         <div class="col-md-6 col-sm-8">
-                            <h2 class="page-inner-head">Ami First Bail Bonds - <span class="license-no">#FELO2584659</span></h2>
+                            <h2 class="page-inner-head">Ami First Bail Bonds - 
+                                <span class="license-no">#{{ agencyModel.SelAgencyLicenseNum }}</span>
+                            </h2>
                         </div>
                        
                         <!-- Top Active or Suspended status element START -->
@@ -347,13 +349,15 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>Agency License Number</label>
-                                                <input type="text" class="form-control" value="FELO2584659">
+                                                <input type="text" [(ngModel)]="agencyModel.AgencyLicenseNum" class="form-control" placeholder="Agency License Number">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="checkbox-wrap bond-agent-check">
-                                                <label><input type="checkbox" /><i class="input-helper"></i><span>Bond Agency</span></label>
+                                                <label><input type="checkbox" [(ngModel)]="agencyModel.IsBondAgency" />
+                                                    <i class="input-helper"></i><span>Bond Agency</span>
+                                                </label>
                                             </div>
                                         </div>
 
@@ -364,14 +368,14 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>Agency Name</label>
-                                                <input type="text" class="form-control" value="Fordelity Bail Bonds">
+                                                <input type="text" [(ngModel)]="agencyModel.AgencyName" class="form-control" placeholder="Agency Name..."/>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>Address 1</label>
-                                                <input type="text" class="form-control" value="23 6th St.">
+                                                <input type="text" [(ngModel)]="agencyModel.Address" class="form-control" placeholder="Address 1...">
                                             </div>
                                         </div>
 
@@ -382,14 +386,14 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>State</label>
-                                                <input type="text" class="form-control" value="California">
+                                                <input type="text" [(ngModel)]="agencyModel.State" class="form-control" placeholder="State...">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>County</label>
-                                                <input type="text" class="form-control" value="Santa Clara">
+                                                <input type="text" [(ngModel)]="agencyModel.County" class="form-control" placeholder="County...">
                                             </div>
                                         </div>
 
@@ -400,14 +404,14 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>City</label>
-                                                <input type="text" class="form-control" value="Coyote">
+                                                <input type="text" [(ngModel)]="agencyModel.City" class="form-control" placeholder="City...">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>Zip Code</label>
-                                                <input type="text" class="form-control" value="32904">
+                                                <input type="text" [(ngModel)]="agencyModel.ZipCode" class="form-control" placeholder="Zip Code...">
                                             </div>
                                         </div>
 
@@ -418,14 +422,14 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>Agency Phone No.</label>
-                                                <input type="text" class="form-control" value="123456798">
+                                                <input type="text" [(ngModel)]="agencyModel.AgencyPhoneNo" class="form-control" placeholder="Agency Phone No...">
                                             </div>
                                         </div>
 
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>Agency Email</label>
-                                                <input type="text" class="form-control" value="acme@abc.com">
+                                                <input type="text" [(ngModel)]="agencyModel.AgencyEmail" class="form-control" placeholder="Agency Email...">
                                             </div>
                                         </div>
 
@@ -491,21 +495,11 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>02/14/2017</td>
-                                                                    <td>California</td>
-                                                                    <td>Santa Clara</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>04/23/2017</td>
-                                                                    <td>Georgia</td>
-                                                                    <td>Webster</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>05/16/2017</td>
-                                                                    <td>New York</td>
-                                                                    <td>Dutchess</td>
-                                                                </tr>
+                                                                <tr *ngFor="let item of historyObj">                                                                    
+                                                                    <td>{{ item.Date }}</td>
+                                                                    <td>{{ item.StatesSuspended }}</td>
+                                                                    <td>{{ item.CountiesSuspended }}</td>                                                                 
+                                                                </tr>                   
                                                             </tbody>
                                                         </table>
                                                     </div>

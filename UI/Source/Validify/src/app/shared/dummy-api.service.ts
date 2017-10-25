@@ -436,32 +436,32 @@ export class DummyAPIService {
                         "IsActive": true,
                         "IsDoiActivated": true,
                         "IsActivated": true,
-                        "IsBondAgency": false,                    
+                        "IsBondAgency": true,                    
                         "AgencyLicenseNum": "FELO2584659",
-                        "AgencyName": "Fordelity Bail Bonds",
+                        "AgencyName": "Fordelity Bail Bonds...",
                         "AgencyPhoneNo": "1234567890",
-                        "Address": "23 6th St.",
-                        "City": "Coyote",
-                        "State": "California",
-                        "County": "Santa Clara",
+                        "Address": "23 6th St....",
+                        "City": "Coyote...",
+                        "State": "California...",
+                        "County": "Santa Clara...",
                         "ZipCode": "32904",
-                        "AgencyEmail": "acme@abc.com"
+                        "AgencyEmail": "acme@abc.com..."
                     },
                     "AgencySuspensionHistory": [
                         {
                             "Date": "02/14/2017",
                             "StatesSuspended": "California",
-                            "CountiesSuspended": "Santa Clara"
+                            "CountiesSuspended": "Santa Clara.."
                         },
                         {
                             "Date": "04/23/2017",
                             "StatesSuspended": "Georgia",
-                            "CountiesSuspended": "Webster"
+                            "CountiesSuspended": "Webster.."
                         },
                         {
                             "Date": "05/16/2017",
                             "StatesSuspended": "New York",
-                            "CountiesSuspended": "Dutchess"
+                            "CountiesSuspended": "Dutchess.."
                         }                    
                     ]                             
                 }

@@ -25,21 +25,22 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('agentDetailsTarget') private agentDetailsTarget:any;
     @ViewChild('agencyDetailsTarget') private agencyDetailsTarget:any;   
        
-    private subscriptionDashboard:Subscription; 
+    private subscriptionDashboard:Subscription;     
     private subscriptionGetAgencyDetails:Subscription; 
     private subscriptionSaveAgencyDetails:Subscription; 
-
     private subscriptionGetAgentDetails:Subscription; 
     private subscriptionSaveAgentDetails:Subscription;  
 
     public dashboardObj;
+    public historyObj;
     public isAgencyDetails:boolean = false;
     public isAgentDetails:boolean = false;  
     public isActiveStatus:boolean = false;  
     public isDoiActivatedStatus:boolean = false;  
-    public isActivatedStatus:boolean = false;        
+    public isActivatedStatus:boolean = false;      
 
-    constructor(private router:Router, private messageService:MessageService, public agencyModel:Agency, public agentModel:Agent, private suretyService:SuretyService, private sharedService:SharedService, private dummyAPIService:DummyAPIService, @Inject(DOCUMENT) private document:Document) {
+    //@Inject(DOCUMENT) private document:Document
+    constructor(private router:Router, private messageService:MessageService, public agencyModel:Agency, public agentModel:Agent, private suretyService:SuretyService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         this.dashboardCheck();      
     }
 
@@ -146,29 +147,34 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
         console.log('getSelectedAgencyDetails...licence_no: ', id)
         this.clearMessageService();
         this.subscriptionGetAgencyDetails = this.suretyService.getAgencyDetails(id).subscribe((response) => {
-            //this.getAgencyDetailSuccess(response); //Depolyment
-            this.dummyGetAgencyDetailResponse(); //DUMMY Test        
+            //this.getAgencyDetailSuccess(response, id); //Depolyment
+            this.dummyGetAgencyDetailResponse(id); //DUMMY Test        
         }, (error) => {            
             //this.getAgencyDetailFail(error); //Depolyment               
-            this.dummyGetAgencyDetailResponse(); //DUMMY Test
+            this.dummyGetAgencyDetailResponse(id); //DUMMY Test
         });       
     }
    
-    private dummyGetAgencyDetailResponse(){
+    private dummyGetAgencyDetailResponse(id:string){
         let response = this.dummyAPIService.getDashboardAgencyDetailsResponse(true); //true -> Success and false -> Fail
         //console.log('dummyGetAgencyDetailResponse: ', response);      
         if (response.status_code === 200){
-            this.getAgencyDetailSuccess(response);
+            this.getAgencyDetailSuccess(response, id);
         } else {
             this.getAgencyDetailFail(response);
         }     
     }
 
-    private getAgencyDetailSuccess(response:any){
+    private getAgencyDetailSuccess(response:any, id:string){
         console.log('getAgencyDetailSuccess>> response: ', response);       
         if (response.data) {  
             this.agencyModel = response.data.AgencyDetails;
-            console.log('getAgencyDetailSuccess>> this.agencyModel...', this.agencyModel);            
+            this.agencyModel.SelAgencyLicenseNum = id;
+            console.log('getAgencyDetailSuccess>> this.agencyModel...', this.agencyModel);   
+
+            this.historyObj = response.data.AgencySuspensionHistory;
+            console.log('getAgencyDetailSuccess>> this.historyObj...', this.historyObj);             
+
             this.setSuccessGetAgencyDetails(response);       
         }   
     }  
