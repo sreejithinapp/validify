@@ -101,8 +101,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         } else if (obj.username === "doi@validify.com") {
             response = this.dummyAPIService.getLoginResponseDOI(true); //true -> Success and false -> Fail 
         } else {
-            this.setFailInfoMessageAndBehaviourSubject({}); 
-            return;
+            response = this.dummyAPIService.getLoginResponseDOI(false); //true -> Success and false -> Fail 
         }  
 
         if (response.status_code === 200){

@@ -145,7 +145,7 @@ export class DummyAPIService {
                 "status_code": 0,
                 "status_text": "Failed!",
                 "data": {
-                    "status": "DOI Login action failed!",                
+                    "status": "Login Failed!",                
                 }
             };  
         }
@@ -281,7 +281,7 @@ export class DummyAPIService {
                             },
                             {                            
                                 "name": "Symetra..",
-                                "licence_no": "FELO2584659",
+                                "licence_no": "SYLO2584659",
                                 "inventory_remaining": "500,000",                            
                                 "no_of_forfeited_bond": 2,
                                 "forfeited_in": "105,000",
@@ -299,7 +299,7 @@ export class DummyAPIService {
                 "status_code": 0,
                 "status_text": "Failed!",
                 "data": {
-                    "status": "Surety Login action failed!",                
+                    "status": "Login Failed!",                
                 }
             }; 
         }       

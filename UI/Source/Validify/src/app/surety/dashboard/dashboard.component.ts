@@ -1,5 +1,5 @@
 
-import { Component, OnDestroy, OnInit, Inject, HostListener, ElementRef, ViewChild} from '@angular/core';
+import { Component, OnDestroy, OnInit, Inject, HostListener, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router} from "@angular/router";
 import { Subscription} from "rxjs/Subscription";
 import { DOCUMENT } from '@angular/platform-browser';
@@ -18,13 +18,13 @@ import { Agent } from "./agent";
     selector: 'vfy-surety-dashboard', 
     templateUrl: './dashboard.component.html', 
     styleUrls: ['./dashboard.component.css'],
-    providers: []
+    providers: [Agency, Agent]
 })
 
-export class DashboardComponent implements OnInit, OnDestroy {       
+export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {       
     
-    @ViewChild('agentDetailsTarget') private agentDetailsTarget: ElementRef;
-    @ViewChild('agencyDetailsTarget') private agencyDetailsTarget: ElementRef;   
+    @ViewChild('agentDetailsTarget') private agentDetailsTarget:any;
+    @ViewChild('agencyDetailsTarget') private agencyDetailsTarget:any;   
        
     private subscriptionDashboard:Subscription; 
     private subscriptionGetAgencyDetails:Subscription; 
@@ -41,8 +41,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.dashboardCheck();      
     }
 
-    ngOnInit() {  
-        //ngOnInit            
+    ngOnInit() {         
+        //console.log('ngOnInit');          
     }     
 
     ngOnDestroy() {        
@@ -57,6 +57,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         }
         this.clearVars();
     } 
+    
+    ngAfterViewInit() {  
+        //console.log('ngAfterViewInit');  
+    }
     //................................................................... 
     
    
@@ -67,10 +71,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.clearDetailVars();      
     }
 
-    private dashboardCheck(){ 
-        this.clearVars();       
+    private clearDetailVars(){         
+        this.isAgencyDetails = false;
+        this.isAgentDetails = false;  
+        this.isActiveStatus = false;  
+        this.isDoiActivatedStatus = false;  
+        this.isActivatedStatus = false;    
+    }
+
+    private dashboardCheck(){  
+        this.clearVars();      
         this.subscriptionDashboard = this.suretyService.behaviorSubjectDashboardInit().subscribe((response) => {   
-            console.log('SURETY dashboardCheck SUCCESS>> dashboard Obj,', response); 
+            //console.log('SURETY dashboardCheck SUCCESS>> dashboard Obj,', response); 
             if (response){
                 this.showGrowlMessage(); 
                 this.dashboardObj = response;    
@@ -98,30 +110,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public onAgencyClick(item:any){
         //console.log('onAgencyClick:', item);
         this.clearDetailVars();     
-
-        this.getSelectedAgencyDetails(item.licence_no);
-
-        this.isAgencyDetails = true;      
-        this.agencyDetailsTarget.nativeElement.scrollTop = this.agencyDetailsTarget.nativeElement.offsetTop; 
+        this.getSelectedAgencyDetails(item.licence_no);      
     }   
 
-    public onAgencyCancelClick(){
-        this.clearDetailVars();
-        this.agencyDetailsTarget.nativeElement.scrollTop = 0;            
+    public onAgencyCancelClick(){  
+        this.clearDetailVars();          
     }
 
     public onAgencySaveClick(){
-        this.clearDetailVars();
-        this.agencyDetailsTarget.nativeElement.scrollTop = 0;        
+        this.saveAgencyDetails();              
     }   
 
-    private clearDetailVars(){         
-        this.isAgencyDetails = false;
-        this.isAgentDetails = false;  
-        this.isActiveStatus = false;  
-        this.isDoiActivatedStatus = false;  
-        this.isActivatedStatus = false;    
-    }
+    private scrollToAgencyDetails(){
+        try {               
+            this.agencyDetailsTarget.nativeElement.scrollTop = this.agencyDetailsTarget.nativeElement.offsetTop; //offsetTop / scrollHeight
+        } catch (err) {           
+            console.log('scrollToAgencyDetails error', err);
+        }
+    }       
 
 
     //Get Selected Agency Details - GET API
@@ -152,24 +158,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
         if (response.data) {  
             this.agencyModel = response.data.AgencyDetails;
             console.log('getAgencyDetailSuccess>> this.agencyModel...', this.agencyModel);            
-            this.setSuccessGetAgencyDetailsAndBehaviourSubject(response);       
+            this.setSuccessGetAgencyDetails(response);       
         }   
     }  
 
     private getAgencyDetailFail(error:any){
         //console.log('getAgencyDetailFail error: ', error); 
-        this.setFailGetAgencyDetailsAndBehaviourSubject(error);       
+        this.setFailGetAgencyDetails(error);       
     }
 
-    private setSuccessGetAgencyDetailsAndBehaviourSubject(obj:any){
-        //console.log('setSuccessGetAgencyDetailsAndBehaviourSubject obj: ', obj);          
+    private setSuccessGetAgencyDetails(obj:any){
+        //console.log('setSuccessGetAgencyDetails obj: ', obj);          
         let msgObj = {severity: 'success', summary: 'Surety Dashboard Get Top 5 Agency Details', detail: obj.status_text};            
-        this.sharedService.setCurrentMsg(msgObj);  
-        this.showGrowlMessage();
+        this.sharedService.setCurrentMsg(msgObj); 
+        this.showGrowlMessage();   
+
+        this.isAgencyDetails = true;   
+        setTimeout(() => {this.scrollToAgencyDetails();}, 100);           
     }
 
-    private setFailGetAgencyDetailsAndBehaviourSubject(obj:any){
-        //console.log('setFailGetAgencyDetailsAndBehaviourSubject obj: ', obj);           
+    private setFailGetAgencyDetails(obj:any){
+        //console.log('setFailGetAgencyDetails obj: ', obj);           
         let msgObj = {severity: 'error', summary: 'Surety Dashboard Get Top 5 Agency Details', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
         this.showGrowlMessage(); 
@@ -203,24 +212,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private saveAgencyDetailSuccess(response:any){
         console.log('saveAgencyDetailSuccess>> response: ', response);       
         if (response.data) {  
-            this.setSuccessSaveAgencyDetailsAndBehaviourSubject(response);       
+            this.setSuccessSaveAgencyDetails(response);       
         }   
     }  
 
     private saveAgencyDetailFail(error:any){
         console.log('saveAgencyDetailFail error: ', error); 
-        this.setFailSaveAgencyDetailsAndBehaviourSubject(error);       
+        this.setFailSaveAgencyDetails(error);       
     }
 
-    private setSuccessSaveAgencyDetailsAndBehaviourSubject(obj:any){
-        //console.log('setSuccessSaveAgencyDetailsAndBehaviourSubject obj: ', obj);          
+    private setSuccessSaveAgencyDetails(obj:any){
+        //console.log('setSuccessSaveAgencyDetails obj: ', obj);          
         let msgObj = {severity: 'success', summary: 'Surety Dashboard Save Selected Agency Details', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj); 
-        this.showGrowlMessage();        
+        this.showGrowlMessage();   
+
+        this.onAgencyCancelClick();       
     }
 
-    private setFailSaveAgencyDetailsAndBehaviourSubject(obj:any){
-        //console.log('setFailSaveAgencyDetailsAndBehaviourSubject obj: ', obj);           
+    private setFailSaveAgencyDetails(obj:any){
+        //console.log('setFailSaveAgencyDetails obj: ', obj);           
         let msgObj = {severity: 'error', summary: 'Surety Dashboard Save Selected Agency Details', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
         this.showGrowlMessage(); 
@@ -234,18 +245,24 @@ export class DashboardComponent implements OnInit, OnDestroy {
         //console.log('onAgentClick:', item);
         this.clearDetailVars();
         this.isAgentDetails = true;
-        this.agentDetailsTarget.nativeElement.scrollTop = this.agentDetailsTarget.nativeElement.offsetTop; 
+        setTimeout(() => {this.scrollToAgentDetails();}, 100);          
     }
 
-    public onAgentCancelClick(){
-        this.clearDetailVars();
-        this.agentDetailsTarget.nativeElement.scrollTop = 0;         
+    public onAgentCancelClick(){  
+        this.clearDetailVars();       
     }
 
-    public onAgentSaveClick(){
-        this.clearDetailVars();
-        this.agentDetailsTarget.nativeElement.scrollTop = 0;         
+    public onAgentSaveClick(){        
+        this.onAgentCancelClick();         
     }
+
+    private scrollToAgentDetails(){
+        try {               
+            this.agentDetailsTarget.nativeElement.scrollTop = this.agentDetailsTarget.nativeElement.offsetTop; //offsetTop / scrollHeight
+        } catch (err) {           
+            console.log('scrollToAgentDetails error', err);
+        }
+    }       
     //...................................................................
    
 }

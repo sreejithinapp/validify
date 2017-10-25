@@ -7,8 +7,7 @@ import { StorageService } from "../storage.service";
 
 @Injectable()
 export class HeaderService {
-
-    private behaviorSubjectMessage;
+  
     private behaviorSubjectHeader;    
     
     constructor(private sharedService:SharedService, private storageService:StorageService) {
@@ -16,22 +15,7 @@ export class HeaderService {
     }
     //.................................................
 
-
-    //...............................................  
-    //MESSAGE 
-    behaviorSubjectMessageInit() {  
-        this.behaviorSubjectMessage = new BehaviorSubject(this.getMessageObj());
-        return this.behaviorSubjectMessage.asObservable();
-    }       
-    setBehaviorSubjectMessage(obj:any) {
-        this.behaviorSubjectMessage.next(obj);
-    }     
-    getMessageObj() {       
-        return this.sharedService.getCurrentMsg();           
-    }
-    //...............................................
-
-
+ 
     //...............................................  
     //Header 
     behaviorSubjectHeaderInit() {  
