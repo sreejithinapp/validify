@@ -609,10 +609,6 @@ export class DummyAPIService {
 
 
 /*
-//getBondSearchResponse();
-//getLoginResponseDOI();
-//getLoginResponseSurety();
-
 http://192.168.1.90:8000/api/v1/account/login/
 {"email": "doi@validify.com", "password": "doi"}
 http://192.168.1.90:8000/api/v1/search/
