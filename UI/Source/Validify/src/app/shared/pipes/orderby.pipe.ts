@@ -11,7 +11,7 @@ export class OrderByPipe implements PipeTransform {
 
         return records.sort(function(a, b){
             
-            if(a[args.property] < b[args.property]){
+            if (a[args.property] < b[args.property]){
                 return -1 * args.direction;
 
             } else if( a[args.property] > b[args.property]){

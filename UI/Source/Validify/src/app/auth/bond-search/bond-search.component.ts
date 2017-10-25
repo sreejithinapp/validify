@@ -20,15 +20,14 @@ export class BondSearchComponent implements OnInit, OnDestroy {
     private subscriptionBondSearch:Subscription;    
     public bondSearchResultElemStatus:boolean = false;
     public bondSearchTxt:string;
-    public searchResultObj;
+    public searchResultObj:object;
 
-    constructor(private messageService: MessageService, private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+    constructor(private messageService:MessageService, private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         this.bondSearchCheck();      
     }
 
     ngOnInit() {      
-        this.bondSearchResultElemStatus = false;
-        this.bondSearchTxt = "";
+        //this.clearVars();
     } 
 
     ngOnDestroy() {               
@@ -36,28 +35,36 @@ export class BondSearchComponent implements OnInit, OnDestroy {
             this.subscriptionBondSearch.unsubscribe(); 
             this.clearMessageService();
         }
+        this.clearVars();
+    }    
+    //...................................................................
+
+
+
+    //...................................................................
+    private clearVars(){
+        this.bondSearchResultElemStatus = false;
+        this.bondSearchTxt = "";
+        this.searchResultObj = null;
     }
-    //...................................................................
 
-
-
-    //...................................................................
-    bondSearchCheck(){
-      this.authService.behaviorSubjectBondSearchInit().subscribe((bool) => { 
-        if (bool){
-          this.showGrowlMessage();     
-        }   
-      });
+    private bondSearchCheck(){
+        this.clearVars();
+        this.authService.behaviorSubjectBondSearchInit().subscribe((bool) => { 
+            if (bool){
+                this.showGrowlMessage();     
+            }   
+        });
     }
     
-    showGrowlMessage(){     
+    private showGrowlMessage(){             
       var obj = this.sharedService.getCurrentMsg();
       if (obj){      
         this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
       }  
     } 
 
-    clearMessageService(){
+    private clearMessageService(){
         this.messageService.clear();
     }  
     //...................................................................
@@ -66,8 +73,7 @@ export class BondSearchComponent implements OnInit, OnDestroy {
 
     //...................................................................
     public bondSearchCloseBtnAction(){
-        this.bondSearchResultElemStatus = false;
-        this.bondSearchTxt = "";
+        this.clearVars();
         this.clearMessageService();
     }
 
@@ -86,14 +92,17 @@ export class BondSearchComponent implements OnInit, OnDestroy {
             });
 
         } else { 
-            this.setFailInfoMessageAndBehaviourSubject({statusText: "Bond Search Text Contains Atleast Four Characters!"});             
+            this.setFailInfoMessageAndBehaviourSubject({status_text: "Bond search text should contains atleast four characters!"});             
         }
     }
    
     private dummyBondSearchResponse(){
-        let response = this.dummyAPIService.getBondSearchResponse();
-        //console.log('dummyBondSearchResponse: ', response);
-        this.bondSearchSuccess(response);
+        let response = this.dummyAPIService.getBondSearchResponse(true); //true -> Success and false -> Fail     
+        if (response.status_code === 200){
+            this.bondSearchSuccess(response);
+        } else {
+            this.bondSearchFail(response); 
+        }        
     }
 
     private bondSearchSuccess(response:any){
@@ -101,7 +110,7 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         if (response.data) {           
             this.searchResultObj = {};  
             this.searchResultObj = response.data;   
-            this.setSuccessInfoMessageAndBehaviourSubject({statusText: "Bond Search Success!"});       
+            this.setSuccessInfoMessageAndBehaviourSubject(response);       
         }        
         this.bondSearchResultElemStatus = true;        
     }  
@@ -113,22 +122,19 @@ export class BondSearchComponent implements OnInit, OnDestroy {
     //...................................................................  
 
 
+
     //................................................................... 
     private setSuccessInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
-        
-        let msgObj = {severity: 'success', summary: 'Public Bond Search', detail: obj.statusText};            
+        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);          
+        let msgObj = {severity: 'success', summary: 'Public Bond Search', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
-
         this.authService.setBehaviorSubjectBondSearch(true);  
     }
 
     private setFailInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);   
-        
-        let msgObj = {severity: 'error', summary: 'Public Bond Search', detail: obj.statusText};            
+        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);           
+        let msgObj = {severity: 'error', summary: 'Public Bond Search', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
-
         this.authService.setBehaviorSubjectBondSearch(true);  
     }
     //................................................................... 
@@ -137,38 +143,3 @@ export class BondSearchComponent implements OnInit, OnDestroy {
 }
 
 
-
-/*
-//...................................................................
-//this.storageService.remove("auth_token"); this.storageService.remove("user_role"); 
-
-//................
-fetchUserDetails(){
-    this.obsvGetUser = this.authService.getUserDetails().subscribe((response) => {
-        console.log('fetchUserDetails>> response: ', response);
-        if (response.user) {
-            this.storageService.set('user_details', JSON.stringify(response.user));      
-            let role_id = this.storageService.get('user_details').role_id;
-            if (role_id === 1) {//DUMMY
-                response.permission = {};
-            }
-            this.storageService.setPermissions(response.permission);
-            this.router.navigate(["/dashboard"]);       
-            this.authService.setIsLoggedInInCheckUsingBS(true);
-        }                        
-    });
-}
-//................
-
-//................
-if (error.status === 401 || error.status === 0) {
-    localStorage.clear();
-    if (this.router.url != "/login") {
-        location.reload();
-    }
-    return Observable.throw(error.json());
-}
-return Observable.throw(error.json()); 
-//................
-
-*/

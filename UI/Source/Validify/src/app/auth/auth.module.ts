@@ -10,7 +10,6 @@ import { AuthRoutesModule } from './auth.routes';
 import { LoginComponent } from './login/login.component';
 import { BondSearchComponent } from './bond-search/bond-search.component';
 import { ForgotComponent } from './forgot/forgot.component';
-//import { HelpComponent } from './help/help.component';
 
 
 @NgModule({ 

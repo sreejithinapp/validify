@@ -4,7 +4,9 @@ export const Constants = {
     login: "account/login/",
     bondsearch: "search/",
     forgot: "forgot/",
-    logout: "logout"    
+    logout: "logout/",
+    getSuretyDashboardAgencyDetails: "surety/dashboard/agency_details/",
+    saveSuretyDashboardAgencyDetails: "saveSuretyDashboardAgencyDetails"    
 }
 
 export const ExcludeAccessToken = ['login', 'register'];

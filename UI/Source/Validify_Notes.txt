@@ -1,49 +1,50 @@
 
 
+
+######################################################################################
+Test Dist folder
+$ lite-server
+
+External
+http://192.168.20.98:3000/#/login
+
+Project name: Validify - Programming Services
+Client:	Validify, Inc
+
+######################################################################################
+
+
+
 ######################################################################################
 
 https://gitlab.inapp.com
 
 https://sunil@gitlab.inapp.com/Validify/Validify.git
 
-######################################################################################
-
-
-
-######################################################################################
-
 CREATE BRANCH:
-git checkout -b VALIDIFY-APP-V1 origin/master
-
+git checkout -b SKSV2 origin/master
 
 VIEW BRANCH:
 git branch
 
-
 SWITCH BRANCH:
-git checkout VALIDIFY-APP-V1
-git checkout validify-dev
+git checkout SKSV2
 git checkout master
-
 
 COMMIT:
 git add index.html
 git commit -m "manual each file updates"
 git commit -am "all files updates"
 
-
 Fetch and Merge:
 git fetch origin
 git merge --no-ff origin/master
 
-
 PUSH:
-git push origin VALIDIFY-APP-V1
-git push origin validify-dev
+git push origin SKSV2
 git push origin master
 (or)
-git push origin VALIDIFY-APP-V1:master
-git push origin validify-dev:master
+git push origin SKSV2:master
 git push origin master:master
 ######################################################################################
 
@@ -51,19 +52,20 @@ git push origin master:master
 
 ######################################################################################
 
-Merge master into development branch (eg: on branch VALIDIFY-APP-V1)
+Merge master into development branch (eg: on branch SKSV2)
 (resolve any merge conflicts if there are any)
 
 git fetch origin
 git merge --no-ff origin/master
-
 or
 $ git merge master
 
 
 Merge development brach into Master:
 git checkout master
-git merge VALIDIFY-APP-V1 (there won't be any conflicts now)
-git push or git push origin master
+git merge SKSV2 
+git push (or) git push origin master
 
 ######################################################################################
+
+

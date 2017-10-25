@@ -23,14 +23,12 @@ export class ForgotComponent implements OnInit, OnDestroy {
     public email:string;   
     public display:boolean = false;
    
-    constructor(private messageService: MessageService, private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+    constructor(private messageService:MessageService, private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         this.forgotCheck();                  
     }
 
     ngOnInit() {        
-        this.username = "";
-        this.email = "";
-        this.display = false;
+        //this.clearVars();      
     } 
 
     ngOnDestroy() {           
@@ -38,27 +36,35 @@ export class ForgotComponent implements OnInit, OnDestroy {
             this.subscriptionForgot.unsubscribe(); 
             this.clearMessageService();
         }
+        this.clearVars();
     }
     //...................................................................
 
 
     //...................................................................
-    forgotCheck(){
-      this.authService.behaviorSubjectForgotInit().subscribe((bool) => { 
-        if (bool){
-          this.showGrowlMessage();     
-        }   
-      });
+    private clearVars(){
+        this.display = false;        
+        this.username = "";
+        this.email = "";
     }
 
-    showGrowlMessage(){     
+    private forgotCheck(){
+        this.clearVars(); 
+        this.authService.behaviorSubjectForgotInit().subscribe((bool) => { 
+            if (bool){
+                this.showGrowlMessage();     
+            }   
+        });
+    }
+
+    private showGrowlMessage(){     
       var obj = this.sharedService.getCurrentMsg();
       if (obj){      
         this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
       }  
     }  
 
-    clearMessageService(){
+    private clearMessageService(){
         this.messageService.clear();
     } 
     //...................................................................
@@ -70,10 +76,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
         this.display = true;
         this.clearMessageService();
     }
-    //................................................................... 
-
-
-    //...................................................................
+  
     public closeBtnAction(){      
         this.username = "";
         this.email = "";
@@ -101,14 +104,18 @@ export class ForgotComponent implements OnInit, OnDestroy {
     }
    
     private dummyHttpResponse(){
-        let response = this.dummyAPIService.getForgotResponse();       
-        this.httpSuccess(response);
+        let response = this.dummyAPIService.getForgotResponse(true); //true -> Success and false -> Fail      
+        if (response.status_code === 200){
+            this.httpSuccess(response);
+        } else {
+            this.httpFail(response); 
+        }         
     }
 
     private httpSuccess(response:any){
         //console.log('httpSuccess>> response: ', response);       
         if (response.data) {   
-            this.setSuccessInfoMessageAndBehaviourSubject({statusText: response.data.status});  
+            this.setSuccessInfoMessageAndBehaviourSubject(response);  
             this.closeBtnAction();   
         }                   
     }  
@@ -123,24 +130,19 @@ export class ForgotComponent implements OnInit, OnDestroy {
 
     //................................................................... 
     private setSuccessInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
-        
-        let msgObj = {severity: 'success', summary: 'Forgot Password', detail: obj.statusText};            
+        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);           
+        let msgObj = {severity: 'success', summary: 'Forgot Password', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
-
         this.authService.setBehaviorSubjectForgot(true);  
     }
 
     private setFailInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);   
-        
-        let msgObj = {severity: 'error', summary: 'Forgot Password', detail: obj.statusText};            
+        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);           
+        let msgObj = {severity: 'error', summary: 'Forgot Password', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
-
         this.authService.setBehaviorSubjectForgot(true);  
     }
     //................................................................... 
-
 
 
 }

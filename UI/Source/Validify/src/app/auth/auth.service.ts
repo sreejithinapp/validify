@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Login } from "./login/login";
-
 import { HttpService } from "../shared/http-service/http.service";
 import { StorageService } from "../shared/storage.service";
 import { Constants } from "../shared/constants";
@@ -143,18 +142,3 @@ export class AuthService {
 
 }
 
-
-
-//...................................................
-/*
-//GET USER
-getUserDetails() {
-  return this.httpService.httpGet(Constants.userdetails);
-} 
-
-//GET PERMISSIONS 
-getPermissions(role_id) {
-    return this.httpService.httpGet('role/role_permission/' + role_id);
-}
-*/
-//...................................................

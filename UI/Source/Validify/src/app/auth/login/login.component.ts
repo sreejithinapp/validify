@@ -2,7 +2,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
-
 import { MessageService } from 'primeng/components/common/messageservice';
 
 import { Login } from "./login";
@@ -22,7 +21,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     private subscriptionLogin:Subscription; 
     
-    constructor(private router:Router, private messageService: MessageService, public loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
+    constructor(private router:Router, private messageService:MessageService, public loginModel:Login, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
        this.loginCheck();                
     }
 
@@ -41,7 +40,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     //...................................................................
-    loginCheck(){
+    private loginCheck(){
       this.authService.behaviorSubjectLoginInit().subscribe((boo) => {  
         if (boo){
             this.roleCheck();  
@@ -51,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
     }
 
-    roleCheck(){
+    private roleCheck(){
       this.authService.behaviorSubjectRoleInit().subscribe((role) => {   
         if (role === 'group1'){       
           this.router.navigate(['/surety']);
@@ -65,14 +64,14 @@ export class LoginComponent implements OnInit, OnDestroy {
       });
     }    
    
-    showGrowlMessage(){     
+    private showGrowlMessage(){     
       var obj = this.sharedService.getCurrentMsg();
       if (obj){      
         this.messageService.add({severity: obj.severity, summary:obj.summary, detail:obj.detail});
       }        
     } 
 
-    clearMessageService(){
+    private clearMessageService(){
         this.messageService.clear();
     }
     //...................................................................
@@ -97,20 +96,24 @@ export class LoginComponent implements OnInit, OnDestroy {
    
     private dummyLoginResponse(obj){
         let response:any;
-        if (obj.username === "surety@validify.com"){
-            response = this.dummyAPIService.getLoginResponseSurety(); 
-        } else if (obj.username === "doi@validify.com"){
-            response = this.dummyAPIService.getLoginResponseDOI(); 
-        } else{
+        if (obj.username === "surety@validify.com") {
+            response = this.dummyAPIService.getLoginResponseSurety(true); //true -> Success and false -> Fail 
+        } else if (obj.username === "doi@validify.com") {
+            response = this.dummyAPIService.getLoginResponseDOI(true); //true -> Success and false -> Fail 
+        } else {
             this.setFailInfoMessageAndBehaviourSubject({}); 
             return;
-        } 
-        //console.log('dummyLoginResponse: ', response);
-        this.loginSuccess(response);
+        }  
+
+        if (response.status_code === 200){
+            this.loginSuccess(response);
+        } else {
+            this.loginFail(response); 
+        }         
     }
 
     private loginSuccess(response:any){
-        console.log('loginSuccess>> response: ', response);  
+        //console.log('loginSuccess>> response: ', response);  
 
         if (response.data) {
 
@@ -121,7 +124,7 @@ export class LoginComponent implements OnInit, OnDestroy {
             if (response.data.user_role) {
                 
                 this.storageService.set("user_role", response.data.user_role);
-                this.setSuccessInfoMessageAndBehaviourSubject(true, response.data.user_role); 
+                this.setSuccessInfoMessageAndBehaviourSubject(response, true, response.data.user_role); 
                 
                 if (response.data.dashboard) {
 
@@ -149,8 +152,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         }//response.data end
     } 
     
-    private loginFail(error: any){
-        console.log('loginFail error: ', error);   
+    private loginFail(error:any){
+        //console.log('loginFail error: ', error);   
         this.setFailInfoMessageAndBehaviourSubject(error);                         
     }
     //...................................................................  
@@ -158,64 +161,21 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
     //................................................................... 
-    private setSuccessInfoMessageAndBehaviourSubject(isLogined:boolean, role:string){
-        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);   
-        
-        let msgObj = {severity: 'success', summary: 'Login', detail:'Logined Successfully!'};            
+    private setSuccessInfoMessageAndBehaviourSubject(obj:any, isLogined:boolean, role:string){
+        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);           
+        let msgObj = {severity: 'success', summary: 'Login', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
-
         this.authService.setBehaviorSubjectLogin(isLogined);  
         this.authService.setBehaviorSubjectRole(role);  
     }
 
     private setFailInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setMessageAndBehaviourSubject obj: ', obj); 
-
-        let detailTxt = 'Login Failed'; //obj.statusText          
-        let msgObj = {severity: 'error', summary: 'Login', detail: detailTxt};            
+        //console.log('setMessageAndBehaviourSubject obj: ', obj);           
+        let msgObj = {severity: 'error', summary: 'Login', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
-
         this.authService.setBehaviorSubjectLogin(false);        
     }
     //...................................................................    
     
 }
 
-
-
-
-
-/*
-//...................................................................
-//this.storageService.remove("auth_token"); this.storageService.remove("user_role"); 
-
-//................
-fetchUserDetails(){
-    this.obsvGetUser = this.authService.getUserDetails().subscribe((response) => {
-        console.log('fetchUserDetails>> response: ', response);
-        if (response.user) {
-            this.storageService.set('user_details', JSON.stringify(response.user));      
-            let role_id = this.storageService.get('user_details').role_id;
-            if (role_id === 1) {//DUMMY
-                response.permission = {};
-            }
-            this.storageService.setPermissions(response.permission);
-            this.router.navigate(["/dashboard"]);       
-            this.authService.setIsLoggedInInCheckUsingBS(true);
-        }                        
-    });
-}
-//................
-
-//................
-if (error.status === 401 || error.status === 0) {
-    localStorage.clear();
-    if (this.router.url != "/login") {
-        location.reload();
-    }
-    return Observable.throw(error.json());
-}
-return Observable.throw(error.json()); 
-//................
-
-*/

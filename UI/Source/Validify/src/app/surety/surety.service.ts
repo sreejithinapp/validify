@@ -4,9 +4,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { SharedService } from "../shared/shared.service";
 import { StorageService } from "../shared/storage.service";
-//import { HttpService } from "../../shared/http-service/http.service";
-//import { Constants } from "./surety.constants";
+import { HttpService } from "../shared/http-service/http.service";
+import { Constants } from "../shared/constants";
 
+import { Agency } from "./dashboard/agency";
 
 
 @Injectable()
@@ -15,7 +16,7 @@ export class SuretyService {
     private behaviorSubjectMessage;
     private behaviorSubjectDashboard;    
     
-    constructor(private sharedService:SharedService, private storageService:StorageService) {
+    constructor(private sharedService:SharedService, private storageService:StorageService, private httpService:HttpService) {
         //constructor
     }
     //.................................................
@@ -50,6 +51,17 @@ export class SuretyService {
     }
     //...............................................
    
+
+    //...............................................
+    getAgencyDetails(id:string) {  
+        console.log('getAgencyDetailsAPI id: ', id);  
+        return this.httpService.httpGet(Constants.getSuretyDashboardAgencyDetails + id);         
+    }
+    saveAgencyDetails(agencyModel:Agency) {  
+        console.log('saveAgencyDetails agencyModel obj: ', agencyModel);    
+        return this.httpService.httpPost(Constants.saveSuretyDashboardAgencyDetails, agencyModel);
+    }
+    //...............................................
 
 }
 

@@ -58,10 +58,3 @@ export class AppModule {
 //..........................................................
 
 
-
-
-//import { GrowlModule } from "primeng/components/growl/growl";
-//import { ConfirmDialogModule } from "primeng/components/confirmdialog/confirmdialog";
-//import { DialogModule } from 'primeng/primeng';
-//import { OverlayPanelModule } from 'primeng/primeng';
-////GrowlModule, ConfirmDialogModule, DialogModule, OverlayPanelModule,   

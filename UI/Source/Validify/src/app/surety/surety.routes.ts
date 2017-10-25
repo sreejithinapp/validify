@@ -26,4 +26,3 @@ export class SuretyRoutesModule {
   constructor(){ }
 }
 
-//outlet:'surety'
