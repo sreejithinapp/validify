@@ -131,7 +131,7 @@ export class DummyAPIService {
                                 "no_of_forfeited_bond": 2,
                                 "inventory_remaining": "500,000",
                                 "forfeited_percent": 0.28,
-                                "licence_no": "FELO2584659"
+                                "licence_no": "SYLO2584659"
                             }
                         ]
 
