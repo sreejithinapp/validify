@@ -1,6 +1,6 @@
 
     
-<!-- Content START -->
+<!-- SURETY Content START -->
 <div id="page-content-wrapper">    
 
 
@@ -273,7 +273,7 @@
 
 
     <!-- Agency Details START -->
-    <div class="page-details mTop50" id="agencyDetails1" *ngIf="isAgencyDetails" #agencyDetailsTarget>
+    <div class="page-details mTop50" id="agencyDetails" *ngIf="isAgencyDetails" #agencyDetailsTarget>
 
         <!-- Top element START -->
         <div class="row">
@@ -282,7 +282,7 @@
                     <div class="row">
 
                         <div class="col-md-6 col-sm-8">
-                            <h2 class="page-inner-head">Ami First Bail Bonds - 
+                            <h2 class="page-inner-head">{{ agencyModel.SelAgencyName }} - 
                                 <span class="license-no">#{{ agencyModel.SelAgencyLicenseNum }}</span>
                             </h2>
                         </div>
@@ -290,13 +290,13 @@
                         <!-- Top Active or Suspended status element START -->
                         <div class="col-md-6 col-sm-4 text-right">
 
-                            <div class="surety-status active txt-bold"  *ngIf="isActiveStatus">
+                            <div class="surety-status active txt-bold"  *ngIf="agencyModel.SuretyStatus">
                                 <i class="active-text fa fa-check-circle-o" aria-hidden="true"></i> 
                                 <span class="active-text">Active</span>
                                 <div class="reason" data-toggle="tooltip" data-placement="bottom" title="Suerty is Active"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
                             </div>
 
-                            <div class="surety-status in-active txt-bold" *ngIf="!isActiveStatus">
+                            <div class="surety-status in-active txt-bold" *ngIf="!agencyModel.SuretyStatus">
                                 <i class="fa fa-circle-o" aria-hidden="true"></i>
                                 <span class="in-active-text">Suspended</span>
                                 <div class="reason" data-toggle="tooltip" data-placement="bottom" title="Suerty was Suspended"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
@@ -444,11 +444,11 @@
 
                                                 <label class="block">DOI Status:</label>
 
-                                                <div class="surety-status active" *ngIf="isDoiActivatedStatus">
+                                                <div class="surety-status active" *ngIf="agencyModel.DOIStatus">
                                                     <span class="txt-bold active-text">Activated</span> on 03/15/2017
                                                 </div>
 
-                                                <div class="surety-status in-active" *ngIf="!isDoiActivatedStatus">
+                                                <div class="surety-status in-active" *ngIf="!agencyModel.DOIStatus">
                                                     <span class="txt-bold in-active-text">Suspended</span> on 03/15/2017
                                                 </div>
 
@@ -458,11 +458,11 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">   
 
-                                                <div class="surety-status active" *ngIf="isActivatedStatus">
+                                                <div class="surety-status active" *ngIf="agencyModel.AgencyStatus">
                                                     <span class="txt-bold active-text">Activated</span> on 03/17/2017
                                                 </div>
 
-                                                <div class="surety-status in-active" *ngIf="!isActivatedStatus">
+                                                <div class="surety-status in-active" *ngIf="!agencyModel.AgencyStatus">
                                                     <span class="txt-bold in-active-text">Suspended</span> on 03/17/2017
                                                 </div>
 
@@ -537,19 +537,21 @@
                     <div class="row">
 
                         <div class="col-md-6 col-sm-8">
-                            <h2 class="page-inner-head">Roger Montana - <span class="License-no">#FELO2584659</span></h2>
+                            <h2 class="page-inner-head">{{ agentModel.SelAgentName }} - 
+                                <span class="License-no">#{{ agentModel.SelAgentLicenseNum }}</span>
+                            </h2>
                         </div>
 
                         <!-- Top Active or Suspended status element START -->
                         <div class="col-md-6 col-sm-4 text-right">
                             
-                            <div class="surety-status active txt-bold" *ngIf="isActiveStatus">
+                            <div class="surety-status active txt-bold" *ngIf="agentModel.SuretyStatus">
                                 <i class="active-text fa fa-check-circle-o" aria-hidden="true"></i> 
                                 <span class="active-text">Active</span>
                                 <div class="reason" data-toggle="tooltip" data-placement="bottom" title="Suerty is Active"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
                             </div>
 
-                            <div class="surety-status in-active txt-bold" *ngIf="!isActiveStatus">
+                            <div class="surety-status in-active txt-bold" *ngIf="!agentModel.SuretyStatus">
                                 <i class="fa fa-circle-o" aria-hidden="true"></i>
                                 <span class="in-active-text">Suspended</span>
                                 <div class="reason" data-toggle="tooltip" data-placement="bottom" title="Suerty was Suspended"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
@@ -599,13 +601,15 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label for="Licenseno">Agent License Number</label>
-                                                <input type="text" class="form-control" value="FELO2584659">
+                                                <input type="text" [(ngModel)]="agentModel.AgentLicenseNum" class="form-control" placeholder="Agent License Number">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="checkbox-wrap bond-agent-check">
                                                 <label>
-                                                    <input type="checkbox" /><i class="input-helper"></i><span>Bond Agent</span></label>
+                                                    <input type="checkbox" [(ngModel)]="agentModel.IsBondAgent" />
+                                                    <i class="input-helper"></i><span>Bond Agent</span>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -614,13 +618,13 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label for="Licenseno">Agent First Name</label>
-                                                <input type="text" class="form-control" id="agencyName" value="Roger">
+                                                <input type="text" [(ngModel)]="agentModel.AgentFirstName" class="form-control" placeholder="Agent First Name">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label for="Licenseno">Agent Last Name</label>
-                                                <input type="text" class="form-control" id="agencyName" value="Montana">
+                                                <input type="text" [(ngModel)]="agentModel.AgentLastName" class="form-control" placeholder="Agent Last Name">
                                             </div>
                                         </div>
                                     </div>
@@ -629,13 +633,13 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label for="Licenseno">Agent Phone No.</label>
-                                                <input type="text" class="form-control" value="123456798">
+                                                <input type="text" [(ngModel)]="agentModel.AgentPhoneNo" class="form-control" placeholder="Agent Phone No">
                                             </div>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label for="Licenseno">Agent Email</label>
-                                                <input type="text" class="form-control" value="john@abc.com">
+                                                <input type="text" [(ngModel)]="agentModel.AgentEmail" class="form-control" placeholder="Agent Email">
                                             </div>
                                         </div>
                                     </div>
@@ -649,11 +653,11 @@
                                                 
                                                 <label class="block">DOI Status:</label>
                                                 
-                                                <div class="surety-status active" *ngIf="isDoiActivatedStatus">
+                                                <div class="surety-status active" *ngIf="agentModel.DOIStatus">
                                                     <span class="txt-bold active-text">Activated</span> on 03/15/2017
                                                 </div>
 
-                                                <div class="surety-status in-active" *ngIf="!isDoiActivatedStatus">
+                                                <div class="surety-status in-active" *ngIf="!agentModel.DOIStatus">
                                                     <span class="txt-bold in-active-text">Suspended</span> on 03/15/2017
                                                 </div>
 
@@ -664,11 +668,11 @@
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">                                                      
                                                 
-                                                <div class="surety-status active" *ngIf="isActivatedStatus">
+                                                <div class="surety-status active" *ngIf="agentModel.AgentStatus">
                                                     <span class="txt-bold active-text">Activated</span> on 03/17/2017
                                                 </div>
 
-                                                <div class="surety-status in-active" *ngIf="!isActivatedStatus">
+                                                <div class="surety-status in-active" *ngIf="!agentModel.AgentStatus">
                                                     <span class="txt-bold in-active-text">Suspended</span> on 03/17/2017
                                                 </div>
 
@@ -705,24 +709,15 @@
                                                                     <th>Reason</th>
                                                                 </tr>
                                                             </thead>
-
                                                             <tbody>
-                                                                <tr>
-                                                                    <td>California</td>
-                                                                    <td>02/14/2017</td>
-                                                                    <td>Surety Suspension</td>
-                                                                    <td>Alameda</td>
-                                                                    <td>Liability Controls</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td></td>
-                                                                    <td>04/23/2017</td>
-                                                                    <td>DOI Suspension</td>
-                                                                    <td>Alpine </td>
-                                                                    <td>Rules Violation</td>
-                                                                </tr>                                                                    
+                                                                <tr *ngFor="let item of historyObj">                                                                    
+                                                                    <td>{{ item.State }}</td>
+                                                                    <td>{{ item.Date }}</td>
+                                                                    <td>{{ item.Action }}</td>
+                                                                    <td>{{ item.County }}</td> 
+                                                                    <td>{{ item.Reason }}</td>                                                                
+                                                                </tr>                   
                                                             </tbody>
-
                                                         </table>
 
                                                     </div>
@@ -748,7 +743,7 @@
 
     
 </div>  
-<!-- Content END -->
+<!-- SURETY Content END -->
 
 
 

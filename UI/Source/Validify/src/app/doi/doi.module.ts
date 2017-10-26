@@ -1,6 +1,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { GrowlModule } from "primeng/components/growl/growl";
 import { DialogModule } from 'primeng/primeng';
@@ -18,6 +19,7 @@ import { DoiService } from './doi.service';
 
   imports: [
     CommonModule,
+    FormsModule,
     GrowlModule,    
     DialogModule,
     SharedModule,

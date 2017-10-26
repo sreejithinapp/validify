@@ -35,10 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     public historyObj;
     public isAgencyDetails:boolean = false;
     public isAgentDetails:boolean = false;  
-    public isActiveStatus:boolean = false;  
-    public isDoiActivatedStatus:boolean = false;  
-    public isActivatedStatus:boolean = false;      
-
+   
     //@Inject(DOCUMENT) private document:Document
     constructor(private router:Router, private messageService:MessageService, public agencyModel:Agency, public agentModel:Agent, private suretyService:SuretyService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
         this.dashboardCheck();      
@@ -85,10 +82,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private clearDetailVars(){         
         this.isAgencyDetails = false;
-        this.isAgentDetails = false;  
-        this.isActiveStatus = false;  
-        this.isDoiActivatedStatus = false;  
-        this.isActivatedStatus = false;    
+        this.isAgentDetails = false;        
     }
 
     private dashboardCheck(){  
@@ -122,7 +116,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     public onAgencyClick(item:any){
         //console.log('onAgencyClick:', item);
         this.clearDetailVars();     
-        this.getSelectedAgencyDetails(item.licence_no);      
+        this.getSelectedAgencyDetails(item);      
     }   
 
     public onAgencyCancelClick(){  
@@ -143,37 +137,37 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
     //Get Selected Agency Details - GET API
-    private getSelectedAgencyDetails(id:string) { 
-        console.log('getSelectedAgencyDetails...licence_no: ', id)
+    private getSelectedAgencyDetails(item:any) {         
         this.clearMessageService();
-        this.subscriptionGetAgencyDetails = this.suretyService.getAgencyDetails(id).subscribe((response) => {
-            //this.getAgencyDetailSuccess(response, id); //Depolyment
-            this.dummyGetAgencyDetailResponse(id); //DUMMY Test        
+        this.subscriptionGetAgencyDetails = this.suretyService.getAgencyDetails(item.licence_no).subscribe((response) => {
+            //this.getAgencyDetailSuccess(response, item); //Depolyment
+            this.dummyGetAgencyDetailResponse(item); //DUMMY Test        
         }, (error) => {            
             //this.getAgencyDetailFail(error); //Depolyment               
-            this.dummyGetAgencyDetailResponse(id); //DUMMY Test
+            this.dummyGetAgencyDetailResponse(item); //DUMMY Test
         });       
     }
    
-    private dummyGetAgencyDetailResponse(id:string){
+    private dummyGetAgencyDetailResponse(item:any){
         let response = this.dummyAPIService.getDashboardAgencyDetailsResponse(true); //true -> Success and false -> Fail
         //console.log('dummyGetAgencyDetailResponse: ', response);      
         if (response.status_code === 200){
-            this.getAgencyDetailSuccess(response, id);
+            this.getAgencyDetailSuccess(response, item);
         } else {
             this.getAgencyDetailFail(response);
         }     
     }
 
-    private getAgencyDetailSuccess(response:any, id:string){
-        console.log('getAgencyDetailSuccess>> response: ', response);       
+    private getAgencyDetailSuccess(response:any, item:any){
+        //console.log('getAgencyDetailSuccess>> response: ', response);       
         if (response.data) {  
             this.agencyModel = response.data.AgencyDetails;
-            this.agencyModel.SelAgencyLicenseNum = id;
-            console.log('getAgencyDetailSuccess>> this.agencyModel...', this.agencyModel);   
+            this.agencyModel.SelAgencyName = item.name;
+            this.agencyModel.SelAgencyLicenseNum = item.licence_no;            
+            //console.log('getAgencyDetailSuccess>> this.agencyModel...', this.agencyModel);   
 
             this.historyObj = response.data.AgencySuspensionHistory;
-            console.log('getAgencyDetailSuccess>> this.historyObj...', this.historyObj);             
+            //console.log('getAgencyDetailSuccess>> this.historyObj...', this.historyObj);             
 
             this.setSuccessGetAgencyDetails(response);       
         }   
@@ -205,7 +199,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     //Save Agency Details - POST API
     private saveAgencyDetails() { 
-        console.log('saveAgencyDetails...this.agencyModel: ', this.agencyModel)
+        //console.log('saveAgencyDetails...this.agencyModel: ', this.agencyModel)
         this.clearMessageService();
         this.subscriptionSaveAgencyDetails = this.suretyService.saveAgencyDetails(this.agencyModel).subscribe((response) => {
             //this.saveAgencyDetailSuccess(response); //Depolyment
@@ -227,7 +221,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     private saveAgencyDetailSuccess(response:any){
-        console.log('saveAgencyDetailSuccess>> response: ', response);       
+        //console.log('saveAgencyDetailSuccess>> response: ', response);       
         if (response.data) {  
             this.setSuccessSaveAgencyDetails(response);       
         }   
@@ -261,7 +255,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     public onAgentClick(item:any){
         //console.log('onAgentClick:', item);   
         this.clearDetailVars();     
-        this.getSelectedAgentDetails(item.licence_no);         
+        this.getSelectedAgentDetails(item);         
     }
 
     public onAgentCancelClick(){  
@@ -281,33 +275,39 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     }   
 
     //Get Selected Agent Details - GET API
-    private getSelectedAgentDetails(id:string) { 
-        console.log('getSelectedAgentDetails...licence_no: ', id)
+    private getSelectedAgentDetails(item:any) {         
         this.clearMessageService();
-        this.subscriptionGetAgencyDetails = this.suretyService.getAgencyDetails(id).subscribe((response) => {
-            //this.getAgentDetailSuccess(response); //Depolyment
-            this.dummyGetAgentDetailResponse(); //DUMMY Test        
+        this.subscriptionGetAgencyDetails = this.suretyService.getAgencyDetails(item.agent_licence_no).subscribe((response) => {
+            //this.getAgentDetailSuccess(response, item); //Depolyment
+            this.dummyGetAgentDetailResponse(item); //DUMMY Test        
         }, (error) => {            
             //this.getAgentDetailFail(error); //Depolyment               
-            this.dummyGetAgentDetailResponse(); //DUMMY Test
+            this.dummyGetAgentDetailResponse(item); //DUMMY Test
         });       
     }
    
-    private dummyGetAgentDetailResponse(){
+    private dummyGetAgentDetailResponse(item:any){
         let response = this.dummyAPIService.getDashboardAgentDetailsResponse(true); //true -> Success and false -> Fail
         //console.log('dummyGetAgentDetailResponse: ', response);      
         if (response.status_code === 200){
-            this.getAgentDetailSuccess(response);
+            this.getAgentDetailSuccess(response, item);
         } else {
             this.getAgentDetailFail(response);
         }     
     }
 
-    private getAgentDetailSuccess(response:any){
-        console.log('getAgentDetailSuccess>> response: ', response);       
+    private getAgentDetailSuccess(response:any, item:any){
+        //console.log('getAgentDetailSuccess>> response: ', response);       
         if (response.data) {  
-            this.agentModel = response.data.AgentDetails;
-            console.log('getAgentDetailSuccess>> this.agentModel...', this.agentModel);            
+            this.agentModel = response.data.AgentDetails;           
+            this.agentModel.SelAgentName = item.agent_name;
+            this.agentModel.SelAgentLicenseNum = item.agent_licence_no;            
+            //console.log('getAgencyDetailSuccess>> this.agentModel...', this.agentModel);   
+
+            this.historyObj = response.data.AgentSuspensionHistory;
+            //console.log('getAgencyDetailSuccess>> this.historyObj...', this.historyObj);             
+
+            //console.log('getAgentDetailSuccess>> this.agentModel...', this.agentModel);            
             this.setSuccessGetAgentDetails(response);       
         }   
     }  
@@ -338,7 +338,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     //Save Agent Details - POST API
     private saveAgentDetails() { 
-        console.log('saveAgentDetails...this.agentModel: ', this.agentModel)
+        //console.log('saveAgentDetails...this.agentModel: ', this.agentModel)
         this.clearMessageService();
         this.subscriptionSaveAgentDetails = this.suretyService.saveAgentDetails(this.agentModel).subscribe((response) => {
             //this.saveAgentDetailSuccess(response); //Depolyment
@@ -360,7 +360,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     private saveAgentDetailSuccess(response:any){
-        console.log('saveAgentDetailSuccess>> response: ', response);       
+        //console.log('saveAgentDetailSuccess>> response: ', response);       
         if (response.data) {  
             this.setSuccessSaveAgentDetails(response);       
         }   

@@ -1,5 +1,9 @@
 export class Agency {
+  public SelAgencyName?:string;
   public SelAgencyLicenseNum?:string;
+  public SuretyStatus?:boolean;
+  public DOIStatus?:boolean;
+  public AgencyStatus?:boolean;
   public IsBondAgency?:boolean;
   public AgencyLicenseNum?:string;  
   public AgencyName?:string;

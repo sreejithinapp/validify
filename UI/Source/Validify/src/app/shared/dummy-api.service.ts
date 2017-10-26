@@ -433,9 +433,9 @@ export class DummyAPIService {
                 "status_text": "Success!",
                 "data": {  
                     "AgencyDetails": {
-                        "IsActive": true,
-                        "IsDoiActivated": true,
-                        "IsActivated": true,
+                        "SuretyStatus": true,
+                        "DOIStatus": true,
+                        "AgencyStatus": true,
                         "IsBondAgency": true,                    
                         "AgencyLicenseNum": "FELO2584659",
                         "AgencyName": "Fordelity Bail Bonds...",
@@ -523,11 +523,11 @@ export class DummyAPIService {
                 "status_text": "Success!",
                 "data": {  
                     "AgentDetails": {
-                        "IsActive": false,
-                        "IsDoiActivated": false,
-                        "IsActivated": false,
-                        "IsBondAgent": true,                    
-                        "AgencyLicenseNum": "FELO2584659",
+                        "SuretyStatus": false,
+                        "DOIStatus": false,
+                        "AgentStatus": false,
+                        "IsBondAgent": false,                    
+                        "AgentLicenseNum": "FELO2584659",
                         "AgentFirstName": "Roger",
                         "AgentLastName": "Montana",
                         "AgentPhoneNo": "1234567890",                
