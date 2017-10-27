@@ -17,17 +17,18 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 
 export class BondSearchComponent implements OnInit, OnDestroy {    
     
-    private subscriptionBondSearch:Subscription;    
+    private subscriptionBondSearch:Subscription;  
+
     public bondSearchResultElemStatus:boolean = false;
     public bondSearchTxt:string;
     public searchResultObj:object;
 
     constructor(private messageService:MessageService, private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
-        this.bondSearchCheck();      
+         //constructor
     }
 
     ngOnInit() {      
-        //this.clearVars();
+        this.clearVars();
     } 
 
     ngOnDestroy() {               
@@ -36,9 +37,8 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         }
         this.clearVars();
         this.clearMessageService();  
-    }    
+    }       
     //...................................................................
-
 
 
     //...................................................................
@@ -46,17 +46,8 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         this.bondSearchResultElemStatus = false;
         this.bondSearchTxt = "";
         this.searchResultObj = null;
-    }
+    } 
 
-    private bondSearchCheck(){
-        this.clearVars();
-        this.authService.behaviorSubjectBondSearchInit().subscribe((bool) => { 
-            if (bool){
-                this.showGrowlMessage();     
-            }   
-        });
-    }
-    
     private showGrowlMessage(){             
       var obj = this.sharedService.getCurrentMsg();
       if (obj){      
@@ -92,7 +83,7 @@ export class BondSearchComponent implements OnInit, OnDestroy {
             });
 
         } else { 
-            this.setFailInfoMessageAndBehaviourSubject({status_text: "Bond search text should contains atleast four characters!"});             
+            this.setFailMessage({status_text: "Bond search text should contains atleast four characters!"});             
         }
     }
    
@@ -110,35 +101,28 @@ export class BondSearchComponent implements OnInit, OnDestroy {
         if (response.data) {           
             this.searchResultObj = {};  
             this.searchResultObj = response.data;   
-            this.setSuccessInfoMessageAndBehaviourSubject(response);       
-        }        
-        this.bondSearchResultElemStatus = true;        
+            this.setSuccessMessage(response);       
+        }    
     }  
 
-    private bondSearchFail(error:any){
-        //console.log('bondSearchFail error: ', error); 
-        this.setFailInfoMessageAndBehaviourSubject(error);       
+    private setSuccessMessage(obj:any){             
+        let msgObj = {severity: 'success', summary: 'Public Bond Search', detail: obj.status_text};            
+        this.sharedService.setCurrentMsg(msgObj); 
+        this.showGrowlMessage();   
+        this.bondSearchResultElemStatus = true;     
+    }
+
+    private bondSearchFail(error:any){       
+        this.setFailMessage(error);       
+    }
+    private setFailMessage(obj:any){          
+        let msgObj = {severity: 'error', summary: 'Public Bond Search', detail: obj.status_text};            
+        this.sharedService.setCurrentMsg(msgObj);        
+        this.showGrowlMessage();
+        this.bondSearchResultElemStatus = false; 
     }
     //...................................................................  
 
-
-
-    //................................................................... 
-    private setSuccessInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);          
-        let msgObj = {severity: 'success', summary: 'Public Bond Search', detail: obj.status_text};            
-        this.sharedService.setCurrentMsg(msgObj);  
-        this.authService.setBehaviorSubjectBondSearch(true);  
-    }
-
-    private setFailInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);           
-        let msgObj = {severity: 'error', summary: 'Public Bond Search', detail: obj.status_text};            
-        this.sharedService.setCurrentMsg(msgObj);  
-        this.authService.setBehaviorSubjectBondSearch(true);  
-    }
-    //................................................................... 
- 
 
 }
 

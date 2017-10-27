@@ -63,10 +63,8 @@ body {
 }
 
 .sidebar-nav li {
-    /*text-indent: 20px;*/
-    /*line-height: 40px;*/
     text-indent: 5px;
-    line-height: 30px;
+    line-height: 18px;
 }
 
 .sidebar-nav li a {

@@ -422,6 +422,55 @@ export class DummyAPIService {
 
 
     //.................................................
+    public getSearchResponse(boo:boolean) {
+
+        let obj;
+
+        if (boo) { //Success
+
+            obj = { 
+                "status_code": 200,
+                "status_text": "Success!",
+                "data": {
+                    "defendant_name": "John Smith",
+                    "court_city": "San Jose",
+                    "court_address": "191 N 1st St",
+                    "next_court_date": "08/03/2017",
+                    "court_time": "8:30AM–5PM",
+                    "charge": "5000",
+                    "bond_amount": 3000,
+                    "court_state": "CA",
+                    "court_type": "Superior",
+                    "court_date_history": [
+                        {
+                            "date": "08/03/2017",
+                            "availability": "Y"
+                        },
+                        {
+                            "date": "08/07/2017",
+                            "availability": "N"
+                        }                   
+                    ]               
+                }
+            }; 
+
+        } else { //Fail
+
+            obj = {  
+                "status_code": 0,
+                "status_text": "Failed!",
+                "data": {
+                    "status": "Search Failed!",                
+                }
+            };  
+        }
+              
+        return obj;    
+    }
+    //.................................................
+
+
+    //.................................................
     public getDashboardAgencyDetailsResponse(boo:boolean) {
 
         let obj;

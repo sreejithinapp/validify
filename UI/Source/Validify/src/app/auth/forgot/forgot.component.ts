@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from "rxjs/Subscription";
 
 import { MessageService } from 'primeng/components/common/messageservice';
-//import { ConfirmationService } from 'primeng/primeng';
 
 import { AuthService } from "../auth.service";
 import { SharedService } from "../../shared/shared.service";
@@ -18,17 +17,18 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 
 export class ForgotComponent implements OnInit, OnDestroy {    
     
-    private subscriptionForgot:Subscription;       
+    private subscriptionForgot:Subscription;    
+
     public username:string;
     public email:string;   
     public display:boolean = false;
    
     constructor(private messageService:MessageService, private authService:AuthService, private sharedService:SharedService, private dummyAPIService:DummyAPIService) {
-        this.forgotCheck();                  
+        //constructor                 
     }
 
     ngOnInit() {        
-        //this.clearVars();      
+        this.clearVars();      
     } 
 
     ngOnDestroy() {           
@@ -46,16 +46,7 @@ export class ForgotComponent implements OnInit, OnDestroy {
         this.display = false;        
         this.username = "";
         this.email = "";
-    }
-
-    private forgotCheck(){
-        this.clearVars(); 
-        this.authService.behaviorSubjectForgotInit().subscribe((bool) => { 
-            if (bool){
-                this.showGrowlMessage();     
-            }   
-        });
-    }
+    }   
 
     private showGrowlMessage(){     
       var obj = this.sharedService.getCurrentMsg();
@@ -80,70 +71,58 @@ export class ForgotComponent implements OnInit, OnDestroy {
     public closeBtnAction(){      
         this.username = "";
         this.email = "";
-        this.display = false;       
+        this.display = false;          
     }
 
-    public submitBtnAction() {  
-        
-        this.clearMessageService();
-        
-        if (this.username.length > 3 && this.email.length > 3) {
-            
+    public submitBtnAction() {          
+        this.clearMessageService();        
+        if (this.username.length > 3 && this.email.length > 3) {            
             this.subscriptionForgot = this.authService.forgot(this.username, this.email).subscribe((response) => {
-                //this.httpSuccess(response); //Depolyment
-                this.dummyHttpResponse(); //DUMMY Test
-            
+                //this.forgotSuccess(response); //Depolyment
+                this.dummyForgotResponse(); //DUMMY Test            
             }, (error) => {            
-                //this.httpFail(error); //Depolyment              
-                this.dummyHttpResponse(); //DUMMY Test
+                //this.forgotFail(error); //Depolyment              
+                this.dummyForgotResponse(); //DUMMY Test
             });
-
         } else { 
-            this.setFailInfoMessageAndBehaviourSubject({status_text:"Please fill all the fields!"});
+            this.setFailMessage({status_text:"Please fill all the fields!"});
         }
     }
    
-    private dummyHttpResponse(){
+    private dummyForgotResponse(){
         let response = this.dummyAPIService.getForgotResponse(true); //true -> Success and false -> Fail      
         if (response.status_code === 200){
-            this.httpSuccess(response);
+            this.forgotSuccess(response);
         } else {
-            this.httpFail(response); 
+            this.forgotFail(response); 
         }         
     }
 
-    private httpSuccess(response:any){
-        //console.log('httpSuccess>> response: ', response);       
+    private forgotSuccess(response:any){
+        //console.log('forgotSuccess>> response: ', response);       
         if (response.data) {   
-            this.setSuccessInfoMessageAndBehaviourSubject(response);  
-            this.closeBtnAction();   
+            this.closeBtnAction();  
+            this.setSuccessMessage(response);               
         }                   
     }  
 
-    private httpFail(error:any){
-        //console.log('httpFail error: ', error);  
-        this.setFailInfoMessageAndBehaviourSubject(error);             
-    }
-    //................................................................... 
-
-
-
-    //................................................................... 
-    private setSuccessInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);           
+    private setSuccessMessage(obj:any){               
         let msgObj = {severity: 'success', summary: 'Forgot Password', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
-        this.authService.setBehaviorSubjectForgot(true);  
+        this.showGrowlMessage();  
     }
 
-    private setFailInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setFailInfoMessageAndBehaviourSubject obj: ', obj);           
+    private forgotFail(error:any){
+        //console.log('forgotFail error: ', error);  
+        this.setFailMessage(error);             
+    }
+
+    private setFailMessage(obj:any){               
         let msgObj = {severity: 'error', summary: 'Forgot Password', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
-        this.authService.setBehaviorSubjectForgot(true);  
+        this.showGrowlMessage();        
     }
     //................................................................... 
-
 
 }
 

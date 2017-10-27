@@ -1,35 +1,25 @@
                
 <!-- Header START -->
-<nav class="navbar-default navbar-fixed-top header" role="navigation">        
+<nav class="navbar-default navbar-fixed-top header" role="navigation">      
     
 
-    <!-- Header: Mobile Only View START -->
+    <!-- Header: Mobile Only View START -->   
     <div class="navbar-header">
         <div class="left-nav-toggle visible-xs">
-            <a href="#" class="toggle-btn" id="menu-toggle"><img src="assets/images/validify_bug_primary.png"></a>
+            <a href="#" class="toggle-btn"><img src="assets/images/validify_bug_primary.png"></a>
         </div>
         <a class="navbar-brand" href="#">✔alidify, Inc.</a>
-    </div>
+    </div>   
     <!-- Header: Mobile Only View END -->
 
 
     <!-- Header Elements START -->
     <div id="navbar" class="navbar-collapse nav-top-links">
-
         
-        <!-- Header: Role Details START -->
-        <div id="header-wrap" class="left-nav-toggle hidden-xs">
-            <nav class="navbar-left hidden-xs">  
-                <h1 class="header-head">{{headerObj.first_name}}</h1>
-                <h5 class="user-name">{{headerObj.last_name}}</h5>
-            </nav>
-        </div>
-        <!-- Header: Role Details END -->
-
 
         <!-- Header: Toggle menu START -->
         <div class="pull-left mTop15 mLeft10">
-            <a href="#" class="toggle-btn" id="menu-toggle1">
+            <a href="#" class="toggle-btn">
                 <img src="assets/images/validify_bug_primary.png">               
             </a>
         </div>
@@ -51,11 +41,12 @@
 
             <!-- Search START -->
             <li class="nav-search">
-                <input type="search" class="form-control" value="Search"><i class="fa fa-search" id="search-btn"></i>
+                <input type="search" [(ngModel)]="searchTxt" class="form-control" placeholder="Search">
+                <i class="fa fa-search" (click)="searchBtnAction()"></i>
             </li>
             <!-- Search END -->
 
-
+          
             <!-- Notification START -->
             <li class="dropdown">
 
@@ -113,5 +104,88 @@
     </div>
     <!-- Header Elements END -->
 
-</nav>
+</nav> 
 <!-- Header END -->
+
+
+<p-dialog header="Search Result" [(visible)]="display" modal="modal" width="600" [responsive]="true" (onHide)="closeBtnAction()">
+        
+    <div class="search-result mTop10">
+
+        <ul class="list-group">
+
+            <li class="list-group-item justify-content-between">
+                Defendant Name
+                <span>John Smith</span>
+            </li>
+
+            <li class="list-group-item justify-content-between">Charges
+                <span>xxxx</span>
+            </li> 
+
+            <li class="list-group-item justify-content-between">
+                Bond Amount
+                <span>$3000</span>
+            </li>
+
+            <li class="list-group-item justify-content-between">
+                Next Court Date
+                <span>08/03/2017</span>
+            </li>
+
+            <li class="list-group-item justify-content-between">
+                Court Time
+                <span>8:30AM–5PM</span>
+            </li>
+
+            <li class="list-group-item justify-content-between">
+                Court Address
+                <span> 191 N 1st St</span>
+            </li>
+
+            <li class="list-group-item justify-content-between">
+                Court City
+                <span>San Jose</span>
+            </li>
+
+            <li class="list-group-item justify-content-between">
+                Court State
+                <span>CA</span>
+            </li>
+
+            <li class="list-group-item justify-content-between">
+                Court Type
+                <span>Superior</span>
+            </li>
+
+        </ul>
+
+        <div>
+            <h5>Court Date History</h5>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Court Date</th>
+                        <th>Show Y/N</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>                                 
+                        <td>xx/xx/xx</td>
+                        <td>Y</td>
+                    </tr>
+                    <tr>                                  
+                        <td>xx/xx/xx</td>
+                        <td>N</td>
+                    </tr>                                
+                </tbody>
+            </table>
+        </div>
+
+    </div>                   
+
+    <div class="login-footer-box">   
+        <button type="button" class="btn active-btn" (click)="closeBtnAction()">Close</button>   
+    </div>
+   
+</p-dialog>

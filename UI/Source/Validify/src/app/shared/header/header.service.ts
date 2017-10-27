@@ -1,32 +1,25 @@
 import {Injectable} from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { HttpService } from "../http-service/http.service";
 import { SharedService } from "../shared.service";
 import { StorageService } from "../storage.service";
-
+import { Constants } from "../constants";
 
 @Injectable()
-export class HeaderService {
-  
-    private behaviorSubjectHeader;    
+export class HeaderService {  
     
-    constructor(private sharedService:SharedService, private storageService:StorageService) {
+      
+    constructor(private sharedService:SharedService, private storageService:StorageService, private httpService:HttpService) {
         //constructor
     }
     //.................................................
 
- 
+     
     //...............................................  
-    //Header 
-    behaviorSubjectHeaderInit() {  
-        this.behaviorSubjectHeader = new BehaviorSubject(this.getHeaderObj());
-        return this.behaviorSubjectHeader.asObservable();
-    }       
-    setBehaviorSubjectHeader(obj:any) {
-        this.behaviorSubjectHeader.next(obj);
-    }     
-    getHeaderObj() { 
-        return this.storageService.get('header');   
+    //Search API
+    search(searchTxt:string) {      
+        return this.httpService.httpPost(Constants.search, {search: searchTxt});
     }
     //...............................................
 

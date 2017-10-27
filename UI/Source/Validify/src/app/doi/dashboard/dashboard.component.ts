@@ -182,7 +182,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private setSuccessGetAgencyDetails(obj:any){
         //console.log('setSuccessGetAgencyDetails obj: ', obj);          
-        let msgObj = {severity: 'success', summary: 'DOI Dashboard Get Top 5 Agency Details', detail: obj.status_text};            
+        let msgObj = {severity: 'success', summary: 'DOI Agency Info', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj); 
         this.showGrowlMessage();   
 
@@ -192,7 +192,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private setFailGetAgencyDetails(obj:any){
         //console.log('setFailGetAgencyDetails obj: ', obj);           
-        let msgObj = {severity: 'error', summary: 'DOI Dashboard Get Top 5 Agency Details', detail: obj.status_text};            
+        let msgObj = {severity: 'error', summary: 'DOI Agency Info', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
         this.showGrowlMessage(); 
     }
@@ -236,7 +236,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private setSuccessSaveAgencyDetails(obj:any){
         //console.log('setSuccessSaveAgencyDetails obj: ', obj);          
-        let msgObj = {severity: 'success', summary: 'DOI Dashboard Save Selected Agency Details', detail: obj.status_text};            
+        let msgObj = {severity: 'success', summary: 'DOI Agency Save', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj); 
         this.showGrowlMessage();   
 
@@ -245,7 +245,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private setFailSaveAgencyDetails(obj:any){
         //console.log('setFailSaveAgencyDetails obj: ', obj);           
-        let msgObj = {severity: 'error', summary: 'DOI Dashboard Save Selected Agency Details', detail: obj.status_text};            
+        let msgObj = {severity: 'error', summary: 'DOI Agency Save', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
         this.showGrowlMessage(); 
     }
@@ -321,7 +321,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private setSuccessGetAgentDetails(obj:any){
         //console.log('setSuccessGetAgentDetails obj: ', obj);          
-        let msgObj = {severity: 'success', summary: 'DOI Dashboard Get Top 5 Agent Details', detail: obj.status_text};            
+        let msgObj = {severity: 'success', summary: 'DOI Agent Info', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj); 
         this.showGrowlMessage();   
 
@@ -331,7 +331,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private setFailGetAgentDetails(obj:any){
         //console.log('setFailGetAgentDetails obj: ', obj);           
-        let msgObj = {severity: 'error', summary: 'DOI Dashboard Get Top 5 Agent Details', detail: obj.status_text};            
+        let msgObj = {severity: 'error', summary: 'DOI Agent Info', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
         this.showGrowlMessage(); 
     }
@@ -375,7 +375,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private setSuccessSaveAgentDetails(obj:any){
         //console.log('setSuccessSaveAgentDetails obj: ', obj);          
-        let msgObj = {severity: 'success', summary: 'DOI Dashboard Save Selected Agent Details', detail: obj.status_text};            
+        let msgObj = {severity: 'success', summary: 'DOI Agent Save', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj); 
         this.showGrowlMessage();   
         this.onAgentCancelClick();       
@@ -383,7 +383,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
 
     private setFailSaveAgentDetails(obj:any){
         //console.log('setFailSaveAgentDetails obj: ', obj);           
-        let msgObj = {severity: 'error', summary: 'DOI Dashboard Save Selected Agent Details', detail: obj.status_text};            
+        let msgObj = {severity: 'error', summary: 'DOI Agent Save', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
         this.showGrowlMessage(); 
     }    

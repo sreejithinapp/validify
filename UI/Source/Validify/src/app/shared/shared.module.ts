@@ -1,5 +1,9 @@
 
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { DialogModule } from 'primeng/primeng';
 
 import { LoaderComponent } from './loader/loader.component';
 import { HeaderComponent } from './header/header.component';
@@ -11,11 +15,15 @@ import { MinToTimePipe } from './pipes/min-to-time.pipe';
 
 @NgModule({
 
-    imports: [],
+    imports: [
+        CommonModule,
+        FormsModule,           
+        DialogModule
+    ],
 
     declarations: [
         LoaderComponent,
-        HeaderComponent,
+        HeaderComponent,      
         CategoryPipe,
         OrderByPipe,
         TruncatePipe,
@@ -26,7 +34,7 @@ import { MinToTimePipe } from './pipes/min-to-time.pipe';
 
     exports: [
         LoaderComponent,
-        HeaderComponent,
+        HeaderComponent,     
         CategoryPipe,
         OrderByPipe,
         TruncatePipe,

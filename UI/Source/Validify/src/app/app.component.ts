@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { MessageService } from 'primeng/components/common/messageservice';
+//import { MessageService } from 'primeng/components/common/messageservice';
 
 @Component({
   selector: 'body',
@@ -10,15 +10,16 @@ import { MessageService } from 'primeng/components/common/messageservice';
 
 export class AppComponent {  
 
-    constructor(private messageService:MessageService) {
+    constructor() {
       //constructor
-      this.clearMessageService();
+      //this.clearMessageService();
     } 
-    private clearMessageService(){
+    /*private clearMessageService(){
         this.messageService.clear();
-    } 
+    } */
 
 }
+//private messageService:MessageService
 //.......................................................................
 
 

@@ -3,18 +3,24 @@
 <!-- Sidebar START -->
 <div id="sidebar-wrapper">
 
-    <ul class="sidebar-nav">  
-        
-        <li  class="active"><a href="#"><span class="ico home hidden"></span>HOME</a></li>
-        
-        <li><a href="#"><span class="ico bond hidden"></span>SURETIES</a></li>
+    <!-- Header: Role Details START -->   
+    <div id="header-wrap" class="left-nav-toggle hidden-xs">
+        <nav class="navbar-left hidden-xs">  
+            <h1 class="header-head">{{userInfoObj.first_name}}</h1> 
+            <h5 class="user-name">{{userInfoObj.last_name}}</h5>           
+        </nav>
+    </div>    
+    <!-- Header: Role Details END -->
 
-        <li><a href="#"><span class="ico agencies hidden"></span>AGENCIES</a></li>
-
-        <li><a href="#"><span class="ico agent hidden"></span>AGENTS</a></li>  
-
-        <li class="#"><a href="#"><span class="ico admin hidden"></span>ADMIN</a></li>
-    </ul>  
+    <!-- Sidebar: Links START -->
+    <ul class="sidebar-nav">          
+        <li class="sidemenu-active"><a href="#">HOME</a></li>    
+        <li><a href="#">SURETIES</a></li>
+        <li><a href="#">AGENCIES</a></li>
+        <li><a href="#">AGENTS</a></li>  
+        <li class="#" hidden><a href="#">ADMIN</a></li>
+    </ul> 
+    <!-- Sidebar: Links END --> 
 
 </div>    
 <!-- Sidebar END -->

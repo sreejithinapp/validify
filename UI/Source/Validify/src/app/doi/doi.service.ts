@@ -13,7 +13,7 @@ import { Agent } from "./dashboard/agent";
 @Injectable()
 export class DoiService {        
 
-    private behaviorSubjectMessage;
+    private behaviorSubjectUserInfo; 
     private behaviorSubjectDashboard;    
     
     constructor(private sharedService:SharedService, private storageService:StorageService, private httpService:HttpService) {
@@ -21,20 +21,21 @@ export class DoiService {
     }
     //.................................................
 
-
-    //...............................................  
-    //MESSAGE 
-    behaviorSubjectMessageInit() {  
-        this.behaviorSubjectMessage = new BehaviorSubject(this.getMessageObj());
-        return this.behaviorSubjectMessage.asObservable();
+    
+    //............................................... 
+    //UserInfo      
+    behaviorSubjectUserInfoInit() {  
+        this.behaviorSubjectUserInfo = new BehaviorSubject(this.getUserInfoObj());
+        return this.behaviorSubjectUserInfo.asObservable();
     }       
-    setBehaviorSubjectMessage(obj:any) {
-        this.behaviorSubjectMessage.next(obj);
+    setBehaviorSubjectUserInfo(obj:any) {
+        this.behaviorSubjectUserInfo.next(obj);
     }     
-    getMessageObj() {       
-        return this.sharedService.getCurrentMsg();           
-    }
+    getUserInfoObj() { 
+        return this.storageService.get('userinfo');   
+    }    
     //...............................................
+
 
 
     //...............................................  
@@ -42,10 +43,10 @@ export class DoiService {
     behaviorSubjectDashboardInit() {  
         this.behaviorSubjectDashboard = new BehaviorSubject(this.getDashboardObj());
         return this.behaviorSubjectDashboard.asObservable();
-    }       
+    } 
     setBehaviorSubjectDashboard(obj:any) {
         this.behaviorSubjectDashboard.next(obj);
-    }     
+    }  
     getDashboardObj() { 
         return this.storageService.get('dashboard');  
     }
@@ -55,11 +56,11 @@ export class DoiService {
     //...............................................
     //Dashboard Agency Details -  API
     getAgencyDetails(id:string) {  
-        console.log('getAgencyDetails API id: ', id);  
+        //console.log('getAgencyDetails API id: ', id);  
         return this.httpService.httpGet(Constants.getSuretyDashboardAgencyDetails + id);         
     }
     saveAgencyDetails(agencyModel:Agency) {  
-        console.log('saveAgencyDetails agencyModel obj: ', agencyModel);    
+        //console.log('saveAgencyDetails agencyModel obj: ', agencyModel);    
         return this.httpService.httpPost(Constants.saveSuretyDashboardAgencyDetails, agencyModel);
     }
     //...............................................
@@ -68,11 +69,11 @@ export class DoiService {
     //...............................................
     //Dashboard Agent Details - API
     getAgentDetails(id:string) {  
-        console.log('getAgentDetails API id: ', id);  
+        //console.log('getAgentDetails API id: ', id);  
         return this.httpService.httpGet(Constants.getSuretyDashboardAgentDetails + id);         
     }
     saveAgentDetails(agentModel:Agent) {  
-        console.log('saveAgentDetails agentModel obj: ', agentModel);    
+        //console.log('saveAgentDetails agentModel obj: ', agentModel);    
         return this.httpService.httpPost(Constants.saveSuretyDashboardAgentDetails, agentModel);
     }
     //...............................................

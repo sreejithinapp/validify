@@ -24,7 +24,7 @@
         <div class="row">    
 
             <div class="col-md-6 col-sm-12 col-xs-12 border-R">
-                <div class="login-inner-content mTop20">
+                <div class="mTop20">
                     <h4>User Login</h4>
                     <form (ngSubmit)="login()" #loginForm="ngForm" autocomplete="off">    
                        
@@ -42,7 +42,7 @@
                             <div class="checkbox pull-left">
                                 <label><input type="checkbox" id="remember" name="remember" [(ngModel)]="loginModel.remember">Remember me</label>
                             </div>                           
-                            <button type="submit" class="btn active-btn pull-right mRight10" [disabled]="!loginForm.form.valid">Login</button>
+                            <button type="submit" class="btn active-btn pull-right" [disabled]="!loginForm.form.valid">Login</button>
                         </div>
                         
                         <vfy-forgot></vfy-forgot>                    
@@ -53,14 +53,8 @@
 
             <vfy-bond-search></vfy-bond-search>        
 
-        </div>    
-
-        <div class="login-footer-box hidden">Validify all rights reserved</div>
+        </div>           
     
     </div>
     
 </div>
-
-<!--
-<p-growl [life]="3000" [sticky]=false></p-growl>
--->

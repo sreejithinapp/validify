@@ -5,7 +5,8 @@ export const Constants = {
 
     //LOGIN Screen
     login: "account/login/",
-    bondsearch: "search/",
+    bondsearch: "bondsearch/",
+    search: "search/",
     forgot: "forgot/",
     logout: "logout/",
 
@@ -25,7 +26,7 @@ export const Constants = {
 
     //DOI Agent
     getDoiDashboardAgentDetails: "doi/dashboard/agent_details/",
-    saveDoiDashboardAgentDetails: "saveDoiDashboardAgentDetails",  
+    saveDoiDashboardAgentDetails: "saveDoiDashboardAgentDetails"  
 }
 
 export const ExcludeAccessToken = ['login', 'register'];

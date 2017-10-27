@@ -12,15 +12,8 @@ import { Constants } from "../shared/constants";
 export class AuthService {  
   
   private behaviorSubjectLogin;
-
-  private behaviorSubjectRole;
-
-  private behaviorSubjectBondSearch;
-  private isBondSearchResponseFound:boolean = false;
-
-  private behaviorSubjectForgot;
-  private isForgotResponseFound:boolean = false;
-
+  private behaviorSubjectRole;  
+  
   private behaviorSubjectLogout;
   private isLogoutResponseFound:boolean = false;
 
@@ -66,38 +59,6 @@ export class AuthService {
 
 
   //...............................................
-  //BOND SERACH 
-  behaviorSubjectBondSearchInit() {  
-    this.behaviorSubjectBondSearch = new BehaviorSubject(this.getBondSearch());
-    return this.behaviorSubjectBondSearch.asObservable();
-  }      
-  setBehaviorSubjectBondSearch(bool:boolean) {
-    this.isBondSearchResponseFound = bool;
-    this.behaviorSubjectBondSearch.next(bool);
-  }  
-  getBondSearch() {   
-    return this.isBondSearchResponseFound;
-  } 
-  //...............................................
-
-
-  //...............................................
-  //FORGOT 
-  behaviorSubjectForgotInit() {  
-    this.behaviorSubjectForgot = new BehaviorSubject(this.getForgot());
-    return this.behaviorSubjectForgot.asObservable();
-  }       
-  setBehaviorSubjectForgot(bool:boolean) {
-    this.isForgotResponseFound = bool;
-    this.behaviorSubjectForgot.next(bool);
-  }  
-  getForgot() {   
-    return this.isForgotResponseFound;
-  }
-  //...............................................
-
-
-  //...............................................
   //LOGOUT 
   behaviorSubjectLogoutInit() {  
     this.behaviorSubjectLogout = new BehaviorSubject(this.getLogout());
@@ -114,7 +75,7 @@ export class AuthService {
     this.storageService.remove("auth_token");
     this.storageService.remove("user_role");
     this.storageService.remove("dashboard");
-    this.storageService.remove("header");       
+    this.storageService.remove("userinfo");       
   }
   //...............................................
 

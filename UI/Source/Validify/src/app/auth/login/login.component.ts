@@ -124,18 +124,17 @@ export class LoginComponent implements OnInit, OnDestroy {
             if (response.data.user_role) {
                 
                 this.storageService.set("user_role", response.data.user_role);
-                this.setSuccessInfoMessageAndBehaviourSubject(response, true, response.data.user_role); 
+                this.setSuccessMessage(response, true, response.data.user_role); 
                 
                 if (response.data.dashboard) {
 
-                    let headerObj = {
+                    let userInfoObj = {
                         "username": response.data.username,
                         "email": response.data.email,
                         "first_name": response.data.first_name,
                         "last_name": response.data.last_name
-                    };
-                    //console.log('headerObj: ', headerObj);                    
-                    this.storageService.set("header", headerObj);
+                    };                                    
+                    this.storageService.set("userinfo", userInfoObj);
 
                     this.storageService.set("dashboard", response.data.dashboard);
                    
@@ -154,23 +153,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     
     private loginFail(error:any){
         //console.log('loginFail error: ', error);   
-        this.setFailInfoMessageAndBehaviourSubject(error);                         
+        this.setFailMessage(error);                         
     }
     //...................................................................  
 
 
 
     //................................................................... 
-    private setSuccessInfoMessageAndBehaviourSubject(obj:any, isLogined:boolean, role:string){
-        //console.log('setSuccessInfoMessageAndBehaviourSubject obj: ', obj);           
+    private setSuccessMessage(obj:any, isLogined:boolean, role:string){              
         let msgObj = {severity: 'success', summary: 'Login', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
         this.authService.setBehaviorSubjectLogin(isLogined);  
         this.authService.setBehaviorSubjectRole(role);  
     }
 
-    private setFailInfoMessageAndBehaviourSubject(obj:any){
-        //console.log('setMessageAndBehaviourSubject obj: ', obj);           
+    private setFailMessage(obj:any){             
         let msgObj = {severity: 'error', summary: 'Login', detail: obj.status_text};            
         this.sharedService.setCurrentMsg(msgObj);  
         this.authService.setBehaviorSubjectLogin(false);        
