@@ -132,6 +132,7 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     private scrollToAgencyDetails(){
         try {               
             this.agencyDetailsTarget.nativeElement.scrollTop = this.agencyDetailsTarget.nativeElement.offsetTop; //offsetTop / scrollHeight
+            //this.agencyDetailsTarget.nativeElement.scrollTop(this.agencyDetailsTarget.nativeElement.scrollHeight); //offsetTop / scrollHeight
         } catch (err) {           
             console.log('scrollToAgencyDetails error', err);
         }
