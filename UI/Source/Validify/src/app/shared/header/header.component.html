@@ -1,6 +1,6 @@
                
 <!-- Header START -->
-<nav class="navbar-default navbar-fixed-top header" role="navigation">      
+<nav id="app-head" class="navbar-default navbar-fixed-top header" [ngClass]="this.menuToggleClassObj">      
     
 
     <!-- Header: Mobile Only View START -->   
@@ -14,12 +14,11 @@
 
 
     <!-- Header Elements START -->
-    <div id="navbar" class="navbar-collapse nav-top-links">
-        
+    <div id="navbar" class="navbar-collapse nav-top-links">        
 
         <!-- Header: Toggle menu START -->
         <div class="pull-left mTop15 mLeft10">
-            <a href="#" class="toggle-btn">
+            <a href="#" class="toggle-btn" (click)="toggleMenu()">
                 <img src="assets/images/validify_bug_primary.png">               
             </a>
         </div>

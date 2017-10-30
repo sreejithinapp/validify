@@ -18,32 +18,50 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     private subscriptionUserInfo:Subscription; 
     public userInfoObj;
+    public isHide:boolean = false;
 
     constructor(private router:Router, private storageService:StorageService, private sharedService:SharedService, private suretyService:SuretyService){      
-       this.userInfoCheck(); 
+        this.userInfoCheck();  
+        //this.menuCollapseCheck();     
     }
 
     ngOnInit() {
-        //ngOnInit           
+        //   
     } 
 
     ngOnDestroy() {   
         if (this.subscriptionUserInfo){
             this.subscriptionUserInfo.unsubscribe();  
-        }     
+        }  
     }
-    //.......................................  
+    //................................................................... 
 
 
-    //.......................................     
+    //...................................................................    
     private userInfoCheck(){        
         this.subscriptionUserInfo = this.suretyService.behaviorSubjectUserInfoInit().subscribe((response) => {   
             //console.log('userInfoCheck userInfoObj SUCCESS>> ', response);  
-            this.userInfoObj = response;            
+            this.userInfoObj = response;  
+            //this.menuCollapseCheck();                    
         }, (error) => {  
             console.log('userInfoCheck >> userInfoObj ERROR>> ', error);   
         });
     } 
-    //.......................................   
+    //................................................................... 
+
+
+    //................................................................... 
+    private menuCollapseCheck(){
+      this.sharedService.behaviorSubjectMenuToggleInit().subscribe((boo) => {  
+        if (boo){           
+            console.log("collapsed"); 
+            this.isHide = true;                 
+        } else {           
+            console.log("Exapnded");
+            this.isHide = false;              
+        }                        
+      });
+    }
+    //...................................................................  
 
 }

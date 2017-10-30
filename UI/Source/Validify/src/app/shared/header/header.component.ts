@@ -27,8 +27,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public searchTxt:string = "";  
     public display:boolean = false;
 
+    private isCollapsed:boolean = false; 
+    public menuToggleClassObj:any;   
+
     constructor(private router:Router, private messageService:MessageService, private authService:AuthService, private storageService:StorageService, private sharedService:SharedService, private headerService:HeaderService, private dummyAPIService:DummyAPIService){      
-       //constructor
+        this.toggleMenu();   
     }
 
     ngOnInit() {
@@ -45,6 +48,23 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.clearVars();
     }
     //...................................................................
+
+
+
+    //................................................................... 
+    public toggleMenu(){      
+        if (this.isCollapsed){
+            this.menuToggleClassObj = { "toggled": false }; 
+            this.isCollapsed = false; 
+            this.sharedService.setBehaviorSubjectMenuCollapsed(true);
+        } else {
+            this.menuToggleClassObj = { "toggled": true }; 
+            this.isCollapsed = true; 
+            this.sharedService.setBehaviorSubjectMenuCollapsed(false);
+        }
+    }   
+    //................................................................... 
+
 
 
     //...................................................................
@@ -65,7 +85,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.messageService.clear();
     }  
     //...................................................................
-
 
 
 

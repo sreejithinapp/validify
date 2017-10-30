@@ -1,18 +1,40 @@
 
 import {Injectable} from '@angular/core';
-
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class SharedService {  
 
     private dashboardObj:any;
     private currentMessageObj:any;
+   
+    private behaviorSubjectMenuToggle;
+    private behaviorSubjectMenuToggle2;
+    private isCollapsed:boolean = false;
         
     constructor() {
-        //constructor
+        //constructor      
     }
     //.................................................
- 
+    
+
+    
+    //...............................................  
+    //Menu Toggle  
+    behaviorSubjectMenuToggleInit() {  
+        this.behaviorSubjectMenuToggle = new BehaviorSubject(this.getCollapsedStatus());
+        return this.behaviorSubjectMenuToggle.asObservable();
+    }       
+    setBehaviorSubjectMenuCollapsed(boo:boolean) {
+        this.isCollapsed = boo;
+        this.behaviorSubjectMenuToggle.next(boo);
+    }  
+    getCollapsedStatus() {   
+        return this.isCollapsed; 
+    }   
+    //...............................................
+   
+
 
     //.................................................
     //Dashboard
@@ -23,7 +45,6 @@ export class SharedService {
          return this.dashboardObj;    
     }
     //.................................................
-
 
 
     //.................................................
@@ -58,7 +79,6 @@ export class SharedService {
         return obj;    
     }
     //.................................................
-
   
 
 }
