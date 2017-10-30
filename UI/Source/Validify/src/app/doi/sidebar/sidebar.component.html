@@ -3,14 +3,15 @@
 <!-- Sidebar START -->
 <div id="sidebar-wrapper">
 
-    <!-- Header: Role Details START -->   
-    <div id="header-wrap" class="left-nav-toggle hidden-xs">
+     <!-- Header: Role Details START -->   
+    <div id="header-wrap" class="left-nav-toggle hidden-xs" *ngIf="!isHeadLabelHide">
         <nav class="navbar-left hidden-xs">  
             <h1 class="header-head">{{userInfoObj.first_name}}</h1> 
             <h5 class="user-name">{{userInfoObj.last_name}}</h5>           
         </nav>
     </div>    
     <!-- Header: Role Details END -->
+    
 
     <!-- Sidebar: Links START -->
     <ul class="sidebar-nav">          

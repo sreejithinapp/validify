@@ -1,7 +1,7 @@
 
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-//import {Subscription} from "rxjs/Subscription";
+import {Subscription} from "rxjs/Subscription";
 
 import { SharedService } from "../shared/shared.service";
 //import { MessageService } from 'primeng/components/common/messageservice';
@@ -19,8 +19,9 @@ import { SharedService } from "../shared/shared.service";
 
 export class SuretyComponent implements OnInit, OnDestroy {       
    
-   public menuToggleClassObj:any;
- 
+    public menuToggleClassObj:any;    
+    private menuToggleSubscription:Subscription;
+
     constructor(private router:Router, private sharedService:SharedService) {     
         this.menuCollapseCheck();   
     }
@@ -29,21 +30,21 @@ export class SuretyComponent implements OnInit, OnDestroy {
         //ngOnInit
     }
 
-    ngOnDestroy() {        
-        //ngOnDestroy
+    ngOnDestroy() { 
+        this.menuToggleSubscription.unsubscribe();
     }
     //................................................................... 
     
 
-    //................................................................... 
-    private menuCollapseCheck(){
-      this.sharedService.behaviorSubjectMenuToggleInit().subscribe((boo) => {  
-        if (boo){
-            this.menuToggleClassObj = { "toggled": false };             
-        } else {
-            this.menuToggleClassObj = { "toggled": true };            
-        }                        
-      });
+    //...................................................................
+    private menuCollapseCheck() {
+        this.menuToggleSubscription = this.sharedService.isMenuCollapsed.subscribe((boo) => {  
+            if (boo){ 
+                this.menuToggleClassObj = { "toggled": false };             
+            } else {
+                this.menuToggleClassObj = { "toggled": true };            
+            }                        
+        });
     }
     //................................................................... 
 

@@ -57,11 +57,11 @@ export class DoiService {
     //Dashboard Agency Details -  API
     getAgencyDetails(id:string) {  
         //console.log('getAgencyDetails API id: ', id);  
-        return this.httpService.httpGet(Constants.getSuretyDashboardAgencyDetails + id);         
+        return this.httpService.httpGet(Constants.getDoiDashboardAgencyDetails + id);         
     }
     saveAgencyDetails(agencyModel:Agency) {  
         //console.log('saveAgencyDetails agencyModel obj: ', agencyModel);    
-        return this.httpService.httpPost(Constants.saveSuretyDashboardAgencyDetails, agencyModel);
+        return this.httpService.httpPost(Constants.saveDoiDashboardAgencyDetails, agencyModel);
     }
     //...............................................
 
@@ -70,11 +70,11 @@ export class DoiService {
     //Dashboard Agent Details - API
     getAgentDetails(id:string) {  
         //console.log('getAgentDetails API id: ', id);  
-        return this.httpService.httpGet(Constants.getSuretyDashboardAgentDetails + id);         
+        return this.httpService.httpGet(Constants.getDoiDashboardAgentDetails + id);         
     }
     saveAgentDetails(agentModel:Agent) {  
         //console.log('saveAgentDetails agentModel obj: ', agentModel);    
-        return this.httpService.httpPost(Constants.saveSuretyDashboardAgentDetails, agentModel);
+        return this.httpService.httpPost(Constants.saveDoiDashboardAgentDetails, agentModel);
     }
     //...............................................
 

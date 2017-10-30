@@ -1,6 +1,6 @@
 
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs/Subscription";
 
 import { MessageService } from 'primeng/components/common/messageservice';
@@ -52,15 +52,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
     //................................................................... 
-    public toggleMenu(){      
+    public toggleMenu(){  //toggled as expanded    
         if (this.isCollapsed){
-            this.menuToggleClassObj = { "toggled": false }; 
-            this.isCollapsed = false; 
-            this.sharedService.setBehaviorSubjectMenuCollapsed(true);
+            this.menuToggleClassObj = { "toggled": false };                    
+            this.sharedService.updateMenuCollapsedStatus(true);
+            this.isCollapsed = false;   
         } else {
-            this.menuToggleClassObj = { "toggled": true }; 
-            this.isCollapsed = true; 
-            this.sharedService.setBehaviorSubjectMenuCollapsed(false);
+            this.menuToggleClassObj = { "toggled": true };                     
+            this.sharedService.updateMenuCollapsedStatus(false);
+            this.isCollapsed = true;    
         }
     }   
     //................................................................... 

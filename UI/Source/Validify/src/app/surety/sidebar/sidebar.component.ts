@@ -4,9 +4,6 @@ import { Subscription } from "rxjs/Subscription";
 
 import { SuretyService } from "../surety.service";
 import { SharedService } from "../../shared/shared.service";
-import { StorageService } from "../../shared/storage.service";
-//import { DummyAPIService } from "../../shared/dummy-api.service";
-
 
 @Component({
  selector: 'vfy-surety-sidebar',
@@ -18,20 +15,25 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     private subscriptionUserInfo:Subscription; 
     public userInfoObj;
-    public isHide:boolean = false;
 
-    constructor(private router:Router, private storageService:StorageService, private sharedService:SharedService, private suretyService:SuretyService){      
+    private menuToggleSubscription:Subscription;
+    public isHeadLabelHide:boolean = false;    
+
+    constructor(private router:Router, private sharedService:SharedService, private suretyService:SuretyService){      
         this.userInfoCheck();  
-        //this.menuCollapseCheck();     
+        this.menuCollapseCheck();     
     }
 
     ngOnInit() {
-        //   
+        //ngOnInit   
     } 
 
     ngOnDestroy() {   
         if (this.subscriptionUserInfo){
             this.subscriptionUserInfo.unsubscribe();  
+        } 
+        if (this.menuToggleSubscription){
+            this.menuToggleSubscription.unsubscribe();  
         }  
     }
     //................................................................... 
@@ -41,8 +43,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private userInfoCheck(){        
         this.subscriptionUserInfo = this.suretyService.behaviorSubjectUserInfoInit().subscribe((response) => {   
             //console.log('userInfoCheck userInfoObj SUCCESS>> ', response);  
-            this.userInfoObj = response;  
-            //this.menuCollapseCheck();                    
+            this.userInfoObj = response;                           
         }, (error) => {  
             console.log('userInfoCheck >> userInfoObj ERROR>> ', error);   
         });
@@ -50,17 +51,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
     //................................................................... 
 
 
-    //................................................................... 
-    private menuCollapseCheck(){
-      this.sharedService.behaviorSubjectMenuToggleInit().subscribe((boo) => {  
-        if (boo){           
-            console.log("collapsed"); 
-            this.isHide = true;                 
-        } else {           
-            console.log("Exapnded");
-            this.isHide = false;              
-        }                        
-      });
+    //...................................................................  
+    private menuCollapseCheck() {
+        this.menuToggleSubscription = this.sharedService.isMenuCollapsed.subscribe((boo) => {  
+            if (boo){
+                this.isHeadLabelHide = true;           
+            } else {                
+                this.isHeadLabelHide = false;             
+            }                        
+        });
     }
     //...................................................................  
 

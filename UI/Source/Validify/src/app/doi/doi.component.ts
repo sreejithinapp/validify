@@ -1,11 +1,11 @@
 
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-//import {Subscription} from "rxjs/Subscription";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
+import { Subscription } from "rxjs/Subscription";
 
+import { SharedService } from "../shared/shared.service";
 //import { MessageService } from 'primeng/components/common/messageservice';
 //import { SuretyService } from "./surety.service";
-//import { SharedService } from "../shared/shared.service";
 //import { StorageService } from "../shared/storage.service";
 //import { DummyAPIService } from "../shared/dummy-api.service";
 
@@ -18,8 +18,11 @@ import {ActivatedRoute, Router} from "@angular/router";
 
 export class DoiComponent implements OnInit, OnDestroy {   
    
-    constructor(private router:Router) {
-        //constructor         
+    public menuToggleClassObj:any;
+    private menuToggleSubscription:Subscription;
+
+    constructor(private router:Router, private sharedService:SharedService) {     
+        this.menuCollapseCheck();   
     }
 
     ngOnInit() : void {     
@@ -31,6 +34,18 @@ export class DoiComponent implements OnInit, OnDestroy {
     }
     //................................................................... 
 
+
+    //...................................................................
+    private menuCollapseCheck() {
+        this.menuToggleSubscription = this.sharedService.isMenuCollapsed.subscribe((boo) => {  
+            if (boo){ 
+                this.menuToggleClassObj = { "toggled": false };             
+            } else {
+                this.menuToggleClassObj = { "toggled": true };            
+            }                        
+        });
+    }
+    //................................................................... 
 
    
 }

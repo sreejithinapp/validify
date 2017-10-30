@@ -19,8 +19,12 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private subscriptionUserInfo:Subscription; 
     public userInfoObj;
 
+    private menuToggleSubscription:Subscription;
+    public isHeadLabelHide:boolean = false;    
+
     constructor(private router:Router, private storageService:StorageService, private sharedService:SharedService, private doiService:DoiService){      
-       this.userInfoCheck(); 
+       this.userInfoCheck();
+       this.menuCollapseCheck();   
     }
 
     ngOnInit() {
@@ -30,7 +34,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
     ngOnDestroy() {  
         if (this.subscriptionUserInfo){
             this.subscriptionUserInfo.unsubscribe();  
-        }     
+        }   
+        if (this.menuToggleSubscription){
+            this.menuToggleSubscription.unsubscribe();  
+        }   
     }
     //....................................... 
 
@@ -44,7 +51,20 @@ export class SidebarComponent implements OnInit, OnDestroy {
         });
     } 
     //.......................................   
- 
+    
+
+    //...................................................................  
+    private menuCollapseCheck() {
+        this.menuToggleSubscription = this.sharedService.isMenuCollapsed.subscribe((boo) => {  
+            if (boo){
+                this.isHeadLabelHide = true;           
+            } else {                
+                this.isHeadLabelHide = false;             
+            }                        
+        });
+    }
+    //................................................................... 
    
+  
 
 }

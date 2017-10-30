@@ -2,7 +2,7 @@
 import { Component, OnDestroy, OnInit, Inject, HostListener, AfterViewInit, ElementRef, ViewChild} from '@angular/core';
 import { ActivatedRoute, Router} from "@angular/router";
 import { Subscription} from "rxjs/Subscription";
-import { DOCUMENT } from '@angular/platform-browser';
+//import { DOCUMENT } from '@angular/platform-browser';
 
 import { MessageService } from 'primeng/components/common/messageservice';
 
@@ -25,9 +25,11 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     @ViewChild('agentDetailsTarget') private agentDetailsTarget:any;
     @ViewChild('agencyDetailsTarget') private agencyDetailsTarget:any;   
        
-    private subscriptionDashboard:Subscription;     
+    private subscriptionDashboard:Subscription;   
+
     private subscriptionGetAgencyDetails:Subscription; 
     private subscriptionSaveAgencyDetails:Subscription; 
+
     private subscriptionGetAgentDetails:Subscription; 
     private subscriptionSaveAgentDetails:Subscription;  
 
