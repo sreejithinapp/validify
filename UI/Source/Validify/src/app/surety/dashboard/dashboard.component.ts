@@ -13,6 +13,8 @@ import { DummyAPIService } from "../../shared/dummy-api.service";
 import { Agency } from "./agency";
 import { Agent } from "./agent";
 
+//declare var $;
+
 @Component({
     selector: 'vfy-surety-dashboard', 
     templateUrl: './dashboard.component.html', 
@@ -79,12 +81,20 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     //...................................................................
     private clearVars(){       
         this.dashboardObj = null;
-        this.clearDetailVars();      
+        this.isAgencyDetails = false;
+        this.isAgentDetails = false;
+        //this.clearDetailVars();      
     }
 
-    private clearDetailVars(){         
-        this.isAgencyDetails = false;
-        this.isAgentDetails = false;        
+    private clearDetailVars(){   
+        if (this.isAgencyDetails){
+             window.scrollTo(0, 150);  
+             this.isAgencyDetails = false;
+        } else {
+             window.scrollTo(0, 350);  
+             this.isAgentDetails = false;
+        }      
+        //window.scroll(x,y) | window.scrollTo(x,y) |  window.scrollBy(x,y)
     }
 
     private dashboardCheck(){  
@@ -130,9 +140,8 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     }   
 
     private scrollToAgencyDetails(){
-        try {               
-            this.agencyDetailsTarget.nativeElement.scrollTop = this.agencyDetailsTarget.nativeElement.offsetTop; //offsetTop / scrollHeight
-            //this.agencyDetailsTarget.nativeElement.scrollTop(this.agencyDetailsTarget.nativeElement.scrollHeight); //offsetTop / scrollHeight
+        try {  
+            window.scrollBy(0, this.agencyDetailsTarget.nativeElement.scrollHeight - 230); //offsetTop / scrollHeight          
         } catch (err) {           
             console.log('scrollToAgencyDetails error', err);
         }
@@ -270,8 +279,8 @@ export class DashboardComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     private scrollToAgentDetails(){
-        try {               
-            this.agentDetailsTarget.nativeElement.scrollTop = this.agentDetailsTarget.nativeElement.offsetTop; //offsetTop / scrollHeight
+        try { 
+            window.scrollBy(0, this.agentDetailsTarget.nativeElement.scrollHeight - 100); //offsetTop / scrollHeight   
         } catch (err) {           
             console.log('scrollToAgentDetails error', err);
         }
