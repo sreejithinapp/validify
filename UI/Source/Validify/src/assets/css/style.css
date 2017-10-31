@@ -594,6 +594,7 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
 /*---------------------31-10-17------------------------------------------*/
 .navbar-top-links{
     margin-top: 10px;
+    margin-left: 20px;
 }
 
 
@@ -604,6 +605,7 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
     .nav-top-links{
         width: 100%;
     }    
+    
     .navbar-top-links > li > a{
         color: #0B080E;
     }
