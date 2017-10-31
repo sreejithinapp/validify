@@ -400,9 +400,6 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
 .public-search.fa-search:hover{   
     color: #fff; cursor: pointer;
 }
-.public-search:focus .fa-search{
-    color:#f00;
-}
 .user-name{
     margin-left: 10px; font-size: 13px; color: #fff;
 }
