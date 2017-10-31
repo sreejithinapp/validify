@@ -604,6 +604,21 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
     .nav-top-links{
         width: 100%;
     }    
+    .navbar-top-links > li > a{
+        color: #0B080E;
+    }
+    .breadcrumb-wrap{
+        display: none;
+    }
+    #sidebar-wrapper{
+        width: 0 !important;
+    }
+    .header{
+        margin-left:0;
+    }
+    .header .nav-search .form-control{
+        width: 170px;
+    }
 }
 /*---------------------------------------------------------------*/
 
