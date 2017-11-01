@@ -411,6 +411,7 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
 }
 .dash-tiles{
     position: relative;
+    min-height:95px;
 }
 .dash-tiles .drop-list{
     background-color: #F2EFF5; border: 1px solid #D3CADF; padding: 5px; width: 100px; position: absolute; top: -3px; right: 10px; font-weight: bold; box-shadow: 0px 0px 16px #766AB0;
@@ -505,7 +506,7 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
 .dash-tiles .drop-list.doi-suspended li{
     margin: 1px 10px;
 }
-.nav-search .fa-search:hover{
+.nav-search:hover .fa-search{
     opacity: 1; cursor: pointer; color: #55426D;
 }
 .pointer{
