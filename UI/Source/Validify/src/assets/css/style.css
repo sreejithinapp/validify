@@ -506,7 +506,7 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
 .dash-tiles .drop-list.doi-suspended li{
     margin: 1px 10px;
 }
-.nav-search:hover .fa-search{
+.nav-search input:focus + .fa-search{
     opacity: 1; cursor: pointer; color: #55426D;
 }
 .pointer{
