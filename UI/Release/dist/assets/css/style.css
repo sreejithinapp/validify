@@ -591,8 +591,11 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
 .dash-tiles.summary .main-head h1 {
     color: #F55859;
 }
-/*---------------------------------------------------------------*/
-
+/*---------------------31-10-17------------------------------------------*/
+.navbar-top-links{
+    margin-top: 10px;
+    margin-left: 20px;
+}
 
 
 
@@ -602,6 +605,22 @@ body .ui-dialog .ui-dialog-titlebar .ui-dialog-title{
     .nav-top-links{
         width: 100%;
     }    
+    
+    .navbar-top-links > li > a{
+        color: #0B080E;
+    }
+    .breadcrumb-wrap{
+        display: none;
+    }
+    #sidebar-wrapper{
+        width: 0 !important;
+    }
+    .header{
+        margin-left:0;
+    }
+    .header .nav-search .form-control{
+        width: 170px;
+    }
 }
 /*---------------------------------------------------------------*/
 
